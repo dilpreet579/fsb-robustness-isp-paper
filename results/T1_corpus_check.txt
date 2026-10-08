@@ -1,0 +1,26 @@
+== rockyou: raw lines=14,344,391 raw distinct=14,344,391 raw total=32,603,388 bad lines=0  [11s]
+   plan: unique=14,344,391 total=32,603,388  MATCH=True
+   cleaned: unique=14,326,970 total=32,581,870
+    1 290729 123456
+    2 79076 12345
+    3 76789 123456789
+    4 59462 password
+    5 49952 iloveyou
+    6 33291 princess
+    7 21725 1234567
+    8 20901 rockyou
+    9 20553 12345678
+    10 16648 abc123
+== phpbb: raw lines=184,388 raw distinct=184,384 raw total=255,420 bad lines=1  [0s]
+   plan: unique=184,388 total=255,420  MATCH=True
+   cleaned: unique=184,381 total=255,417
+    1 2650 123456
+    2 1244 password
+    3 708 phpbb
+    4 562 qwerty
+    5 418 12345
+    6 371 12345678
+    7 343 letmein
+    8 313 111111
+    9 273 1234
+    10 253 123456789
