@@ -1,0 +1,13 @@
+[T2] 10k sample: min=1.002e-114 max=8.930e-03 all finite=True all>0=True
+.[T2] row-sum range over 97x97 contexts: 1.000000000000 .. 1.000000000000
+[T2] row-sum range over 97x97 contexts: 1.000000000000 .. 1.000000000000
+.[T2] top-1000 mass: p^=0.113027 empirical=0.113027  (3-gram alone would give 0.003462)
+..[T2] sum of p^ over S~ = 0.496717 (must be <= 1); t=100000, scale=0.652754, 3-gram mass on top-t = 0.030363
+[T2] qbar=     1: p^(w_qbar)=8.9304e-03  (hist rank-1 p=8.9304e-03)
+[T2] qbar=    10: p^(w_qbar)=9.8765e-04  (hist rank-10 p=5.1169e-04)
+[T2] qbar=   100: p^(w_qbar)=2.6528e-04  (hist rank-100 p=1.8451e-04)
+[T2] qbar=  1000: p^(w_qbar)=5.0620e-05  (hist rank-1000 p=4.1234e-05)
+[T2] qbar= 10000: p^(w_qbar)=6.3714e-06  (hist rank-10000 p=5.2523e-06)
+.[T2] max tail p^ = 2.462e-03, smallest head p^ = 7.162e-07, #tail > head-min = 14512
+.
+6 passed in 5.53s
