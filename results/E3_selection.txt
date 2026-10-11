@@ -1,0 +1,10 @@
+E3 selection on the DEV pool only: mean over ('M0', 'M1', 'M2') of loss at q=1000, interpolated at 6500 entries per bucket.
+Lower is better. nan = the sweep does not reach that bucket size.
+[est] fsb_base  score=   7.79   per condition {'M0': np.float64(0.71), 'M1': np.float64(12.56), 'M2': np.float64(10.1)}
+[est] ens_max   score=  13.47   per condition {'M0': np.float64(9.23), 'M1': np.float64(16.61), 'M2': np.float64(14.56)}
+[est] smoothed  score=   7.96   per condition {'M0': np.float64(1.13), 'M1': np.float64(12.55), 'M2': np.float64(10.2)}
+[est] selected on dev: fsb_base
+[emp] fsb_base  score=  18.48   per condition {'M0': np.float64(17.58), 'M1': np.float64(12.56), 'M2': np.float64(25.32)}
+[emp] ens_max   score=  22.91   per condition {'M0': np.float64(22.1), 'M1': np.float64(16.61), 'M2': np.float64(30.03)}
+[emp] smoothed  score=  18.47   per condition {'M0': np.float64(17.52), 'M1': np.float64(12.55), 'M2': np.float64(25.34)}
+[emp] selected on dev: smoothed
