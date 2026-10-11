@@ -1,0 +1,110 @@
+[world] N=13,125,513 |B|=2^24 estimator built in 0s
+WORKED EXAMPLES (T4). Condition M0, attacker model 'est' (weights = public estimate p^), candidate list = top 2,000,000 of S~ by p^.
+
+How to replay by hand
+  * hash:  d = SHA-256(b'c3sim-salt-v1' + password);  h = first 8 bytes of d as a big-endian integer;  f(w) = h >> (64 - bits).
+    python3 -c "import hashlib;d=hashlib.sha256(b'c3sim-salt-v1'+b'123456').digest();print(int.from_bytes(d[:8],'big')>>40)"   (bits=24)
+  * FSB: |B| = 2^24 = 16,777,216;  gamma(w) = min(|B|, ceil(|B| * p^(w) / p^(w_qbar))),  p^(w_qbar) = 2.6527519402e-04  (qbar = 100).
+    The client picks offset u uniformly in [0, gamma(w)-1]; its bucket is b = (f(w) + u) mod |B|.
+    A candidate c is in bucket b iff (b - f(c)) mod |B| < gamma(c).  Score = weight(c) / gamma(c), larger first; ties by weight, then lexicographic.
+  * p^(w) for a password in the histogram head (top 100,000 of S~) is count / total, total = 29320495 (sum of A_train counts); otherwise 3-gram probability * scale (scale = 0.652754).
+  * 'weight' below is p^ (attacker model est); p_att = weight / (sum of weights over S~'s candidate set) is shown for reference.
+
+--- FSB qbar=100, example 1: target = 'angelica'  [head (leak count >= 1000); leak count 3453]
+    sha256 prefix = e9926860a6afdcfc  f(w) = 15307368
+    p^(w) = 1.177675e-04;  |B|*p^(w)/p^(w_qbar) = 7448152.0761  ->  gamma(w) = 7,448,153
+    client offset u = 996,572;  bucket b = 16,303,940
+    candidates in bucket b (fast lookup): 1,661
+    naive scan over all 2,000,000 candidates: 1,661 in bucket; top-5 identical to fast lookup: True
+    top-5 guesses:   rank  password             weight p^(c)    p_att(c)       gamma(c)   f(c)       score=weight/gamma
+                        1  123456               8.9304e-03   1.7979e-02   16,777,216  11,013,555  5.322938e-10
+                        2  12                   2.4621e-03   4.9568e-03   16,777,216  13,477,593  1.467546e-10
+                        3  12345                2.4263e-03   4.8847e-03   16,777,216  12,181,056  1.446181e-10
+                        4  123456789            2.3534e-03   4.7380e-03   16,777,216  12,368,178  1.402759e-10
+                        5  08                   1.8550e-03   3.7346e-03   16,777,216  14,022,202  1.105688e-10
+    target is candidate #328; position in the bucket guess list: 433; position without bucket (baseline): 329
+
+--- FSB qbar=100, example 2: target = 'godisgreat'  [histogram (21..999); leak count 168]
+    sha256 prefix = 79f3fbfcd391a895  f(w) = 7992315
+    p^(w) = 5.729780e-06;  |B|*p^(w)/p^(w_qbar) = 362377.5120  ->  gamma(w) = 362,378
+    client offset u = 46,591;  bucket b = 8,038,906
+    candidates in bucket b (fast lookup): 1,760
+    naive scan over all 2,000,000 candidates: 1,760 in bucket; top-5 identical to fast lookup: True
+    top-5 guesses:   rank  password             weight p^(c)    p_att(c)       gamma(c)   f(c)       score=weight/gamma
+                        1  123456               8.9304e-03   1.7979e-02   16,777,216  11,013,555  5.322938e-10
+                        2  12                   2.4621e-03   4.9568e-03   16,777,216  13,477,593  1.467546e-10
+                        3  12345                2.4263e-03   4.8847e-03   16,777,216  12,181,056  1.446181e-10
+                        4  123456789            2.3534e-03   4.7380e-03   16,777,216  12,368,178  1.402759e-10
+                        5  08                   1.8550e-03   3.7346e-03   16,777,216  14,022,202  1.105688e-10
+    target is candidate #11138; position in the bucket guess list: not in top 1000; position without bucket (baseline): not in top 1000
+
+--- FSB qbar=100, example 3: target = '739182'  [tail (2..20); leak count 7]
+    sha256 prefix = 36486e4ea374ad80  f(w) = 3557486
+    p^(w) = 2.188182e-09;  |B|*p^(w)/p^(w_qbar) = 138.3906  ->  gamma(w) = 139
+    client offset u = 110;  bucket b = 3,557,596
+    candidates in bucket b (fast lookup): 1,767
+    naive scan over all 2,000,000 candidates: 1,767 in bucket; top-5 identical to fast lookup: True
+    top-5 guesses:   rank  password             weight p^(c)    p_att(c)       gamma(c)   f(c)       score=weight/gamma
+                        1  123456               8.9304e-03   1.7979e-02   16,777,216  11,013,555  5.322938e-10
+                        2  12                   2.4621e-03   4.9568e-03   16,777,216  13,477,593  1.467546e-10
+                        3  12345                2.4263e-03   4.8847e-03   16,777,216  12,181,056  1.446181e-10
+                        4  123456789            2.3534e-03   4.7380e-03   16,777,216  12,368,178  1.402759e-10
+                        5  08                   1.8550e-03   3.7346e-03   16,777,216  14,022,202  1.105688e-10
+    target is candidate #1164405; position in the bucket guess list: not in top 1000; position without bucket (baseline): not in top 1000
+
+--- FSB qbar=100, example 4: target = 'lilog4'  [tail singleton; leak count 1]
+    sha256 prefix = b1d01506e0444efc  f(w) = 11653141
+    p^(w) = 1.623767e-09;  |B|*p^(w)/p^(w_qbar) = 102.6945  ->  gamma(w) = 103
+    client offset u = 51;  bucket b = 11,653,192
+    candidates in bucket b (fast lookup): 1,689
+    naive scan over all 2,000,000 candidates: 1,689 in bucket; top-5 identical to fast lookup: True
+    top-5 guesses:   rank  password             weight p^(c)    p_att(c)       gamma(c)   f(c)       score=weight/gamma
+                        1  123456               8.9304e-03   1.7979e-02   16,777,216  11,013,555  5.322938e-10
+                        2  12                   2.4621e-03   4.9568e-03   16,777,216  13,477,593  1.467546e-10
+                        3  12345                2.4263e-03   4.8847e-03   16,777,216  12,181,056  1.446181e-10
+                        4  123456789            2.3534e-03   4.7380e-03   16,777,216  12,368,178  1.402759e-10
+                        5  08                   1.8550e-03   3.7346e-03   16,777,216  14,022,202  1.105688e-10
+    target is candidate #1318643; position in the bucket guess list: not in top 1000; position without bucket (baseline): not in top 1000
+
+--- FSB qbar=100, example 5: target = '0126969881'  [not in the leak S~; leak count 0]
+    sha256 prefix = 0cbb3f6ad756bd94  f(w) = 834367
+    p^(w) = 2.867878e-13;  |B|*p^(w)/p^(w_qbar) = 0.0181  ->  gamma(w) = 1
+    client offset u = 0;  bucket b = 834,367
+    candidates in bucket b (fast lookup): 1,725
+    naive scan over all 2,000,000 candidates: 1,725 in bucket; top-5 identical to fast lookup: True
+    top-5 guesses:   rank  password             weight p^(c)    p_att(c)       gamma(c)   f(c)       score=weight/gamma
+                        1  123456               8.9304e-03   1.7979e-02   16,777,216  11,013,555  5.322938e-10
+                        2  12                   2.4621e-03   4.9568e-03   16,777,216  13,477,593  1.467546e-10
+                        3  12345                2.4263e-03   4.8847e-03   16,777,216  12,181,056  1.446181e-10
+                        4  123456789            2.3534e-03   4.7380e-03   16,777,216  12,368,178  1.402759e-10
+                        5  08                   1.8550e-03   3.7346e-03   16,777,216  14,022,202  1.105688e-10
+    target is candidate #n/a (not in list); position in the bucket guess list: not in top 1000; position without bucket (baseline): not in top 1000
+
+--- HPB l=11, example 1: target = 'angelica'  [head (leak count >= 1000); leak count 3453]
+    sha256 prefix = e9926860a6afdcfc  f(w) = 1868
+    gamma(w) = 1 (HPB: bucket = first 11 bits of the hash)
+    client offset u = 0;  bucket b = 1,868
+    candidates in bucket b (fast lookup): 965
+    naive scan over all 2,000,000 candidates: 965 in bucket; top-5 identical to fast lookup: True
+    top-5 guesses:   rank  password             weight p^(c)    p_att(c)       gamma(c)   f(c)       score=weight/gamma
+                        1  superman             2.6528e-04   5.3406e-04           1      1,868  2.652752e-04
+                        2  angelica             1.1777e-04   2.3709e-04           1      1,868  1.177675e-04
+                        3  broken               5.9071e-05   1.1892e-04           1      1,868  5.907131e-05
+                        4  wookie               5.1500e-06   1.0368e-05           1      1,868  5.149981e-06
+                        5  damnyou              4.5361e-06   9.1321e-06           1      1,868  4.536076e-06
+    target is candidate #328; position in the bucket guess list: 2; position without bucket (baseline): 329
+
+--- HPB l=11, example 2: target = '739182'  [tail (2..20); leak count 7]
+    sha256 prefix = 36486e4ea374ad80  f(w) = 434
+    gamma(w) = 1 (HPB: bucket = first 11 bits of the hash)
+    client offset u = 0;  bucket b = 434
+    candidates in bucket b (fast lookup): 976
+    naive scan over all 2,000,000 candidates: 976 in bucket; top-5 identical to fast lookup: True
+    top-5 guesses:   rank  password             weight p^(c)    p_att(c)       gamma(c)   f(c)       score=weight/gamma
+                        1  alexa                3.3356e-05   6.7152e-05           1        434  3.335551e-05
+                        2  jeffhardy            1.8554e-05   3.7352e-05           1        434  1.855357e-05
+                        3  chew                 1.2286e-05   2.4735e-05           1        434  1.228613e-05
+                        4  garrett1             7.8784e-06   1.5861e-05           1        434  7.878448e-06
+                        5  jeferson             5.1841e-06   1.0437e-05           1        434  5.184087e-06
+    target is candidate #1164405; position in the bucket guess list: 576; position without bucket (baseline): not in top 1000
+
