@@ -1,0 +1,6 @@
+Gate statistic (plan T6): FSB qbar=100, q=1000, loss in percentage points; difference = mismatch loss - M0 loss
+sd = sqrt(sd_a^2 + sd_b^2) of the per-repeat losses (independent target pools)
+[est] loss(M1) - loss(M0) = 17.69 - 12.10 = +5.60 points (sd 0.72)
+[est] loss(M2) - loss(M0) = 26.96 - 12.10 = +14.86 points (sd 0.29)
+[emp] loss(M1) - loss(M0) = 17.69 - 33.43 = -15.74 points (sd 0.94)
+[emp] loss(M2) - loss(M0) = 31.64 - 33.43 = -1.79 points (sd 0.81)
