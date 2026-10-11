@@ -1,0 +1,100 @@
+[world] N=13,125,513 |B|=2^24 estimator built in 1s
+[M0/est] hpb            param=7      avg= 102543.1 max=  103317 loss q1/10/100/1000 =  +2.76  +8.99 +19.02 +26.44   base@1000=9.99 cand/bucket=15625 [1s]
+[M0/emp] hpb            param=7      avg= 102543.1 max=  103317 loss q1/10/100/1000 =  +3.76  +9.83 +18.74 +26.74   base@1000=11.04 cand/bucket=15627 [1s]
+[M0/est] hpb            param=8      avg=  51271.5 max=   51819 loss q1/10/100/1000 =  +4.24 +12.14 +22.81 +27.70   base@1000=9.99 cand/bucket=7812 [1s]
+[M0/emp] hpb            param=8      avg=  51271.5 max=   51819 loss q1/10/100/1000 =  +5.08 +12.90 +22.52 +31.50   base@1000=11.04 cand/bucket=7813 [1s]
+[M0/est] hpb            param=9      avg=  25635.8 max=   26104 loss q1/10/100/1000 =  +5.73 +15.56 +27.22 +29.76   base@1000=9.99 cand/bucket=3906 [1s]
+[M0/emp] hpb            param=9      avg=  25635.8 max=   26104 loss q1/10/100/1000 =  +6.73 +16.50 +26.82 +36.06   base@1000=11.04 cand/bucket=3906 [1s]
+[M0/est] hpb            param=10     avg=  12817.9 max=   13159 loss q1/10/100/1000 =  +8.02 +19.17 +32.01 +32.93   base@1000=9.99 cand/bucket=1952 [0s]
+[M0/emp] hpb            param=10     avg=  12817.9 max=   13159 loss q1/10/100/1000 =  +9.00 +19.89 +31.58 +39.84   base@1000=11.04 cand/bucket=1953 [0s]
+[M0/est] hpb            param=11     avg=   6408.9 max=    6704 loss q1/10/100/1000 = +10.52 +22.92 +33.78 +36.90   base@1000=9.99 cand/bucket=977 [0s]
+[M0/emp] hpb            param=11     avg=   6408.9 max=    6704 loss q1/10/100/1000 = +11.57 +23.63 +36.24 +42.77   base@1000=11.04 cand/bucket=976 [0s]
+[M0/est] hpb            param=12     avg=   3204.5 max=    3425 loss q1/10/100/1000 = +13.55 +27.14 +35.59 +36.94   base@1000=9.99 cand/bucket=489 [0s]
+[M0/emp] hpb            param=12     avg=   3204.5 max=    3425 loss q1/10/100/1000 = +14.64 +27.84 +40.97 +42.79   base@1000=11.04 cand/bucket=488 [0s]
+[M0/est] hpb            param=13     avg=   1602.2 max=    1755 loss q1/10/100/1000 = +16.74 +31.62 +38.42 +36.94   base@1000=9.99 cand/bucket=245 [0s]
+[M0/emp] hpb            param=13     avg=   1602.2 max=    1755 loss q1/10/100/1000 = +17.73 +32.25 +44.99 +42.79   base@1000=11.04 cand/bucket=244 [0s]
+[M0/est] hpb            param=14     avg=    801.1 max=     919 loss q1/10/100/1000 = +20.52 +34.72 +42.20 +36.94   base@1000=9.99 cand/bucket=123 [0s]
+[M0/emp] hpb            param=14     avg=    801.1 max=     919 loss q1/10/100/1000 = +21.55 +37.19 +47.98 +42.79   base@1000=11.04 cand/bucket=122 [0s]
+[M0/est] hpb            param=15     avg=    400.6 max=     494 loss q1/10/100/1000 = +24.15 +36.43 +43.50 +36.94   base@1000=9.99 cand/bucket=62 [0s]
+[M0/emp] hpb            param=15     avg=    400.6 max=     494 loss q1/10/100/1000 = +25.10 +41.81 +49.18 +42.79   base@1000=11.04 cand/bucket=61 [0s]
+[M0/est] hpb            param=16     avg=    200.3 max=     261 loss q1/10/100/1000 = +27.98 +38.75 +43.50 +36.94   base@1000=9.99 cand/bucket=31 [0s]
+[M0/emp] hpb            param=16     avg=    200.3 max=     261 loss q1/10/100/1000 = +29.30 +46.11 +49.18 +42.79   base@1000=11.04 cand/bucket=31 [0s]
+[M0/est] fsb fsb_base   param=1      avg=     56.3 max=      93 loss q1/10/100/1000 =  +0.00  +3.66 +43.50 +36.94   base@1000=9.99 cand/bucket=56 [1s]
+[M0/emp] fsb fsb_base   param=1      avg=     56.3 max=      93 loss q1/10/100/1000 = +15.16 +23.28 +49.18 +42.79   base@1000=11.04 cand/bucket=50 [1s]
+[M0/est] fsb fsb_base   param=10     avg=    488.8 max=     571 loss q1/10/100/1000 =  +0.00  +0.00  +4.11 +36.94   base@1000=9.99 cand/bucket=488 [2s]
+[M0/emp] fsb fsb_base   param=10     avg=    488.8 max=     571 loss q1/10/100/1000 = +11.99 +16.38 +22.96 +42.79   base@1000=11.04 cand/bucket=433 [2s]
+[M0/est] fsb fsb_base   param=100    avg=   1733.3 max=    1863 loss q1/10/100/1000 =  +0.00  +0.00  +0.00 +12.20   base@1000=9.99 cand/bucket=1731 [4s]
+[M0/emp] fsb fsb_base   param=100    avg=   1733.3 max=    1863 loss q1/10/100/1000 =  +9.84 +14.34 +16.66 +33.72   base@1000=11.04 cand/bucket=1544 [3s]
+[M0/est] fsb fsb_base   param=1000   avg=   7799.8 max=    8002 loss q1/10/100/1000 =  +0.00  +0.00  +0.00  +0.00   base@1000=9.99 cand/bucket=7792 [7s]
+[M0/emp] fsb fsb_base   param=1000   avg=   7799.8 max=    8002 loss q1/10/100/1000 =  +7.39 +11.48 +14.60 +16.82   base@1000=11.04 cand/bucket=7011 [5s]
+[M0/est] fsb fsb_base   param=10000  avg=  42774.8 max=   43130 loss q1/10/100/1000 =  +0.00  +0.00  +0.00  +0.00   base@1000=9.99 cand/bucket=42714 [20s]
+[M0/emp] fsb fsb_base   param=10000  avg=  42774.8 max=   43130 loss q1/10/100/1000 =  +4.92  +8.09 +10.92 +14.02   base@1000=11.04 cand/bucket=38368 [15s]
+E1 acceptance checks (plan T5)
+[est] FSB loss <= 1 point for every q <= qbar: PASS
+[est] HPB at 6409 entries/bucket (l=11) loses 36.9 points at q=1000 (expect tens of points): PASS
+[emp] FSB loss <= 1 point for every q <= qbar: FAIL  violations (qbar, q, loss, sd): [(1, 1, 15.164, 0.326), (10, 1, 11.992, 0.472), (10, 10, 16.38, 0.314), (100, 1, 9.844, 0.435), (100, 10, 14.336, 0.21), (100, 100, 16.656, 0.421), (1000, 1, 7.392, 0.396), (1000, 10, 11.48, 0.401), (1000, 100, 14.596, 0.438), (1000, 1000, 16.816, 0.34), (10000, 1, 4.92, 0.282), (10000, 10, 8.088, 0.284), (10000, 100, 10.924, 0.481), (10000, 1000, 14.024, 0.278)]
+[emp] HPB at 6409 entries/bucket (l=11) loses 42.8 points at q=1000 (expect tens of points): PASS
+overall: est=PASS, emp=FAIL
+[world] N=13,125,513 |B|=2^24 estimator built in 0s
+[M0/est] hpb            param=11     avg=   6408.9 max=    6704 loss q1/10/100/1000 = +10.52 +22.92 +33.78 +32.78   base@1000=9.99 cand/bucket=489 [0s]
+[M0/emp] hpb            param=11     avg=   6408.9 max=    6704 loss q1/10/100/1000 = +11.57 +23.63 +36.24 +39.73   base@1000=11.04 cand/bucket=488 [0s]
+[M0/est] hpb            param=8      avg=  51271.5 max=   51819 loss q1/10/100/1000 =  +4.24 +12.14 +22.81 +27.70   base@1000=9.99 cand/bucket=3906 [0s]
+[M0/emp] hpb            param=8      avg=  51271.5 max=   51819 loss q1/10/100/1000 =  +5.08 +12.90 +22.52 +31.50   base@1000=11.04 cand/bucket=3907 [0s]
+[M0/est] fsb fsb_base   param=100    avg=   1733.3 max=    1863 loss q1/10/100/1000 =  +0.00  +0.00  +0.00 +12.20   base@1000=9.99 cand/bucket=1726 [3s]
+[M0/emp] fsb fsb_base   param=100    avg=   1733.3 max=    1863 loss q1/10/100/1000 =  +8.66 +12.26 +13.91 +31.00   base@1000=11.04 cand/bucket=1475 [2s]
+[M0/est] hpb            param=11     avg=   6408.9 max=    6704 loss q1/10/100/1000 = +10.52 +22.92 +33.78 +36.90   base@1000=9.99 cand/bucket=977 [0s]
+[M0/emp] hpb            param=11     avg=   6408.9 max=    6704 loss q1/10/100/1000 = +11.57 +23.63 +36.24 +42.77   base@1000=11.04 cand/bucket=976 [0s]
+[M0/est] hpb            param=8      avg=  51271.5 max=   51819 loss q1/10/100/1000 =  +4.24 +12.14 +22.81 +27.70   base@1000=9.99 cand/bucket=7812 [1s]
+[M0/emp] hpb            param=8      avg=  51271.5 max=   51819 loss q1/10/100/1000 =  +5.08 +12.90 +22.52 +31.50   base@1000=11.04 cand/bucket=7813 [1s]
+[M0/est] fsb fsb_base   param=100    avg=   1733.3 max=    1863 loss q1/10/100/1000 =  +0.00  +0.00  +0.00 +12.20   base@1000=9.99 cand/bucket=1731 [4s]
+[M0/emp] fsb fsb_base   param=100    avg=   1733.3 max=    1863 loss q1/10/100/1000 =  +9.84 +14.34 +16.66 +33.72   base@1000=11.04 cand/bucket=1544 [3s]
+[world] N=13,125,513 |B|=2^24 estimator built in 0s
+[M0/est] hpb            param=11     avg=   6408.9 max=    6704 loss q1/10/100/1000 = +10.52 +22.92 +33.78 +37.07   base@1000=9.99 cand/bucket=1953 [1s]
+[M0/emp] hpb            param=11     avg=   6408.9 max=    6704 loss q1/10/100/1000 = +11.57 +23.63 +36.24 +42.90   base@1000=11.04 cand/bucket=1953 [1s]
+[M0/est] hpb            param=8      avg=  51271.5 max=   51819 loss q1/10/100/1000 =  +4.24 +12.14 +22.81 +27.70   base@1000=9.99 cand/bucket=15626 [2s]
+[M0/emp] hpb            param=8      avg=  51271.5 max=   51819 loss q1/10/100/1000 =  +5.08 +12.90 +22.52 +31.50   base@1000=11.04 cand/bucket=15625 [2s]
+[M0/est] fsb fsb_base   param=100    avg=   1733.3 max=    1863 loss q1/10/100/1000 =  +0.00  +0.00  +0.00 +12.20   base@1000=9.99 cand/bucket=1733 [5s]
+[M0/emp] fsb fsb_base   param=100    avg=   1733.3 max=    1863 loss q1/10/100/1000 = +10.30 +15.51 +18.15 +35.21   base@1000=11.04 cand/bucket=1592 [4s]
+[world] N=13,125,513 |B|=2^24 estimator built in 0s
+[M0/est] hpb            param=11     avg=   6408.9 max=    6704 loss q1/10/100/1000 = +10.52 +22.92 +33.78 +37.07   base@1000=9.99 cand/bucket=6410 [3s]
+[M0/emp] hpb            param=11     avg=   6408.9 max=    6704 loss q1/10/100/1000 = +11.57 +23.63 +36.24 +42.90   base@1000=11.04 cand/bucket=6410 [3s]
+[M0/est] hpb            param=8      avg=  51271.5 max=   51819 loss q1/10/100/1000 =  +4.24 +12.14 +22.81 +27.70   base@1000=9.99 cand/bucket=51271 [6s]
+[M0/emp] hpb            param=8      avg=  51271.5 max=   51819 loss q1/10/100/1000 =  +5.08 +12.90 +22.52 +31.50   base@1000=11.04 cand/bucket=51271 [6s]
+[M0/est] fsb fsb_base   param=100    avg=   1733.3 max=    1863 loss q1/10/100/1000 =  +0.00  +0.00  +0.00 +12.20   base@1000=9.99 cand/bucket=1734 [11s]
+[M0/emp] fsb fsb_base   param=100    avg=   1733.3 max=    1863 loss q1/10/100/1000 = +11.64 +20.43 +24.32 +41.48   base@1000=11.04 cand/bucket=1734 [11s]
+Candidate-list convergence: bucket success (%) on identical targets/buckets
+cand                            1M      2M      4M     all  |1M-2M|  |2M-all|
+attacker scheme param q                                                      
+emp      fsb    100   1      9.492  10.672  11.128  12.468    1.180     1.796
+                      10    14.320  16.396  17.572  22.488    2.076     6.092
+                      100   18.556  21.300  22.796  28.968    2.744     7.668
+                      1000  42.040  44.756  46.244  52.520    2.716     7.764
+         hpb    8     1      5.912   5.912   5.912   5.912    0.000     0.000
+                      10    14.964  14.964  14.964  14.964    0.000     0.000
+                      100   27.164  27.164  27.164  27.164    0.000     0.000
+                      1000  42.532  42.532  42.532  42.532    0.000     0.000
+                11    1     12.396  12.396  12.396  12.396    0.000     0.000
+                      10    25.692  25.692  25.692  25.692    0.000     0.000
+                      100   40.880  40.880  40.880  40.880    0.000     0.000
+                      1000  50.768  53.804  53.940  53.940    3.036     0.136
+est      fsb    100   1      0.828   0.828   0.828   0.828    0.000     0.000
+                      10     1.840   1.840   1.840   1.840    0.000     0.000
+                      100    3.432   3.432   3.432   3.432    0.000     0.000
+                      1000  22.188  22.192  22.192  22.192    0.004     0.000
+         hpb    8     1      5.072   5.072   5.072   5.072    0.000     0.000
+                      10    13.976  13.976  13.976  13.976    0.000     0.000
+                      100   26.244  26.244  26.244  26.244    0.000     0.000
+                      1000  37.696  37.696  37.696  37.696    0.000     0.000
+                11    1     11.348  11.348  11.348  11.348    0.000     0.000
+                      10    24.760  24.760  24.760  24.760    0.000     0.000
+                      100   37.212  37.212  37.212  37.212    0.000     0.000
+                      1000  42.768  46.896  47.060  47.060    4.128     0.164
+
+max |1M-2M| (the plan's check) by attacker:
+attacker
+emp    3.036
+est    4.128
+max |2M-all| by attacker:
+attacker
+emp    7.764
+est    0.164

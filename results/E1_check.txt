@@ -1,0 +1,6 @@
+E1 acceptance checks (plan T5)
+[est] FSB loss <= 1 point for every q <= qbar: PASS
+[est] HPB at 6409 entries/bucket (l=11) loses 36.9 points at q=1000 (expect tens of points): PASS
+[emp] FSB loss <= 1 point for every q <= qbar: FAIL  violations (qbar, q, loss, sd): [(1, 1, 15.164, 0.326), (10, 1, 11.992, 0.472), (10, 10, 16.38, 0.314), (100, 1, 9.844, 0.435), (100, 10, 14.336, 0.21), (100, 100, 16.656, 0.421), (1000, 1, 7.392, 0.396), (1000, 10, 11.48, 0.401), (1000, 100, 14.596, 0.438), (1000, 1000, 16.816, 0.34), (10000, 1, 4.92, 0.282), (10000, 10, 8.088, 0.284), (10000, 100, 10.924, 0.481), (10000, 1000, 14.024, 0.278)]
+[emp] HPB at 6409 entries/bucket (l=11) loses 42.8 points at q=1000 (expect tens of points): PASS
+overall: est=PASS, emp=FAIL
