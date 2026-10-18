@@ -1,0 +1,4 @@
+Phase 1b, 10-core laptop, 5,000 targets x 5 repeats:
+e1b_basics (t=1e6 E1+M2, M1b, base sweep, top-20): see e1b_basics_log (about 10 min incl. world builds)
+e1b_fix dev (base + 3 variants, M0/M1b/M2): 10 min 50 s
+e1b_fix fresh (base + cal_w1.0; M0, M1b, M2, M3 x3, run once): 14 min 11 s
