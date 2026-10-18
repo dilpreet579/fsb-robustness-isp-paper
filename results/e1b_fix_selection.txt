@@ -1,0 +1,7 @@
+Selection on the DEV pool only: mean over M0, M1b, M2 and over est/emp of loss at q=1000 interpolated at 6500 entries per bucket
+(lower is better; every variant tried is listed, including failures)
+fsb_base      score= 11.451  M0/est=0.71  M0/emp=17.39  M1b/est=0.54  M1b/emp=14.51  M2/est=10.14  M2/emp=25.43
+cal_w0.5      score= 10.801  M0/est=0.56  M0/emp=17.10  M1b/est=0.47  M1b/emp=15.48  M2/est=7.35  M2/emp=23.84
+cal_w1.0      score= 10.794  M0/est=0.57  M0/emp=17.05  M1b/est=0.48  M1b/emp=15.38  M2/est=7.43  M2/emp=23.86
+cal_iso_w0.5  score= 10.802  M0/est=0.56  M0/emp=17.10  M1b/est=0.47  M1b/emp=15.49  M2/est=7.35  M2/emp=23.84
+best calibrated variant on dev: cal_w1.0 (score 10.794 vs fsb_base 11.451)
