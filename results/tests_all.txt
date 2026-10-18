@@ -1,0 +1,25 @@
+[T4] baseline q=   1: empirical 0.0765 vs exact top-q mass 0.0758 (sd 0.0013, z=+0.49)
+[T4] baseline q=  10: empirical 0.2208 vs exact top-q mass 0.2221 (sd 0.0021, z=-0.64)
+[T4] baseline q= 100: empirical 0.3947 vs exact top-q mass 0.3933 (sd 0.0024, z=+0.57)
+[T4] baseline q=1000: empirical 0.5685 vs exact top-q mass 0.5676 (sd 0.0025, z=+0.36)
+.[T4] toy Zipf(1.0) N=300,000; FSB qbar=100 avg bucket 900; HPB l=9 avg bucket 586
+[T4]   q=   1: baseline 0.076  FSB loss +0.000  HPB loss +0.400
+[T4]   q=  10: baseline 0.223  FSB loss +0.000  HPB loss +0.464
+[T4]   q= 100: baseline 0.395  FSB loss +0.000  HPB loss +0.468
+[T4]   q=1000: baseline 0.570  FSB loss +0.430  HPB loss +0.430
+.[T3] 1000 random buckets: fast lookup == naive scan (hit sets and top-50 order); mean hits/bucket=1061.7, groups=1231
+.[T3] 3k-password toy: difference array == brute force; avg size 678.343 == sum(gamma)/|B| 678.343; max 712
+.[T3] 50k toy: avg FSB bucket size 1062.4638 vs sum(gamma)/|B| 1062.4638; max 1147
+......[T2] 10k sample: min=1.002e-114 max=8.930e-03 all finite=True all>0=True
+.[T2] row-sum range over 97x97 contexts: 1.000000000000 .. 1.000000000000
+[T2] row-sum range over 97x97 contexts: 1.000000000000 .. 1.000000000000
+.[T2] top-1000 mass: p^=0.113027 empirical=0.113027  (3-gram alone would give 0.003462)
+..[T2] sum of p^ over S~ = 0.496717 (must be <= 1); t=100000, scale=0.652754, 3-gram mass on top-t = 0.030363
+[T2] qbar=     1: p^(w_qbar)=8.9304e-03  (hist rank-1 p=8.9304e-03)
+[T2] qbar=    10: p^(w_qbar)=9.8765e-04  (hist rank-10 p=5.1169e-04)
+[T2] qbar=   100: p^(w_qbar)=2.6528e-04  (hist rank-100 p=1.8451e-04)
+[T2] qbar=  1000: p^(w_qbar)=5.0620e-05  (hist rank-1000 p=4.1234e-05)
+[T2] qbar= 10000: p^(w_qbar)=6.3714e-06  (hist rank-10000 p=5.2523e-06)
+.[T2] max tail p^ = 2.462e-03, smallest head p^ = 7.162e-07, #tail > head-min = 14512
+.
+16 passed in 29.13s

@@ -1,0 +1,5 @@
+Development run, 10-core Apple laptop, 5,000 targets x 5 repeats (default size):
+E1 (grid + candidate convergence): ~166 s
+E2: ~171 s
+E3 (dev + fresh, 576 rows each): 40 min 45 s wall
+Tests (16): ~30 s
