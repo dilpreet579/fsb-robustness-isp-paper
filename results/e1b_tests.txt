@@ -1,0 +1,3 @@
+[1b] model tail mass 0.6328 (expect about 0.6329); held-out tail mass 0.6367; calibrated 0.6367
+..
+2 passed in 7.34s
