@@ -1,0 +1,49 @@
+Top-20 guesses of the est attacker (M0, no bucket), A_train as the leak
+
+--- t = 1,000,000: est attacker's top-20 guesses with no bucket (candidate-list order, weight = p^)
+    entries whose p^ comes from the 3-gram (not in the histogram head): top-20 8, top-100 27, top-1000 141
+    rank  password            p^            leak count  rank by leak count  source
+       1  123456             8.9304e-03      261844                   1  histogram
+       2  12345              2.4263e-03       71140                   2  histogram
+       3  123456789          2.3534e-03       69004                   3  histogram
+       4  password           1.8230e-03       53451                   4  histogram
+       5  iloveyou           1.5325e-03       44933                   5  histogram
+       6  princess           1.0198e-03       29900                   6  histogram
+       7  01                 8.1019e-04           2             1026320  3-gram
+       8  na                 7.7665e-04           1            10573516  3-gram
+       9  sa                 7.7470e-04           1            11644518  3-gram
+      10  da                 7.4788e-04           1             7249086  3-gram
+      11  an                 7.0241e-04           1             6055590  3-gram
+      12  1234567            6.6588e-04       19524                   7  histogram
+      13  rockyou            6.4211e-04       18827                   8  histogram
+      14  12345678           6.2956e-04       18459                   9  histogram
+      15  la                 6.0523e-04           1             9502159  3-gram
+      16  ma                 5.4412e-04           2             1832900  3-gram
+      17  abc123             5.1169e-04       15003                  10  histogram
+      18  nicole             5.0098e-04       14689                  11  histogram
+      19  se                 4.8296e-04           1            11773757  3-gram
+      20  daniel             4.6981e-04       13775                  12  histogram
+
+--- t = 100,000: est attacker's top-20 guesses with no bucket (candidate-list order, weight = p^)
+    entries whose p^ comes from the 3-gram (not in the histogram head): top-20 14, top-100 52, top-1000 257
+    rank  password            p^            leak count  rank by leak count  source
+       1  123456             8.9304e-03      261844                   1  histogram
+       2  12                 2.4621e-03          12              174514  3-gram
+       3  12345              2.4263e-03       71140                   2  histogram
+       4  123456789          2.3534e-03       69004                   3  histogram
+       5  08                 1.8550e-03           3              681171  3-gram
+       6  password           1.8230e-03       53451                   4  histogram
+       7  iloveyou           1.5325e-03       44933                   5  histogram
+       8  01                 1.0303e-03           2             1026320  3-gram
+       9  princess           1.0198e-03       29900                   6  histogram
+      10  na                 9.8765e-04           1            10573516  3-gram
+      11  sa                 9.8517e-04           1            11644518  3-gram
+      12  da                 9.5107e-04           1             7249086  3-gram
+      13  11                 9.4563e-04           9              232621  3-gram
+      14  an                 8.9324e-04           1             6055590  3-gram
+      15  09                 8.6290e-04           3              683049  3-gram
+      16  la                 7.6966e-04           1             9502159  3-gram
+      17  13                 7.4436e-04           7              298930  3-gram
+      18  14                 7.3698e-04           5              415301  3-gram
+      19  ma                 6.9194e-04           2             1832900  3-gram
+      20  10                 6.6967e-04           6              346138  3-gram
