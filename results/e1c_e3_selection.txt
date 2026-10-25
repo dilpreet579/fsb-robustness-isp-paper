@@ -1,0 +1,5 @@
+E3 at t=1e6, selection on the DEV pool only: mean over ('M0', 'M1b', 'M2x') and over est/emp of loss at q=1000 interpolated at 6500 entries per bucket (lower is better).
+fsb_base  score=  7.012  M0/est=1.95  M0/emp=5.28  M1b/est=1.69  M1b/emp=4.27  M2x/est=12.16  M2x/emp=16.71
+ens_max   score= 18.071  M0/est=16.90  M0/emp=18.78  M1b/est=14.92  M1b/emp=16.17  M2x/est=18.83  M2x/emp=22.84
+smoothed  score=  7.184  M0/est=2.57  M0/emp=5.28  M1b/est=2.11  M1b/emp=4.27  M2x/est=12.17  M2x/emp=16.70
+selected on dev: fsb_base
