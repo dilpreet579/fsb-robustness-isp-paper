@@ -1,0 +1,6 @@
+Phase 1c, 10-core laptop, 5,000 targets x 5 repeats (jobs overlapped, so times are inflated):
+e1c_e2 (E2-type rows, M3 x5 sigma, base sweep, sanity): 13 min 38 s
+e1c_tsweep (4 worlds): 1 min 28 s
+e1c_e3 (dev + fresh, 5 conditions): 56 min 33 s
+e1c_fix dev (base + 3 variants): 20 min 56 s
+e1c_fix fresh (run once): 28 min 49 s
