@@ -47,3 +47,16 @@ The plan item defines M1b with est weights only. I also ran the emp attacker on 
 ## Q15. Cross-fit
 Calibration factors are learned with an estimator trained on 90% of A_train (held-out 10% of A_train accounts) and applied to the estimator trained on 100% of A_train. The scale of the 3-gram tail differs slightly between the two (10% less data in the fit); not corrected.
 
+## Phase 1c
+
+## Q16. Interval for the sigma at which M3 loss crosses 5 points
+Per repeat (5 repeats, different targets) I compute the crossing by linear interpolation along the sigma grid {0, 0.25, 0.5, 0.75, 1.0, 1.5} (sigma = 0 is M0 on the same targets), then report mean ± 95% t-interval (4 dof) and the [min, max]. The noise z_w is a fixed hash of the password (one draw), so the interval reflects target sampling only, not the variability of the noise itself; a different noise salt would add that variance. Linear interpolation between grid points is an approximation (the loss is convex in sigma on this grid).
+
+## Q17. E3 selection conditions at t = 1e6
+Phase 1 selected over M0, M1a, M2 at 6,500 entries per bucket. At t = 1e6 I select over M0, M1b, M2x (the conditions I consider primary now) and still report all five conditions. If you prefer the old set it is a re-aggregation of `e1c_e3_dev.csv`, no rerun.
+
+## Q18. est-attacker sanity runs at t = 1e6 only
+Item 5 was run at the primary t = 1e6. At t = 1e5 the short-string artifact is larger (14 of the top 20, REPORT_1b) and the check could be repeated there cheaply. M2's policy (length >= 8) already excludes every candidate of length <= 2, so the M2 variant of the check changes nothing by construction.
+
+## Q19. Calibration rerun, which M2 list
+The fix is evaluated on M0, M1b, M2 (top370_A_train) and M2x (Xato), plus M3 on the fresh pool; dev selection uses M0, M1b, M2x.

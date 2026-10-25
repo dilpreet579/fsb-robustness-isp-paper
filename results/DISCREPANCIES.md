@@ -59,3 +59,14 @@ Format: what the paper does / what the plan or this implementation does / why / 
 ## D13. Calibration fix (Phase 1b)
 - New estimator variant (`c3sim/calibration.py`), cross-fitted on a 90/10 split of A_train accounts, not part of the base paper. The est attacker for it uses the deployed (calibrated) estimate, unlike E3 (QUESTIONS Q13). It is a public function of the string; it cannot encode leak membership (Q12).
 
+## Phase 1c additions
+
+## D14. M2 banned list: Xato top-370, not the file named in the brief
+- The brief named `Passwords/Common-Credentials/10-million-password-list-top-1000.txt`. The folder listing (re-fetched once) has no such file. Used the nearest fixed public list in the same folder: `xato-net-10-million-passwords-1000.txt` (the top 1000 of the same Xato 10M list; SecLists' current name for it), first 370 lines. Line 43 of that file is blank, so the first 370 lines hold 369 real passwords (63 of the 370 lines have length >= 8; only those matter for a length >= 8 policy). `top370_A_train` stays as the secondary list (condition `M2`; Xato is `M2x`). The Twitter list the paper used is still not available (D12).
+
+## D15. Phase 1c primary setting and what changed with it
+- t = 1,000,000 is the primary setting from here (the paper's value, D1). Phase 1 / 1b results at t = 100,000 are untouched. At t = 1e6, FSB average bucket sizes at equal qbar are larger (D10), so size-matched HPB rows use different prefix lengths than in Phase 1 (`variant` = match_qbarN, param = l).
+- E3 at t = 1e6 adds M1b and M2x to the conditions and selects on dev over M0, M1b, M2x (Phase 1 selected over M0, M1a, M2). Pools and seeds are unchanged (dev 3000, fresh 4000).
+
+## D16. Calibration fix at t = 1e6 is exploratory
+- The fresh pool A_fresh / B_fresh with seed 6000 (the same targets) was already used by Phase 1's E3 (seed 4000, same pool) and by Phase 1b's fresh calibration run, so it is not an untouched holdout for this design. The run is done once as asked; it is labelled exploratory in REPORT_1c.
