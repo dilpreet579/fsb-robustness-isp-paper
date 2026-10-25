@@ -45,3 +45,17 @@ Format: what the paper does / what the plan or this implementation does / why / 
 - For the human: the E1 acceptance check (FSB loss <= 1 point for q <= qbar) **passes for `est` and fails for `emp`** (see `results/REPORT.md`). Which one is "the" attacker is a decision for you; the count-weighted failure is itself a finding (FSB with an n-gram tail leaks to an attacker who uses the leak counts).
 - Candidate list: for `est`, L = top 2M passwords of S~ by p^ (no n-gram-generated candidates, as in D3); for `emp`, top 2M by count.
 
+## Phase 1b additions
+
+## D10. t = 1,000,000 (paper's value) changes more than the tail artifact
+- With t = 1e6 the est attacker's top-20 holds 8 entries whose p^ comes from the 3-gram (14 at t = 1e5), and the emp attacker's E1 FSB loss at q <= qbar falls from 10-16 points to 1-3 points (still above the 1-point check). But FSB bucket sizes grow at equal qbar (qbar = 1000: 11,336 entries vs 7,800), because more of the distribution sits at histogram probabilities. Equal-qbar comparisons across t are therefore not equal-bandwidth comparisons; E1 rows carry `avg_bucket`. HPB rows are identical across t. Numbers: REPORT_1b section 1.
+
+## D11. M1b (Phase 1b)
+- M1a = Phase 1 M1 (attacker trained on B_attack; list = B_attack vocabulary). M1b = same server estimate and B_target targets, attacker weights p^ over the top 2M of S~ (est) or counts (emp, extra). M1b is not saturated for FSB at q <= 100 (candidates per bucket 488 to 7,792 for qbar 10..1000; only qbar = 10 saturates at q = 1000). The M1a numbers at q = qbar are unchanged from Phase 1.
+
+## D12. Twitter's banned list was not obtained
+- `twitter-banned.txt` is not in SecLists `Passwords/Common-Credentials` (404; folder listing has 39 entries, none Twitter-related). M2 with Twitter's list is not run; M2 stays on `top370_A_train`. See QUESTIONS Q11.
+
+## D13. Calibration fix (Phase 1b)
+- New estimator variant (`c3sim/calibration.py`), cross-fitted on a 90/10 split of A_train accounts, not part of the base paper. The est attacker for it uses the deployed (calibrated) estimate, unlike E3 (QUESTIONS Q13). It is a public function of the string; it cannot encode leak membership (Q12).
+

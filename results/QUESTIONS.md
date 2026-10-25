@@ -32,3 +32,18 @@ M0 is already broken for the count-weighted attacker (D9), so mismatch condition
 ## Q10. Attacker in E3
 For E3 the attacker is fixed across variants: weights = the *base* p^ (model `est`) or counts (`emp`), only beta(c) depends on the scheme variant. An attacker that re-derived weights from each variant's own estimate would change with the defence, which makes variants incomparable.
 
+## Q11. Twitter's banned list (Phase 1b item 4): not found, M2tw not run
+The fetch you approved was `Passwords/Common-Credentials/twitter-banned.txt` in SecLists. It returned HTTP 404. I then listed that folder once through the GitHub contents API (39 entries; no Twitter or banned-password file; the listing was requested twice because the first output was cut by `head`). I did not search other folders or substitute another list, and I did not type the list from memory. To finish item 4 I need either the file or its repo path (one more fetch); the run is then `World.policy_mask` with that list on E2's M2 rows (about 3 minutes).
+
+## Q12. Calibration is a public function of the string (Phase 1b item 5)
+The client evaluates p^ on its own password, so a calibrated p^ cannot depend on whether the string is in the leak. The calibration therefore maps p^ (log-binned) to the *average* held-out mass per string in the bin, including strings that were never leaked. It cannot give a specific leaked tail password the high probability the leak counts say it has (median leaked tail password: p^ / empirical = 5.1e-5 before, 1.5e-4 after calibration, 1-decade bins, 5M samples, scratch run). The count-weighted (`emp`) attacker uses exactly that information, so I expected the fix to help the est attacker (it removes the short-string artifact of D1) but not the emp attacker; the dev rows are the check.
+
+## Q13. Attacker weights for the calibrated scheme (Phase 1b item 5)
+est attacker = the *deployed* estimate of the scheme under test (calibrated p^ for the fix, plain p^ for the base), because "the attacker knows the public estimate". This differs from Q10 (E3, attacker weights fixed at the base p^). Loss is measured against the same attacker's own baseline, so the comparison is like for like per scheme, but the two est attackers are not the same attacker.
+
+## Q14. M1b emp rows
+The plan item defines M1b with est weights only. I also ran the emp attacker on M1b (counts over the top 2M of S~) as an extra; it is labelled `emp` in e1b_m1b.csv.
+
+## Q15. Cross-fit
+Calibration factors are learned with an estimator trained on 90% of A_train (held-out 10% of A_train accounts) and applied to the estimator trained on 100% of A_train. The scale of the 3-gram tail differs slightly between the two (10% less data in the fit); not corrected.
+
