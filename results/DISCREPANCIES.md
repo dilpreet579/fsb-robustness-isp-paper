@@ -70,3 +70,14 @@ Format: what the paper does / what the plan or this implementation does / why / 
 
 ## D16. Calibration fix at t = 1e6 is exploratory
 - The fresh pool A_fresh / B_fresh with seed 6000 (the same targets) was already used by Phase 1's E3 (seed 4000, same pool) and by Phase 1b's fresh calibration run, so it is not an untouched holdout for this design. The run is done once as asked; it is labelled exploratory in REPORT_1c.
+
+## Phase 1d additions
+
+## D17. The 2M candidate cap understates the emp attacker; the Phase 1c t-sweep conclusion does not survive a larger list
+- Phase 1c section 3 (t sweep) and the E2-type tables report the emp attacker with its list capped at 2M candidates (the plan's value). REPORT_1d section 1 reruns M0 and M2x, FSB qbar = 100, with 2M / 4M / 6M / all of S~: loss grows with the list and is not converged at 6M. M0, t = 1M, q = 100: 2.94 (2M), 4.56 (4M), 5.77 (6M), 10.92 (all). M0, t = 3M, q = 100: 0.04, 0.75, 1.97, 7.23. So "loss falls to 0.04 at t = 3M" (REPORT_1c section 3) holds only for the 2M list; against an emp attacker that stores all of S~, t = 3M still leaves 7.2 points. All emp numbers in Phases 1-1c at a 2M cap are lower bounds. The est attacker converged at 2M in Phase 1 (cand_check, t = 1e5); it has not been rechecked at t = 1e6 / 3e6.
+
+## D18. sigma_hat is conditional on being stored (Phase 1d item 3)
+- Method B (per-password dispersion) uses the passwords stored in A_train as its population, because those are what the buckets hold; strings never leaked are not in it, so its tail sigma_hat is a statement about leaked tail passwords. Method A (binned masses) covers all strings but measures only scale error by p^ bin (a lower bound on B). Neither is the paper's quantity; the paper has no estimate-error measure.
+
+## D19. Noise draws (Phase 1d item 2)
+- The 5 new draws use salts `c3sim-noise-v1-d1..d5`. The Phase 1c draw (salt `c3sim-noise-v1`) is not in the mean ± sd. A fallback anchor sigma = 1.5 was added to the requested {0.5, 0.75, 1.0}, and sigma = 0 is the noise-free M0 row; crossings are linear interpolation along {0, 0.5, 0.75, 1.0, 1.5}.

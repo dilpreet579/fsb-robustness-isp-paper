@@ -60,3 +60,17 @@ Item 5 was run at the primary t = 1e6. At t = 1e5 the short-string artifact is l
 
 ## Q19. Calibration rerun, which M2 list
 The fix is evaluated on M0, M1b, M2 (top370_A_train) and M2x (Xato), plus M3 on the fresh pool; dev selection uses M0, M1b, M2x.
+
+## Phase 1d
+
+## Q20. Which candidate list is the headline for the emp attacker?
+D17: the emp attacker is not converged at 2M, 4M or 6M; only "all of S~" (13.1M) is the natural cap (no more strings to try), and it still ignores generated candidates beyond S~. I ran all of S~ as an extra to item 1 because it fit in memory. If emp is the headline attacker, its numbers should be re-read with the all-of-S~ list; E1-E3, the headline table and the t sweep were not rerun at that size (an all-of-S~ index is about 5x slower per run). Tell me which tables to redo.
+
+## Q21. M2 ablation definitions
+M2L = length >= 8 only (nothing banned); M2B = Xato blocklist only (no length rule, so short passwords stay in the target pool and the attacker's list); M2x = both. The server's estimate and buckets are unchanged in all three; only the target pool and the attacker's candidates are restricted (same convention as M2 / M2x).
+
+## Q22. Success ratio at q = 1
+Baseline success at q = 1 is about 1% (M0) and 0.1% (M2x), i.e. 6 to 50 of 5,000 targets per repeat, so the ratio's sd at q = 1 is large; ratio = mean success / mean baseline over repeats, with the sd of the per-repeat ratios.
+
+## Q23. sigma_hat population
+See D18. A per-password sigma_hat that also covers never-leaked strings would need the number of strings in each p^ bin, which is not observable; the binned-mass method (A) sidesteps it at the price of measuring scale error only. If you want one headline number for "how wrong is p^", say which population matters (stored passwords vs targets).
