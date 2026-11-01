@@ -69,6 +69,8 @@ class World:
         self.xato = load_xato()  # Phase 1c banned list (first 370 lines of the Xato top-1000); None if the file is absent
         self.pw, self.cnt = self.sp["A_train"]
         self.N = len(self.pw)
+        if n_cand is None:  # Phase 1e: the attacker holds every password of S~ (no generated strings)
+            self.n_cand = self.N
         self.bits = int(np.ceil(np.log2(self.N)))
         self.h_S = data.pool_hash(self.pw)
         t0 = time.time()
