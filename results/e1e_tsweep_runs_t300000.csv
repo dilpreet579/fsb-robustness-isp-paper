@@ -1,0 +1,4 @@
+t,candidates,label,seconds,rss_after_gb,peak_rss_so_far_gb
+300000,all of S~,world build,4.3,2.89,3.57
+300000,all of S~,M0 fsb qbar=100,16.9,1.4,3.57
+300000,all of S~,M2x fsb qbar=100,9.2,2.77,3.57

@@ -1,0 +1,4 @@
+[world] N=13,125,513 |B|=2^24 estimator built in 1s
+[M0/emp] fsb fsb_base   param=100    avg=   4682.4 max=    4934 loss q1/10/100/1000 =  +1.49  +2.20  +2.32 +12.27   base@1000=11.23 cand/bucket=4683 [17s]
+[M2x/emp] fsb fsb_base   param=100    avg=   4682.4 max=    4934 loss q1/10/100/1000 =  +2.61  +2.77  +4.26 +29.73   base@1000=7.05 cand/bucket=2228 [7s]
+exit 0

@@ -1,0 +1,9 @@
+condition,scheme,variant,param,avg_bucket,max_bucket,q,baseline_success,bucket_success,loss,std_over_repeats,n_targets,repeats,pool,seed,cfg_hash,attacker,t,cand_per_bucket
+M0,fsb,fsb_base,100,4682.36,4934,1,0.968,2.456,1.488,0.131,5000,5,A_test,2000,4d7ec7c456,emp,10000000,4683.5
+M0,fsb,fsb_base,100,4682.36,4934,10,2.152,4.348,2.196,0.137,5000,5,A_test,2000,4d7ec7c456,emp,10000000,4683.5
+M0,fsb,fsb_base,100,4682.36,4934,100,4.632,6.952,2.32,0.155,5000,5,A_test,2000,4d7ec7c456,emp,10000000,4683.5
+M0,fsb,fsb_base,100,4682.36,4934,1000,11.232,23.504,12.272,0.195,5000,5,A_test,2000,4d7ec7c456,emp,10000000,4683.5
+M2x,fsb,fsb_base,100,4682.36,4934,1,0.116,2.724,2.608,0.207,5000,5,A_test|policy_xato,2000,c99bb10c09,emp,10000000,2228.4
+M2x,fsb,fsb_base,100,4682.36,4934,10,0.6,3.372,2.772,0.246,5000,5,A_test|policy_xato,2000,c99bb10c09,emp,10000000,2228.4
+M2x,fsb,fsb_base,100,4682.36,4934,100,2.54,6.8,4.26,0.392,5000,5,A_test|policy_xato,2000,c99bb10c09,emp,10000000,2228.4
+M2x,fsb,fsb_base,100,4682.36,4934,1000,7.052,36.78,29.728,0.323,5000,5,A_test|policy_xato,2000,c99bb10c09,emp,10000000,2228.4

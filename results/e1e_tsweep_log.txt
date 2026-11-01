@@ -1,0 +1,12 @@
+[world] N=13,125,513 |B|=2^24 estimator built in 0s
+[M0/emp] fsb fsb_base   param=100    avg=   1733.3 max=    1863 loss q1/10/100/1000 = +11.49 +20.54 +24.49 +41.26   base@1000=11.23 cand/bucket=1734 [17s]
+[M2x/emp] fsb fsb_base   param=100    avg=   1733.3 max=    1863 loss q1/10/100/1000 = +20.12 +25.92 +28.90 +39.58   base@1000=7.05 cand/bucket=389 [6s]
+[world] N=13,125,513 |B|=2^24 estimator built in 1s
+[M0/emp] fsb fsb_base   param=100    avg=   2023.2 max=    2182 loss q1/10/100/1000 =  +8.08 +14.90 +17.48 +33.45   base@1000=11.23 cand/bucket=2024 [14s]
+[M2x/emp] fsb fsb_base   param=100    avg=   2023.2 max=    2182 loss q1/10/100/1000 = +15.12 +19.54 +22.40 +39.58   base@1000=7.05 cand/bucket=542 [6s]
+[world] N=13,125,513 |B|=2^24 estimator built in 0s
+[M0/emp] fsb fsb_base   param=100    avg=   2564.8 max=    2732 loss q1/10/100/1000 =  +4.99  +9.29 +10.92 +24.16   base@1000=11.23 cand/bucket=2565 [15s]
+[M2x/emp] fsb fsb_base   param=100    avg=   2564.8 max=    2732 loss q1/10/100/1000 =  +9.76 +12.72 +14.79 +39.58   base@1000=7.05 cand/bucket=821 [8s]
+[world] N=13,125,513 |B|=2^24 estimator built in 1s
+[M0/emp] fsb fsb_base   param=100    avg=   3261.7 max=    3450 loss q1/10/100/1000 =  +3.18  +6.34  +7.23 +18.65   base@1000=11.23 cand/bucket=3263 [13s]
+[M2x/emp] fsb fsb_base   param=100    avg=   3261.7 max=    3450 loss q1/10/100/1000 =  +6.49  +8.28 +10.10 +36.49   base@1000=7.05 cand/bucket=1265 [7s]
