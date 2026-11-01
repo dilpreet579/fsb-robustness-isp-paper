@@ -74,3 +74,17 @@ Baseline success at q = 1 is about 1% (M0) and 0.1% (M2x), i.e. 6 to 50 of 5,000
 
 ## Q23. sigma_hat population
 See D18. A per-password sigma_hat that also covers never-leaked strings would need the number of strings in each p^ bin, which is not observable; the binned-mass method (A) sidesteps it at the price of measuring scale error only. If you want one headline number for "how wrong is p^", say which population matters (stored passwords vs targets).
+
+## Phase 1e
+
+## Q24. Is "all of S~" the right ceiling for the emp attacker?
+It adds no generated strings, so passwords outside S~ stay unreachable (in M0, about 37% of A_test accounts have a password not in A_train; REPORT_1d / data_report). The paper's attacker generates 500M 3-gram strings. An attacker with a generator would raise both the baseline and the loss. If the paper's claim should be "against the strongest attacker we can build", the generated candidates need adding; at 13.1M candidates the run is 14 s, at 500M it would be about 40x the index and memory (several tens of GB), which does not fit this machine. Say whether to implement a streamed/bucket-restricted version.
+
+## Q25. The numbers moved: which phase's tables should be re-read with the full emp attacker?
+Done at the full list: REPORT_1e (headline, t sweep, fixes, est convergence). Not done at the full list: Phase 1 E1-E3, the 1c M3 tables and sigma crossings (est: converged, so fine; emp crossings were computed with the 2M list and are lower bounds on the loss, i.e. the true emp crossing sigma is smaller). Tell me which to redo (the M3 emp crossings are the cheapest, about 15 min).
+
+## Q26. Ratio at q = 1 under the full emp attacker
+Same caveat as Q22: baseline success at q = 1 is about 1% (M0), 0.12% (M2x) and 0.54% (M2L), so the q = 1 ratio rests on 6 to 50 successes per repeat.
+
+## Q27. t = 1M stays primary although larger t helps a lot
+With the full emp attacker the loss at q = 100 on M0 falls 24.5 / 17.5 / 10.9 / 7.2 / 2.3 for t = 100k / 300k / 1M / 3M / 10M (REPORT_1e section 2) while the average bucket grows 1.7k / 2.0k / 2.6k / 3.3k / 4.7k. If the aim is the best operating point, the primary t should be a decision about that trade-off, not the paper's 1e6; a hard rule needs a target loss.

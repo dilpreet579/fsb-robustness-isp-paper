@@ -81,3 +81,21 @@ Format: what the paper does / what the plan or this implementation does / why / 
 
 ## D19. Noise draws (Phase 1d item 2)
 - The 5 new draws use salts `c3sim-noise-v1-d1..d5`. The Phase 1c draw (salt `c3sim-noise-v1`) is not in the mean ± sd. A fallback anchor sigma = 1.5 was added to the requested {0.5, 0.75, 1.0}, and sigma = 0 is the noise-free M0 row; crossings are linear interpolation along {0, 0.5, 0.75, 1.0, 1.5}.
+
+## Phase 1e additions
+
+## D20. emp headline attacker is now "all of S~"; 2M-list emp numbers are lower bounds (resolves D17 / Q20)
+- Decision after Phase 1d: the emp attacker holds all 13,125,513 passwords of S~ (no generated strings). REPORT_1e section 1 gives M0, M1b, M2x, M2L headline tables with FSB and size-matched HPB both run against that attacker. All emp numbers in Phases 1-1d (2M list) are lower bounds and appear only in REPORT_1e Appendix A. The paper's attacker also generates 500M 3-gram strings beyond S~ (D3); the full emp attacker here still does not, so "all of S~" is a floor on what a real attacker could do, not a ceiling.
+- est attacker: rechecked at t = 1M, 2M list vs all of S~ (REPORT_1e section 3): est loss at q <= qbar is unchanged (M0 stays exactly 0; M2x identical), so the est numbers of Phases 1c-1d (2M list) stand for q <= qbar. At q > qbar the all-of-S~ est list can lose more (M0 qbar = 10, q = 1000: 42.65 -> 51.83).
+
+## D21. Where the est M2L / HPB rows come from
+- Phase 1c/1d have est and emp FSB rows for M2L (`e1d_ablation.csv`) but no size-matched HPB row for it. `e1e_m2l_2m.csv` reruns M2L FSB and HPB with the 2M list (est and emp); the FSB rows equal `e1d_ablation.csv`. The est columns of REPORT_1e section 1 for M0 / M1b / M2x are the unmodified Phase 1c numbers; est ratios are Phase 1d's `e1d_ratio.csv` (M2L: ratio of means, no per-repeat sd).
+
+## D22. t = 10M ran
+- The brief allowed skipping t = 10M if it did not fit in memory; it fit (peak resident memory 4.6 GB, 33 s for both conditions), so it is in the t sweep (`e1e_tsweep_10M.csv`, own process). At t = 10M about 76% of the unique passwords of S~ are in the histogram head, so the 3-gram only covers the rarest 3.1M.
+
+## D23. cal_iso_w0.5 in Phase 1e is exploratory and not evaluated on a held-out pool
+- It is built from the t = 1M pipeline of `e1c_fix.py` (cross-fit on a 90/10 split of A_train, isotonic, 0.5-decade bins, no dev tuning in this phase) and evaluated on the primary pool A_test (seed 2000) with the full emp attacker. A_test was never used to fit it, but A_dev / A_fresh selection in Phases 1b-1c is what chose the isotonic variant; treat it as exploratory.
+
+## D24. Housekeeping changes that touch code
+- `c3sim/data.py`: `C3SIM_DATA` / `C3SIM_CACHE` environment overrides and `corpora_available()`; `experiments/common.py`: `World(n_cand=None)` = all of S~; `tests/conftest.py`: a `corpora` fixture that skips corpus-dependent tests; `Makefile`, `README.md`. None changes any number; the full test run is 28 passed, and with data absent 14 passed / 9 skipped / 0 errors (the other 5 tests are the new Phase 1e file, which is excluded from that run) (REPORT_1e section 6).
