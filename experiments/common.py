@@ -80,14 +80,21 @@ class World:
             self._base_fn = memo(fn)
         print(f"[world] N={self.N:,} |B|=2^{self.bits} estimator built in {time.time() - t0:.0f}s", flush=True)
         self._att = {}
-        self._z = None
+        self._zs = {}  # noise draws by salt (pw-aligned z_w)
 
     # ---- conditions -------------------------------------------------------------------------------------------
     def banned(self):  # named list for M2
         return self.pw[:370]
 
-    def policy_mask(self, pw, banned=None):
-        return (data.lengths(pw) >= 8) & ~np.isin(pw, self.banned() if banned is None else banned)
+    def policy_mask(self, pw, banned=None, minlen=8):
+        """Password policy: length >= minlen and not on the banned list (Phase 1d ablation varies both)."""
+        return (data.lengths(pw) >= minlen) & ~np.isin(pw, self.banned() if banned is None else banned)
+
+    def _ablate(self, cond, pw):
+        """M2L: length >= 8 only (empty banned list). M2B: Xato blocklist only (no length rule)."""
+        if cond == "M2L":
+            return self.policy_mask(pw, banned=np.array([], dtype=f"S{data.W}"), minlen=8)
+        return self.policy_mask(pw, banned=self.xato, minlen=0)
 
     def short_keep(self):
         """Phase 1c sanity: drop attacker candidates of length <= 2 that are outside the histogram head (index >= t)."""
@@ -110,6 +117,8 @@ class World:
                 self._att[key] = atk.Attacker(bp, bc, self.n_cand, name="B_attack/emp")
             elif key[0] == "M2x":
                 self._att[key] = atk.Attacker(self.pw, w, self.n_cand, keep=self.policy_mask(self.pw, self.xato), name=f"A_train|policy_xato/{model}")
+            elif key[0] in ("M2L", "M2B"):  # Phase 1d ablation: length >= 8 only / Xato blocklist only
+                self._att[key] = atk.Attacker(self.pw, w, self.n_cand, keep=self._ablate(key[0], self.pw), name=f"A_train|{key[0]}/{model}")
             elif key[0] == "M0s":
                 self._att[key] = atk.Attacker(self.pw, w, self.n_cand, keep=self.short_keep(), name=f"A_train|noshort/{model}")
             elif key[0] == "M2s":
@@ -130,18 +139,24 @@ class World:
         if cond in ("M2x", "M2s"):
             m = self.policy_mask(pw, self.xato)
             return self._att[key], (pw[m], cnt[m]), name + "|policy_xato"
+        if cond in ("M2L", "M2B"):
+            m = self._ablate(cond, pw)
+            return self._att[key], (pw[m], cnt[m]), name + ("|len8_only" if cond == "M2L" else "|blocklist_only")
         return self._att[key], (pw, cnt), name
 
     # ---- estimates --------------------------------------------------------------------------------------------
-    def noise(self, strings):
-        """z_w ~ N(0,1) seeded by the password (salted SHA-256 -> uniform -> probit)."""
-        h = data.salted_hash64(strings, data.NOISE_SALT)
+    def noise(self, strings, salt=None):
+        """z_w ~ N(0,1) seeded by the password (salted SHA-256 -> uniform -> probit). salt=None is the Phase 1-1c draw."""
+        h = data.salted_hash64(strings, salt or data.NOISE_SALT)
         return ndtri(((h >> np.uint64(11)).astype(np.float64) + 0.5) / 2.0 ** 53)
 
-    def noisy_member(self, sigma):
-        if self._z is None:
-            self._z = ndtri(((data.pool_hash(self.pw, data.NOISE_SALT) >> np.uint64(11)).astype(np.float64) + 0.5) / 2.0 ** 53)
-        return memo(lambda s: self._base_fn(s) * np.exp(sigma * self.noise(s))), self.ph_S * np.exp(sigma * self._z)
+    def noisy_member(self, sigma, salt=None):
+        """FSB member with p^ * exp(sigma z_w). salt = another noise draw (Phase 1d); None = the original draw."""
+        salt = salt or data.NOISE_SALT
+        if salt not in self._zs:
+            self._zs[salt] = ndtri(((data.pool_hash(self.pw, salt) >> np.uint64(11)).astype(np.float64) + 0.5) / 2.0 ** 53)
+        z = self._zs[salt]
+        return memo(lambda s: self._base_fn(s) * np.exp(sigma * self.noise(s, salt))), self.ph_S * np.exp(sigma * z)
 
     def base_member(self):
         return self._base_fn, self.ph_S
@@ -210,7 +225,8 @@ def run1(world, cond, scheme, name, variant, param, n_targets, repeats, seed, po
                          std_over_repeats=round(float(loss.std(ddof=1)) if repeats > 1 else 0.0, 3), n_targets=n_targets,
                          repeats=repeats, pool=pool_name, seed=seed, cfg_hash=cfg, attacker=model,
                          t=world.t, cand_per_bucket=round(float(np.mean([x["mean_cand_in_bucket"] for x in res])), 1),  # t, cand_per_bucket: Phase 1b+ CSVs only
-                         loss_by_repeat=[round(float(v), 4) for v in loss]))  # in-memory only (not a CSV column); used for Phase 1c intervals
+                         loss_by_repeat=[round(float(v), 4) for v in loss],  # in-memory only (not CSV columns); Phase 1c/1d intervals and ratios
+                         bucket_by_repeat=[round(float(v), 4) for v in b], baseline_by_repeat=[round(float(v), 4) for v in a]))
     L = {r["q"]: r["loss"] for r in rows}
     print(f"[{cond}/{model}] {name:>3} {variant:<10} param={param!s:<6} avg={avg:>9.1f} max={mx:>8} "
           f"loss q1/10/100/1000 = {L[1]:+6.2f} {L[10]:+6.2f} {L[100]:+6.2f} {L[1000]:+6.2f}   "
