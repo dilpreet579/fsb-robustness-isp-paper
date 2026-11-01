@@ -13,12 +13,19 @@ W = 30  # max password length
 SALT = b"c3sim-salt-v1"
 NOISE_SALT = b"c3sim-noise-v1"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(ROOT, "data")
-CACHE = os.path.join(ROOT, "cache")
+DATA = os.environ.get("C3SIM_DATA", os.path.join(ROOT, "data"))  # overridable so tests can simulate a missing data/ directory
+CACHE = os.environ.get("C3SIM_CACHE", os.path.join(ROOT, "cache"))
 PATHS = {
     "rockyou": os.path.join(DATA, "rockyou", "rockyou-withcount.txt"),
     "phpbb": os.path.join(DATA, "phpbb", "phpbb-withcount.txt"),
 }
+
+
+def corpora_available():
+    """True if both corpora can be loaded: each has a cleaned cache or its raw file (RockYou: extracted or the tarball)."""
+    def have(name, *raw):
+        return os.path.exists(os.path.join(CACHE, f"{name}_clean.npz")) or any(os.path.exists(r) for r in raw)
+    return have("rockyou", PATHS["rockyou"], PATHS["rockyou"] + ".tar.gz") and have("phpbb", PATHS["phpbb"])
 
 
 def extract_rockyou():
