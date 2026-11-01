@@ -1,0 +1,5 @@
+attacker,candidates,n_candidates,world_build_s,attacker_build_s,index_build_s,games_5x5000_s,total_s,rss_now_gb,peak_rss_gb
+emp,2M,2000000,2.4,0.3,0.9,1.3,4.9,2.66,2.66
+emp,all,13125513,2.2,1.0,8.6,2.3,14.1,3.57,3.57
+est,2M,2000000,2.2,2.0,1.3,2.1,7.6,2.67,2.67
+est,all,13125513,2.2,4.4,13.3,2.2,22.2,3.63,3.63
