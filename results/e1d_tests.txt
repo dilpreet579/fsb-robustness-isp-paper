@@ -1,0 +1,7 @@
+[1d] true sigma 0.0: moment estimate 0.000
+[1d] true sigma 0.5: moment estimate 0.498
+[1d] true sigma 1.0: moment estimate 0.997
+[1d] naive sd of log(c/m) at sigma=0: 0.60
+..[1d] noise draws: mean +0.001, sd 0.998, corr with the original draw +0.002
+.
+3 passed in 0.41s
