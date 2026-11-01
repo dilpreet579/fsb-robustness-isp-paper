@@ -1,0 +1,7 @@
+Phase 1e, 10-core laptop, 5,000 targets x 5 repeats. e1e_cost and e1e_headline ran alone; estconv, tsweep and the 10M process overlapped (estconv + tsweep), then fix ran with tsweep_10M briefly:
+e1e_cost (4 cold probes, one fresh process each): see e1e_cost.csv (emp 2M 4.9 s, emp all 14.1 s, est 2M 7.6 s, est all 22.2 s; peak RSS 2.7 / 3.6 / 2.7 / 3.6 GB)
+e1e_headline (24 emp all-S~ runs + M2L 2M runs): 2 min 28 s
+e1e_estconv: 2 min 21 s
+e1e_tsweep (t = 100k, 300k, 1M, 3M): 1 min 59 s
+e1e_tsweep_10M (own process): 33 s (peak RSS 4.6 GB)
+e1e_fix (3 variants x 8 qbar x 2 conditions, emp all-S~): 5 min 46 s
