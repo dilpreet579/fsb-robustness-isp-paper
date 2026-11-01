@@ -1,0 +1,12 @@
+A_dev: 1,631,475 accounts; 62.7% of them have a password stored in A_train
+t=100,000 done
+t=1,000,000 done
+         t group                                        method  sigma_hat  sigma_hat_alt                  alt_meaning  se_over_folds  bias_mu  bins_used      n_used
+0   100000  head  B per-password dispersion (stored passwords)      0.164          0.105                mass-weighted          0.029   -0.017          6     99966.0
+1   100000  tail  B per-password dispersion (stored passwords)      1.634          1.489                mass-weighted          0.001    4.903         41  12939105.0
+2   100000  head                 A binned masses (all strings)      0.015          0.016  raw (not Poisson-corrected)            NaN   -0.010          9    593029.0
+3   100000  tail                 A binned masses (all strings)      0.881          0.881  raw (not Poisson-corrected)            NaN    0.630         56   1037606.0
+4  1000000  head  B per-password dispersion (stored passwords)      0.308          0.191                mass-weighted          0.012   -0.093          7    999966.0
+5  1000000  tail  B per-password dispersion (stored passwords)      1.570          1.478                mass-weighted          0.004    5.862         39  12025064.0
+6  1000000  head                 A binned masses (all strings)      0.114          0.114  raw (not Poisson-corrected)            NaN   -0.061         10    832251.0
+7  1000000  tail                 A binned masses (all strings)      0.918          0.918  raw (not Poisson-corrected)            NaN    0.683         55    798404.0
