@@ -1,0 +1,5 @@
+Phase 1d, 10-core laptop, 5,000 targets x 5 repeats (jobs overlapped, so times are inflated):
+e1d_cap: 4 min 36 s
+e1d_noise: 24 min 17 s
+e1d_m2: 4 min 5 s
+e1d_esterror: 57 s
