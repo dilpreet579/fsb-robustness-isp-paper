@@ -1,0 +1,25 @@
+t,candidates,label,seconds,rss_after_gb,peak_rss_so_far_gb
+1000000,all of S~,M0 fsb qbar=10,11.0,3.96,3.96
+1000000,all of S~,M0 hpb l=14,3.2,4.01,4.01
+1000000,all of S~,M0 fsb qbar=100,8.6,4.08,4.08
+1000000,all of S~,M0 hpb l=12,3.0,4.13,4.13
+1000000,all of S~,M0 fsb qbar=1000,12.3,4.21,4.21
+1000000,all of S~,M0 hpb l=10,3.3,4.26,4.26
+1000000,all of S~,M1b fsb qbar=10,8.3,2.11,4.31
+1000000,all of S~,M1b hpb l=14,3.3,2.29,4.31
+1000000,all of S~,M1b fsb qbar=100,10.2,2.1,4.31
+1000000,all of S~,M1b hpb l=12,3.6,1.66,4.31
+1000000,all of S~,M1b fsb qbar=1000,14.1,1.52,4.31
+1000000,all of S~,M1b hpb l=10,3.3,1.77,4.31
+1000000,all of S~,M2x fsb qbar=10,8.6,1.66,4.55
+1000000,all of S~,M2x hpb l=14,2.5,1.27,4.55
+1000000,all of S~,M2x fsb qbar=100,4.1,1.83,4.55
+1000000,all of S~,M2x hpb l=12,2.0,1.87,4.55
+1000000,all of S~,M2x fsb qbar=1000,4.8,2.01,4.55
+1000000,all of S~,M2x hpb l=10,2.2,2.04,4.55
+1000000,all of S~,M2L fsb qbar=10,6.2,4.06,4.55
+1000000,all of S~,M2L hpb l=14,1.9,4.1,4.55
+1000000,all of S~,M2L fsb qbar=100,3.8,4.13,4.55
+1000000,all of S~,M2L hpb l=12,1.9,4.16,4.55
+1000000,all of S~,M2L fsb qbar=1000,4.6,4.21,4.55
+1000000,all of S~,M2L hpb l=10,2.1,4.24,4.55
