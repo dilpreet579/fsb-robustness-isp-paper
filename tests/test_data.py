@@ -22,7 +22,7 @@ def test_clean_aggregates_and_filters():
     assert dict(zip(pw.tolist(), c.tolist())) == {b"a": 3, b"b c": 4}
 
 
-def test_real_splits_deterministic_and_pools_consistent():
+def test_real_splits_deterministic_and_pools_consistent(corpora):
     s1, s2 = data.splits(), data.splits()
     for k in s1:
         assert (s1[k][0] == s2[k][0]).all() and (s1[k][1] == s2[k][1]).all()
