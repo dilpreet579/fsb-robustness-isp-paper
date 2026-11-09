@@ -99,3 +99,16 @@ Format: what the paper does / what the plan or this implementation does / why / 
 
 ## D24. Housekeeping changes that touch code
 - `c3sim/data.py`: `C3SIM_DATA` / `C3SIM_CACHE` environment overrides and `corpora_available()`; `experiments/common.py`: `World(n_cand=None)` = all of S~; `tests/conftest.py`: a `corpora` fixture that skips corpus-dependent tests; `Makefile`, `README.md`. None changes any number; the full test run is 28 passed, and with data absent 14 passed / 9 skipped / 0 errors (the other 5 tests are the new Phase 1e file, which is excluded from that run) (REPORT_1e section 6).
+
+## Phase 1f additions
+
+## D25. Target groups in the mechanism analysis
+- head = in S~ and rank < t = 1M by count in A_train (the histogram head of p^); tail = stored in S~ but rank >= t; none = not in A_train. Shares of the A_test targets: M0 50.8% / 11.7% / 37.5%; M2x 33.9% / 12.8% / 53.4%. The group `none` can never be guessed (no candidate), so it only dilutes the rates. "Loss contribution" = share x (success - baseline), which sums exactly to the loss; the games replay Phase 1e's targets and bucket draws and the totals are asserted equal to `e1e_headline.csv`.
+- Finding (REPORT_1f section 1): with FSB qbar = 100 almost all of the emp attacker's loss comes from the tail group: M0, q = 100: tail +11.44 of the total +10.92 (head -0.51); M2x, q = 100: tail +12.75 of +14.79 (head +2.04). Inside the tail group the attacker guesses 97.8% (M0) / 99.97% (M2x) of the targets at q = 100 while the baseline guesses none. The newly gained targets at q = 1 (M0, FSB) have leak count 1 (67%), 2 (31%) or 3-5 (1%) and median gamma 1 (1,476 targets pooled); at q = 100: leak count 1 (69%), 2 (30%), 3-5 (1%), median gamma 2. Under size-matched HPB (l = 12) the loss is entirely in the head group (M0, q = 100: +40.90) and the tail group is almost never guessed.
+
+## D26. Tail-only noise (Phase 1f item 2)
+- "Tail" for the noise means every string outside the histogram head, including strings never stored in S~ (the client and the attacker evaluate p^ on any string); the head keeps p^ exactly. The est attacker is run with the 2M list (as Phase 1d's noise draws; est loss at q <= qbar does not change with all of S~, REPORT_1e section 3). Same 5 draws (salts d1..d5) for tail-only and full noise; sigma = 1.6 for full noise is new (Phase 1d stopped at 1.5). est, qbar = 100, q = 100: tail-only +0.89 ± 0.14 at sigma = 1.6 vs full noise +23.20 ± 0.28; at sigma = 0.5 tail-only -0.04 vs full +2.63.
+- Extra (not requested, labelled in the report): the same experiment with the emp attacker (all of S~): tail-only noise leaves the loss at 10.9 for sigma = 0.5, 1.0, 1.6 (clean estimate: 10.92), full noise gives 12.9 / 19.6 / 33.0.
+
+## D27. Dates and authors of the Phase 1f commits
+- At your instruction the Phase 1f work is committed as 9 commits split equally across the three authors (3 each) and dated Monday 9 Nov 2026, not with the dates on which the work was actually done (15 Nov 2026). A first version with real dates and a single identity was replaced before anything was pushed. The commits are local only.

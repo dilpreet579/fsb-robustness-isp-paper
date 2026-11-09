@@ -88,3 +88,14 @@ Same caveat as Q22: baseline success at q = 1 is about 1% (M0), 0.12% (M2x) and 
 
 ## Q27. t = 1M stays primary although larger t helps a lot
 With the full emp attacker the loss at q = 100 on M0 falls 24.5 / 17.5 / 10.9 / 7.2 / 2.3 for t = 100k / 300k / 1M / 3M / 10M (REPORT_1e section 2) while the average bucket grows 1.7k / 2.0k / 2.6k / 3.3k / 4.7k. If the aim is the best operating point, the primary t should be a decision about that trade-off, not the paper's 1e6; a hard rule needs a target loss.
+
+## Phase 1f
+
+## Q28. Two different questions hide behind "estimate error": est and emp react to different parts of p^
+Tail-only noise at the measured tail sigma_hat (1.6 vs 1.57) costs the est attacker +0.89 points (full noise: +23.20) and does not move the emp attacker at all (10.9 vs 10.92 clean), yet the emp attacker's 10.9 comes entirely from the tail group (D25). The est attacker scores candidates with p^ itself, so it cannot see tail error; the emp attacker sees the tail's systematic mis-scaling (stored tail passwords have much more probability than the 3-gram gives them, bias mu = +5.9 in REPORT_1d) and extra symmetric noise on top of that changes little. So "FSB is robust to estimate error" has two readings: robust to noise around p^ (head noise is what hurts, est) vs robust to a mis-scaled tail (the emp loss). If the paper claims robustness against estimate error, say which reading it is; the Phase 1c/1d M3 curves answer the first only.
+
+## Q29. Group rates use the 5 repeats; the distributions pool them
+Group shares / success / baseline / loss contributions are mean ± sd over the 5 repeats (25,000 targets total). The gamma and leak-count distributions pool all 25,000 targets (the guessed subset has 1,476 to 3,889 targets per cell, shown as `n`).
+
+## Q30. Authors and dates of the Phase 1f commits
+They follow your latest instruction: 9 commits, 3 per author, all dated 9 Nov 2026. Because the work was done on 15 Nov, the commit dates do not match when it was actually done (see the note on backdating in D27); say if that history is meant for a purpose where the real dates matter.
