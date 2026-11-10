@@ -99,3 +99,23 @@ Group shares / success / baseline / loss contributions are mean ± sd over the 5
 
 ## Q30. Authors and dates of the Phase 1f commits
 They follow your latest instruction: 9 commits, 3 per author, all dated 9 Nov 2026. Because the work was done on 15 Nov, the commit dates do not match when it was actually done (see the note on backdating in D27); say if that history is meant for a purpose where the real dates matter.
+
+## Paper assets
+
+## Q31. Replace the dagger in T2?
+Three runs (emp, all of S~, blocklist-only policy M2B, FSB qbar 10 / 100 / 1000) would remove the dagger; they take about a minute with the Phase 1e harness. I did not run them because of "no new experiments". Say if you want them.
+
+## Q32. Fig. 4 est reference beyond M0 and t <= 3M
+est at t = 10M, and est on M2x at t other than 1M, were never run. Given that est converges at 2M for q <= qbar, the M0 line would almost certainly stay at 0; M2x is the open one (+2.10 at t = 1M). A short est t sweep (M0 and M2x, 100k..10M) would close it.
+
+## Q33. How should the "5-point reference (dotted, est only)" be read?
+I drew one horizontal dotted line at 5 pp in both panels of Fig. 1 and in Fig. 2, and it is described in the legend as a reference. If "est only" meant something else (for example a marker where the est curve crosses 5), say so.
+
+## Q34. Success ratios at q = 1 are large and noisy for M2x
+T1 gives FSB emp 85 ± 25 (qbar = 100) because the no-bucket baseline at q = 1 is 0.12% (about 6 successes among 5,000 targets per repeat). The ratio at q = qbar is better conditioned (the baseline there is 2.5%) but not what was asked; say if the text should use it instead.
+
+## Q35. What the head-storage numbers do and do not say
+They size the head of the 13.1M-password leak used here (average 8.5 bytes of text per entry at t = 1M). A leak of another size or distribution has a different head; probabilities are counted at 4 bytes each although they could be derived from small integer counts; the 3-gram table is not compressed; nothing about transmission or update cost is estimated.
+
+## Q36. Smaller points
+T3's average-bucket column is the M0 value (the scheme's own property, identical for M2x). Narrow-width figures abbreviate the y-label unit as "pp" in two figures (Fig. 3, Fig. 5) because the full "percentage points" does not fit the column height; the captions define pp.

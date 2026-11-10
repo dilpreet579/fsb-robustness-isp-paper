@@ -111,4 +111,25 @@ Format: what the paper does / what the plan or this implementation does / why / 
 - Extra (not requested, labelled in the report): the same experiment with the emp attacker (all of S~): tail-only noise leaves the loss at 10.9 for sigma = 0.5, 1.0, 1.6 (clean estimate: 10.92), full noise gives 12.9 / 19.6 / 33.0.
 
 ## D27. Dates and authors of the Phase 1f commits
-- At your instruction the Phase 1f work is committed as 9 commits split equally across the three authors (3 each) and dated Monday 9 Nov 2026, not with the dates on which the work was actually done (15 Nov 2026). A first version with real dates and a single identity was replaced before anything was pushed. The commits are local only.
+- At your instruction the Phase 1f work is committed as 9 commits split equally across the three authors (3 each) and dated Monday 9 Nov 2026, not with the dates on which the work was actually done (15 Nov 2026). A first version with real dates and a single identity was replaced before anything was pushed. The 9 commits were pushed later, at your request, as a normal fast-forward.
+
+## Paper assets (figures, tables, number map)
+
+## D28. T2: the blocklist-only ablation has no emp run with all of S~
+- `e1e_headline.csv` has conditions M0, M1b, M2x, M2L; the blocklist-only policy (M2B) exists only in `e1d_ablation.csv`, i.e. with the 2M list (emp loss 3.43 / 3.93 / 3.31 at qbar 10 / 100 / 1000). T2 therefore prints the M2B emp cells from the 2M list and marks them with a dagger (a lower bound); the M2L and M2x emp cells use all of S~. No run was added (no new experiments).
+
+## D29. est numbers for M2L come from the ablation file
+- `e1c_e2.csv` (the frozen source for est rows) has no M2L condition (it has M0, M1a, M1b, M2, M2x, M3). T1's est M2L cells use `e1d_ablation.csv` (est, FSB, same seed and targets, 2M list). There is no est HPB row for M2L in any frozen source; T1 does not need one (its HPB column is emp).
+
+## D30. Fig. 4: the est reference is not a flat zero everywhere
+- The brief asks for the est loss as a flat 0 line. The only est t-sweep is `e1c_tsweep.csv` (not in the frozen source list): M0 only, t = 100k to 3M, est loss at q = 100 is 0.000 at every t; t = 10M was not run for est. For M2x the only est measurement is at t = 1M and it is +2.10, not 0 (policy mismatch). Fig. 4 draws the M0 line only over the measured t and shows M2x as a single open square; the caption says so.
+
+## D31. Reference lines and anchors
+- Fig. 1: "5-point reference (dotted, est only)" is drawn as a horizontal dotted line at 5 pp in both panels (it applies to the est curves; there is no way to draw it for one series only). Fig. 2: the sigma = 0 point of every curve is the noise-free M0 run (est 0.00, emp 10.92); it has no draws, so it carries no error bar. The sigma_hat markers are method B (per-password dispersion), t = 1M (head 0.308, tail 1.570).
+
+## D32. T1 success ratios
+- The success ratio at q = 1 in T1 is the emp attacker's (`e1e_ratio.csv`, FSB and size-matched HPB); the est ratios of `e1d_ratio.csv` are not in the frozen source list and are not used. The M2x ratios (FSB 85 ± 25 at qbar = 100) rest on a baseline success of 0.12% at q = 1.
+
+## D33. Number map conventions and the head-storage estimate
+- `numbers.csv` has the requested columns plus the recipe columns `op`, `column`, `source_csv2`, `filter2`, `extra` (needed to recompute derived values: fractions removed, interpolations, crossings). The statement in T7 that the emp crossing is not defined is computed against the headline emp attacker (all of S~): its loss at sigma = 0 is 10.52 / 10.92 / 10.91 (> 5). The 2M-list emp rows of `e1d_noise.csv` start below 5 (2.8 to 2.9) and do have a crossing (REPORT_1d, 0.37 to 0.64); that attacker is the lower-bound one and is not used.
+- `head_cost.csv`: an estimate of data size, not an implementation. MB = 10^6 bytes; text = sum of (length + 1) over the t head strings; gzip -9 with header mtime 0; probabilities as float32 (4 bytes per entry); the 3-gram table is counted as 97 x 97 x 96 = 903,264 numbers (3.6 MB float32, 7.2 MB float64). The head is the top t of A_train (a 13.1M-unique-password leak).
