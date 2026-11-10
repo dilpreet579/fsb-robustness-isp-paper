@@ -1,0 +1,6 @@
+t,entries,head_mass_share,plain_text_bytes,gzip9_bytes,prob_float32_bytes,plain_MB,gzip9_MB,prob_float32_MB,plain_plus_prob_MB,gzip9_plus_prob_MB,trigram_entries,trigram_float32_MB,trigram_float64_MB,note
+100000,100000,0.367066,814500,398486,400000,0.8145,0.398486,0.4,1.2145,0.798486,903264,3.613056,7.226112,"estimate of data size, not an implementation; MB = 1e6 bytes"
+300000,300000,0.448305,2490726,1114899,1200000,2.490726,1.114899,1.2,3.690726,2.314899,903264,3.613056,7.226112,"estimate of data size, not an implementation; MB = 1e6 bytes"
+1000000,1000000,0.544975,8536287,3462594,4000000,8.536287,3.462594,4.0,12.536287,7.462594,903264,3.613056,7.226112,"estimate of data size, not an implementation; MB = 1e6 bytes"
+3000000,3000000,0.654661,27867745,10617219,12000000,27.867745,10.617219,12.0,39.867745,22.617219,903264,3.613056,7.226112,"estimate of data size, not an implementation; MB = 1e6 bytes"
+10000000,10000000,0.893402,96224221,36901619,40000000,96.224221,36.901619,40.0,136.224221,76.901619,903264,3.613056,7.226112,"estimate of data size, not an implementation; MB = 1e6 bytes"

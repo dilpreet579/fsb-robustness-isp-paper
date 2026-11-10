@@ -1,0 +1,19 @@
+\begin{tabular}{llrr}
+\toprule
+Policy & $\bar q$ & \multicolumn{2}{c}{Loss at $q=\bar q$ (pp)} \\
+\cmidrule(lr){3-4}
+ & & est & emp \\
+\midrule
+length $\geq 8$ only & 10 & $0.38 \pm 0.10$ & $12.80 \pm 0.59$ \\
+ & 100 & $1.66 \pm 0.03$ & $14.15 \pm 0.58$ \\
+ & 1000 & $3.58 \pm 0.12$ & $16.07 \pm 0.41$ \\
+\midrule
+blocklist only & 10 & $0.11 \pm 0.05$ & $3.43 \pm 0.36$$^{\dagger}$ \\
+ & 100 & $0.52 \pm 0.20$ & $3.93 \pm 0.31$$^{\dagger}$ \\
+ & 1000 & $-0.06 \pm 0.14$ & $3.31 \pm 0.33$$^{\dagger}$ \\
+\midrule
+both & 10 & $0.96 \pm 0.09$ & $13.54 \pm 0.43$ \\
+ & 100 & $2.10 \pm 0.24$ & $14.79 \pm 0.69$ \\
+ & 1000 & $3.89 \pm 0.23$ & $16.59 \pm 0.35$ \\
+\bottomrule
+\end{tabular}

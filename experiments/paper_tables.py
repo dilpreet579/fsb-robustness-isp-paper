@@ -1,0 +1,181 @@
+"""Paper tables T1-T7 -> paper/tables/T*.tex (LaTeX tabular, booktabs, no vertical rules), generated from results/*.csv and paper/head_cost.csv only.
+Frozen framing: est = attacker weights p^ with the 2M list; emp = weights from leak counts with ALL of S~; t = 1M unless stated; loss = bucket success - baseline success
+of the same attacker, percentage points (pp); +- = sd over the 5 repeats (T7: over the 5 noise draws)."""
+import os
+
+import numpy as np
+import pandas as pd
+
+from experiments.paper_common import PAPER, TABLES, load, one, sel
+from experiments.paper_numlib import SIGMAS, crossing5_per_draw, interp_log
+
+QBARS = (10, 100, 1000)
+PM = r"\pm"
+
+
+def pm(v, sd, d=2):
+    return "--" if pd.isna(v) else (f"${v:.{d}f}$" if pd.isna(sd) else f"${v:.{d}f} {PM} {sd:.{d}f}$")
+
+
+def write(name, colspec, header, body):
+    """header: list of header lines (already LaTeX, end with \\\\); body: list of rows (str) or None for a \\midrule."""
+    out = [r"\begin{tabular}{" + colspec + "}", r"\toprule", *header, r"\midrule"]
+    for r in body:
+        out.append(r"\midrule" if r is None else r)
+    out += [r"\bottomrule", r"\end{tabular}", ""]
+    open(os.path.join(TABLES, name), "w").write("\n".join(out))
+
+
+# ----------------------------------------------------------------------------------------------------------------- T1 headline
+def t1():
+    est, emp, ratio, abl = load("e1c_e2"), load("e1e_headline"), load("e1e_ratio"), load("e1d_ablation")
+    body = []
+    for ci, c in enumerate(("M0", "M1b", "M2x", "M2L")):
+        if ci:
+            body.append(None)
+        for qb in QBARS:
+            f = one(sel(emp, condition=c, scheme="fsb", variant="fsb_base", attacker="emp"), param=qb, q=qb)
+            h = one(sel(emp, condition=c, scheme="hpb", variant=f"match_qbar{qb}", attacker="emp"), q=qb)
+            if c == "M2L":  # Phase 1c has no est row for M2L; the ablation run (est, 2M list) has the same seeds and targets
+                e = one(sel(abl, condition="M2L", scheme="fsb", variant="fsb_base", attacker="est"), param=qb, q=qb)
+            else:
+                e = one(sel(est, condition=c, scheme="fsb", variant="fsb_base", attacker="est"), param=qb, q=qb)
+            rf = one(sel(ratio, condition=c, scheme="fsb", attacker="emp"), qbar=qb, q=1)
+            rh = one(sel(ratio, condition=c, scheme="hpb", attacker="emp"), qbar=qb, q=1)
+            removed = 100 * (1 - f.loss / h.loss)
+            body.append(" & ".join([c if qb == 10 else "", str(qb), f"{f.avg_bucket:,.0f}", pm(e.loss, e.std_over_repeats), pm(f.loss, f.std_over_repeats), pm(h.loss, h.std_over_repeats),
+                                    f"${removed:.0f}$", pm(rf.ratio, rf.ratio_sd, 1), pm(rh.ratio, rh.ratio_sd, 1)]) + r" \\")
+    hdr = [r"Cond. & $\bar q$ & Avg.\ bucket & \multicolumn{3}{c}{Loss at $q=\bar q$ (pp)} & Removed & \multicolumn{2}{c}{Success ratio at $q=1$} \\",
+           r"\cmidrule(lr){4-6}\cmidrule(lr){8-9}",
+           r" & & (entries) & FSB est & FSB emp & HPB emp & (\%) & FSB emp & HPB emp \\"]
+    write("T1_headline.tex", "llrrrrrrr", hdr, body)
+
+
+# ----------------------------------------------------------------------------------------------------------------- T2 M2 ablation
+def t2():
+    abl, hd = load("e1d_ablation"), load("e1e_headline")
+    body = []
+    for pi, (c, lab) in enumerate((("M2L", r"length $\geq 8$ only"), ("M2B", "blocklist only"), ("M2x", "both"))):
+        if pi:
+            body.append(None)
+        for qb in QBARS:
+            e = one(sel(abl, condition=c, scheme="fsb", variant="fsb_base", attacker="est"), param=qb, q=qb)
+            if c == "M2B":  # no emp run with all of S~ exists for the blocklist-only policy: the 2M-list value is a lower bound
+                m = one(sel(abl, condition=c, scheme="fsb", variant="fsb_base", attacker="emp"), param=qb, q=qb)
+                emp = pm(m.loss, m.std_over_repeats) + r"$^{\dagger}$"
+            else:
+                m = one(sel(hd, condition=c, scheme="fsb", variant="fsb_base", attacker="emp"), param=qb, q=qb)
+                emp = pm(m.loss, m.std_over_repeats)
+            body.append(" & ".join([lab if qb == 10 else "", str(qb), pm(e.loss, e.std_over_repeats), emp]) + r" \\")
+    hdr = [r"Policy & $\bar q$ & \multicolumn{2}{c}{Loss at $q=\bar q$ (pp)} \\", r"\cmidrule(lr){3-4}", r" & & est & emp \\"]
+    write("T2_m2_ablation.tex", "llrr", hdr, body)
+    open(os.path.join(TABLES, "T2_m2_ablation_note.tex"), "w").write(
+        r"$^{\dagger}$ emp with the 2M candidate list (lower bound); no all-of-$\tilde S$ run exists for the blocklist-only policy." + "\n")
+
+
+# ----------------------------------------------------------------------------------------------------------------- T3 t sweep + head storage
+def t3():
+    ts = pd.concat([load("e1e_tsweep"), load("e1e_tsweep_10M")], ignore_index=True)
+    hc = pd.read_csv(os.path.join(PAPER, "head_cost.csv")).set_index("t")
+    body = []
+    for t in (100_000, 300_000, 1_000_000, 3_000_000, 10_000_000):
+        r = [f"{t:,}".replace(",", r"\,"), f"{hc.loc[t].plain_MB:.1f}", f"{hc.loc[t].gzip9_MB:.1f}", f"{hc.loc[t].prob_float32_MB:.1f}",
+             f"{one(sel(ts, condition='M0', t=t), q=100).avg_bucket:,.0f}"]
+        for c in ("M0", "M2x"):
+            for q in (1, 10, 100):
+                x = one(sel(ts, condition=c, t=t, attacker="emp"), q=q)
+                r.append(pm(x.loss, x.std_over_repeats, 1))
+        body.append(" & ".join(r) + r" \\")
+    hdr = [r"$t$ & \multicolumn{3}{c}{Head storage (MB)} & Avg.\ bucket & \multicolumn{3}{c}{emp loss, M0 (pp)} & \multicolumn{3}{c}{emp loss, M2x (pp)} \\",
+           r"\cmidrule(lr){2-4}\cmidrule(lr){6-8}\cmidrule(lr){9-11}",
+           r" & text & gzip & +probs & (entries) & $q{=}1$ & $q{=}10$ & $q{=}100$ & $q{=}1$ & $q{=}10$ & $q{=}100$ \\"]
+    write("T3_tsweep_head_storage.tex", "rrrrrrrrrrr", hdr, body)
+    open(os.path.join(TABLES, "T3_note.tex"), "w").write(
+        "Storage is an estimate of data size, not an implementation: newline-delimited head strings (text), the same text under gzip -9, and 4 bytes per entry for a float32 "
+        "probability (+probs); 1 MB = $10^6$ bytes. The 3-gram table adds " + f"{hc.iloc[0].trigram_float32_MB:.1f} MB (float32) or {hc.iloc[0].trigram_float64_MB:.1f} MB (float64). "
+        "FSB with $\\bar q=100$, emp attacker holding all of $\\tilde S$.\n")
+
+
+# ----------------------------------------------------------------------------------------------------------------- T4 fixes
+def t4():
+    fx = load("e1e_fix")
+    body = []
+    for ci, c in enumerate(("M0", "M2x")):
+        if ci:
+            body.append(None)
+        for v, lab in (("fsb_base", "base (add-$\\delta$)"), ("smoothed", "Kneser--Ney"), ("cal_iso_w0.5", "calibrated$^{\\ast}$")):
+            d = sel(fx, condition=c, variant=v, attacker="emp")
+            vals = [interp_log(d, q, b) for q in (100, 1000) for b in (2000, 6500, 20000)]
+            body.append(" & ".join([c if v == "fsb_base" else "", lab] + [("--" if np.isnan(x) else f"{x:.1f}") for x in vals]) + r" \\")
+    hdr = [r"Cond. & Variant & \multicolumn{3}{c}{Loss at $q=100$ (pp)} & \multicolumn{3}{c}{Loss at $q=1000$ (pp)} \\", r"\cmidrule(lr){3-5}\cmidrule(lr){6-8}",
+           r" & & 2k & 6.5k & 20k & 2k & 6.5k & 20k \\"]
+    write("T4_fixes.tex", "llrrrrrr", hdr, body)
+    open(os.path.join(TABLES, "T4_note.tex"), "w").write(
+        "Loss of the emp attacker (all of $\\tilde S$) at equal average bucket size (2,000 / 6,500 / 20,000 entries; log-linear interpolation along a $\\bar q=1..3000$ sweep). "
+        "$^{\\ast}$ exploratory: cross-fitted calibration of the 3-gram tail, isotonic, 0.5-decade bins.\n")
+
+
+# ----------------------------------------------------------------------------------------------------------------- T5 cost
+def t5():
+    c = load("e1e_cost")
+    body = []
+    for att, lab in (("emp", "emp (leak counts)"), ("est", r"est ($\hat p$)")):
+        for cand in ("2M", "all"):
+            r = one(c, attacker=att, candidates=cand)
+            body.append(" & ".join([lab if cand == "2M" else "", r"$2\,000\,000$" if cand == "2M" else r"all of $\tilde S$ ($13\,125\,513$)", f"{r.attacker_build_s:.1f}", f"{r.index_build_s:.1f}",
+                                    f"{r.games_5x5000_s:.1f}", f"{r.total_s:.1f}", f"{r.peak_rss_gb:.1f}"]) + r" \\")
+    hdr = [r"Attacker & Candidates & Build (s) & Index (s) & 25k queries (s) & Total (s) & Peak mem. (GB) \\"]
+    write("T5_cost.tex", "llrrrrr", hdr, body)
+    open(os.path.join(TABLES, "T5_note.tex"), "w").write(
+        "One cold run (M0, FSB $\\bar q=100$, $t=1$M; $5\\times5{,}000$ targets) in a fresh process on a 10-core laptop; total adds the world build "
+        f"({c.world_build_s.min():.1f}--{c.world_build_s.max():.1f} s, same for all rows) to the columns shown. Build = candidate list; Index = $\\gamma$ for every candidate and the lookup structure.\n")
+
+
+# ----------------------------------------------------------------------------------------------------------------- T6 estimator error
+def t6():
+    es = load("e1d_esterror_summary")
+    es = es[es.t == 1_000_000]
+    body = []
+    for gi, g in enumerate(("head", "tail")):
+        if gi:
+            body.append(None)
+        for m, lab in (("B", "per-password dispersion (stored passwords)"), ("A", "binned masses (all strings)")):
+            r = es[(es.group == g) & es.method.str.startswith(m)].iloc[0]
+            se = "--" if pd.isna(r.se_over_folds) else f"{r.se_over_folds:.3f}"
+            body.append(" & ".join([g if m == "B" else "", lab, f"{r.sigma_hat:.3f}", se, f"{r.sigma_hat_alt:.3f}", f"{r.bias_mu:+.2f}", f"{int(r.bins_used)}"]) + r" \\")
+    hdr = [r"Group & Method & $\hat\sigma$ & s.e.\ & alt.\ & bias $\mu$ & Bins \\"]
+    write("T6_estimator_error.tex", "llrrrrr", hdr, body)
+    open(os.path.join(TABLES, "T6_note.tex"), "w").write(
+        "$\\hat\\sigma$: sd of $\\log(\\hat p/p)$ on held-out A\\_dev at $t=1$M, Poisson noise subtracted. Method B: per-password dispersion within bins of $\\hat p$ over the passwords stored in the "
+        "leak (alt. = account-weighted); s.e.\\ over 5 folds. Method A: held-out vs model mass per bin over all strings (alt. = raw RMS, not Poisson-corrected); a lower bound on B. "
+        "Bias $\\mu=\\log(\\text{true}/\\hat p)$, mass-weighted (B) or mean log-ratio (A); positive: $\\hat p$ too small.\n")
+
+
+# ----------------------------------------------------------------------------------------------------------------- T7 crossings
+def t7():
+    emp = load("e1e_headline")
+    body = []
+    for qb in QBARS:
+        v = crossing5_per_draw(qb, "est")
+        body.append(" & ".join([str(qb), f"${np.mean(v):.3f} {PM} {np.std(v, ddof=1):.3f}$", ", ".join(f"{x:.3f}" for x in v)]) + r" \\")
+    z = [float(one(sel(emp, condition="M0", scheme="fsb", variant="fsb_base", attacker="emp"), param=qb, q=qb).loss) for qb in QBARS]
+    assert min(z) > 5, z  # the statement below is only true if emp is already above 5 points at sigma = 0
+    body.append(None)
+    body.append(r"\multicolumn{3}{p{0.92\linewidth}}{\footnotesize emp (all of $\tilde S$): crossing not defined, the loss at $\sigma=0$ already exceeds 5 points (" +
+                " / ".join(f"{x:.1f}" for x in z) + r" pp for $\bar q=10/100/1000$).} \\")
+    hdr = [r"$\bar q$ & $\sigma$ at 5 points (mean $\pm$ sd, 5 draws) & Per-draw values \\"]
+    write("T7_m3_crossings.tex", "lrl", hdr, body)
+    open(os.path.join(TABLES, "T7_note.tex"), "w").write(
+        "est, M0, FSB, loss at $q=\\bar q$; noise multiplies $\\hat p$ on every string by $\\exp(\\sigma z_w)$; $\\sigma=0$ is the noise-free run; linear interpolation along "
+        "$\\sigma\\in\\{0,0.5,0.75,1.0,1.5\\}$; draws use salts d1--d5.\n")
+
+
+def main():
+    os.makedirs(TABLES, exist_ok=True)
+    for f in (t1, t2, t3, t4, t5, t6, t7):
+        f()
+    print("tables written to", TABLES, sorted(os.listdir(TABLES)))
+
+
+if __name__ == "__main__":
+    main()

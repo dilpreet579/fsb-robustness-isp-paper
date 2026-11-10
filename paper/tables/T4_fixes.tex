@@ -1,0 +1,15 @@
+\begin{tabular}{llrrrrrr}
+\toprule
+Cond. & Variant & \multicolumn{3}{c}{Loss at $q=100$ (pp)} & \multicolumn{3}{c}{Loss at $q=1000$ (pp)} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+ & & 2k & 6.5k & 20k & 2k & 6.5k & 20k \\
+\midrule
+M0 & base (add-$\delta$) & 11.4 & 10.1 & 8.8 & 31.4 & 13.3 & 10.5 \\
+ & Kneser--Ney & 11.4 & 10.1 & 8.8 & 31.4 & 13.3 & 10.5 \\
+ & calibrated$^{\ast}$ & 11.5 & 9.9 & 7.9 & 29.1 & 12.9 & 10.4 \\
+\midrule
+M2x & base (add-$\delta$) & 16.4 & 12.9 & 12.5 & 39.6 & 24.6 & 14.1 \\
+ & Kneser--Ney & 16.4 & 12.9 & 12.5 & 39.6 & 24.6 & 14.1 \\
+ & calibrated$^{\ast}$ & 15.8 & 12.8 & 12.3 & 39.5 & 23.0 & 13.8 \\
+\bottomrule
+\end{tabular}
