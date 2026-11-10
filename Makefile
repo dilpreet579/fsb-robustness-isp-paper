@@ -89,6 +89,16 @@ e1d-m2:
 report1d:
 	$(PY) -m experiments.report1d
 
+# ---- Paper assets: figures, LaTeX tables, head-storage estimate, number map and its check (no new experiments; reads results/*.csv; head cost reads the corpora) ----
+.PHONY: paper-assets
+paper-assets:
+	$(PY) -m experiments.paper_head_cost
+	$(PY) -m experiments.paper_figs
+	$(PY) -m experiments.paper_tables
+	$(PY) -m experiments.paper_numbers
+	$(PY) -m experiments.paper_captions
+	$(PY) paper/check_numbers.py
+
 # ---- Phase 1e: emp attacker = all of S~ (13.1M candidates) ----
 phase1e: e1e-cost e1e-headline e1e-estconv e1e-fix e1e-tsweep e1e-tsweep-10m report1e
 # cost probes: one fresh process per configuration (peak memory belongs to that configuration); run alone, before the heavy jobs
