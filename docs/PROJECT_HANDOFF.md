@@ -47,7 +47,8 @@ Working rules used throughout:
 1. The experiments and reports came first; the paper text was drafted afterwards from the verified results (`docs/paper.md`), with every number taken from `paper/numbers.csv`, the figures from `paper/figs/` and the tables from `paper/tables/`.
 2. The text was converted to LaTeX (`paper/main.tex`, one preamble file for the layout, `refs.bib` built from the reference list). Figures 1 to 4 are in the body; Table 1 is `T1_headline.tex`; Appendix A is the per-draw noise table, Appendix B the head-storage table and Appendix C Figure 5 (the fixes).
 3. A number audit (`paper/check_text_numbers.py`) extracts every numeric token from `main.tex` and matches it to the number map, the head-storage file, the data report, listed derived claims (for example exp(5.86) is about 350) and stated setup constants. Tables are checked by regenerating them and comparing bytes. The authors read the audit result and the md-versus-CSV points listed in `results/REPORT_paper.md` and corrected the text where the data disagreed.
-4. The layout target was 7 pages for the text plus references, with appendices on a further page. The current PDF is 8 pages: pages 1 to 7 hold the text and references, page 8 the appendices.
+4. The text was later extended with comparisons to Li et al. (their estimator, 436-million-password leak, 8.9 MB estimate and policy experiment, each checked against the base paper in `docs/`), a short note on HIBP's padded responses and Microsoft Password Monitor, and the M2x case at qbar = 1000, where FSB is worse than size-matched HPB at q = 1 (8.58 pp against 6.06 pp). Each edit is listed in `results/REPORT_paper.md`.
+5. The layout target is 7.5 to 7.75 pages for text plus references, with the appendices on a further page. The current PDF is 9 pages: the text and references run to about 7.6 pages (page 8 is about 64% filled), and Appendices A to C are on page 9.
 
 ## 5. How to reproduce
 
@@ -71,16 +72,17 @@ Fixed settings: seed 2000, pool A_test, 5 repeats of 5,000 targets, t = 1,000,00
 
 - C1: against the estimate-based attacker FSB's loss at q = qbar is 0.0 pp for qbar = 10, 100, 1000, against 37.0, 41.1, 40.2 pp for size-matched HPB.
 - C2: the loss reaches 5 pp at noise sigma = 0.87, 0.69, 0.66; the measured head error is 0.31, so the margin is about 2 to 1.
-- C3: the count-aware attacker gains 10.5, 10.9, 10.9 pp, still about 73% below HPB; under a length-and-blocklist policy FSB removes under 1% of HPB's loss at q = 1 for qbar = 100.
+- C3: the count-aware attacker gains 10.5, 10.9, 10.9 pp, still about 73% below HPB; under a length-and-blocklist policy FSB removes under 1% of HPB's loss at q = 1 for qbar = 100, and at qbar = 1000 it is worse than size-matched HPB (it removes -41.7% of HPB's loss).
 - C4: the residual loss sits on rare stored passwords outside the histogram head; a 10M-entry head cuts it to 2.3 pp.
 - C5: a cold run of the count-aware attacker takes 14 s and 3.6 GB.
 
 ## 7. Open items and known limits
 
-- Two claims in Related Work (1.5% from Thomas et al.; 16% from Pal et al. 2019) are not checked against the cited papers; the audit lists them as unmatched. The sentence "We are not aware of an earlier study ..." needs a literature check by the authors.
+- Two claims in Related Work (1.5% from Thomas et al.; 16% from Pal et al. 2019) are not checked against the cited papers; the audit lists them as unmatched, together with the 436 million of Li et al. (confirmed in the base paper). The sentence "We are not aware of an earlier study ..." needs a literature check by the authors.
+- The Microsoft Password Monitor reference is undated ("n.d.") because the year could not be confirmed, and the statements about HIBP's padded responses (Cloudflare blog, 4 March 2020) and Password Monitor (OPRF and homomorphic encryption) are not checked against the pages (`results/QUESTIONS.md` Q38).
 - The blocklist-only policy ablation (M2B) has no run over all stored passwords; its emp numbers come from the 2M-candidate file (DISCREPANCIES D28).
 - Figure 4 shows a single est point for M2x at t = 1M because that is the only measurement; the est reference is not a flat zero everywhere (D30).
 - The calibration variant is exploratory (tuned on a held-out split).
 - The study uses one leak and one split; the standard deviations come from re-sampling targets, not from re-splitting the leak.
-- `docs/paper.md` is an untracked local copy kept in line with the LaTeX; the LaTeX is the maintained source.
+- `docs/paper.md` is an untracked local copy; it does not include the latest LaTeX edits (the Li et al. comparisons, the references added for Ali and Microsoft, and the M2x qbar = 1000 result). The LaTeX is the maintained source.
 - Tooling note: the PDF is built with `tectonic` (no pdflatex was installed on the build machine).

@@ -76,6 +76,8 @@ def _derived():
         d.append((f"HPB larger than FSB by (%), qbar={q}", f"C1_M0_qbar{q}_hpb_avg / C1_M0_qbar{q}_fsb_avg - 1",
                   (g[f"C1_M0_qbar{q}_hpb_avg"] / g[f"C1_M0_qbar{q}_fsb_avg"] - 1) * 100, 0.5, "abs"))
     d.append(("'under 1%' / 'less than 1%' of HPB's loss removed (M2x, qbar=100, q=1)", "C3_M2x_qbar100_frac_removed_q1 x 100 < 1", g["C3_M2x_qbar100_frac_removed_q1"] * 100, None, "lt1"))
+    d.append(("M2x qbar=1000 q=1: share of HPB loss removed by FSB (negative: FSB worse)", "1 - 8.584/6.056 (C3_M2x_qbar1000_emp_fsb_loss_q1 / _hpb_loss_q1)",
+              (1 - g["C3_M2x_qbar1000_emp_fsb_loss_q1"] / g["C3_M2x_qbar1000_emp_hpb_loss_q1"]) * 100, 0.05, "neg"))
     return d
 
 
@@ -196,6 +198,8 @@ def match(val, d, pct, mult):
             out.append(("derived", f"{lab}: {form} = {v:.2f}"))
         elif kind == "abs" and pct and close(v, val, d):
             out.append(("derived", f"{lab}: {form} = {v:.2f}"))
+        elif kind == "neg" and pct and close(abs(v), val, d):
+            out.append(("derived", f"{lab}: {form} = {v:.2f}%"))
         elif kind == "lt1" and pct and val == 1 and v < 1:
             out.append(("derived", f"{lab}: {form} = {v:.3f}"))
     for c, lab in CONSTANTS.items():
@@ -247,7 +251,7 @@ def main():
             ms = match(val, d, pct, mult)
             status, src = "UNMATCHED", ""
             if ms:
-                pri = {"numbers.csv": 0, "head_cost": 1, "data_report": 2, "e1d_ablation": 2, "derived": 3, "constant": 4}
+                pri = {"derived": -1, "numbers.csv": 0, "head_cost": 1, "data_report": 2, "e1d_ablation": 2, "constant": 4}  # an explicit derived claim is the stated basis, not a coincidental numbers.csv hit
                 ms.sort(key=lambda x: pri[x[0]])
                 status, src = ms[0][0], "; ".join(f"{s}:{x}" if s != ms[0][0] else x for s, x in ms[:3]) + (f" (+{len(ms) - 3} more)" if len(ms) > 3 else "")
                 only_num = all(s in ("numbers.csv", "head_cost") for s, _ in ms)
