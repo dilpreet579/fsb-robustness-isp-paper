@@ -3,6 +3,13 @@
 Figures, LaTeX tables, a head-storage estimate and a checked number map for the paper. **No new experiments**: everything is computed from the existing `results/*.csv`
 (the head-storage estimate also reads the corpora). Nothing in `results/` is written to by these scripts.
 
+## Paper PDF
+
+    make paper-pdf             # paper/main.tex (+ preamble.tex, refs.bib, figs/, tables/) -> paper/main.pdf with tectonic (runs BibTeX itself); needs tectonic
+    .venv/bin/python -I paper/check_text_numbers.py   # audit of every number printed in main.tex against numbers.csv, head_cost.csv, data_report.md and listed derived claims/constants;
+                                                      # prints unmatched tokens with their lines (exit 1), writes paper/text_numbers_audit.tsv; fixes nothing
+    results/REPORT_paper.md    # what was built, page counts, non-mechanical edits to docs/paper.md, audit result
+
 ## Regenerate
 
     make paper-assets          # runs the six steps below in order, ending with the number check

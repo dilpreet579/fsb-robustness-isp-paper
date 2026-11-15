@@ -99,6 +99,12 @@ paper-assets:
 	$(PY) -m experiments.paper_captions
 	$(PY) paper/check_numbers.py
 
+# ---- Paper PDF: paper/main.tex -> paper/main.pdf from scratch with tectonic (runs BibTeX itself); no experiments ----
+.PHONY: paper-pdf
+paper-pdf:
+	rm -f paper/main.pdf paper/main.aux paper/main.bbl paper/main.blg paper/main.log
+	cd paper && tectonic --keep-logs --keep-intermediates main.tex
+
 # ---- Phase 1e: emp attacker = all of S~ (13.1M candidates) ----
 phase1e: e1e-cost e1e-headline e1e-estconv e1e-fix e1e-tsweep e1e-tsweep-10m report1e
 # cost probes: one fresh process per configuration (peak memory belongs to that configuration); run alone, before the heavy jobs

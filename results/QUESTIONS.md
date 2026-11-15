@@ -119,3 +119,6 @@ They size the head of the 13.1M-password leak used here (average 8.5 bytes of te
 
 ## Q36. Smaller points
 T3's average-bucket column is the M0 value (the scheme's own property, identical for M2x). Narrow-width figures abbreviate the y-label unit as "pp" in two figures (Fig. 3, Fig. 5) because the full "percentage points" does not fit the column height; the captions define pp.
+
+## Q37. Paper PDF: open items for the authors
+Author block: filled with Dilpreet Singh, Ishita Gupta, Madhav Raj (National Institute of Technology Delhi under each name; no emails or department; no date printed); wording of the generative-AI disclosure; the Hunt reference is undated (`n.d.`, accessed November 2026); whether `paper/main.pdf` should be committed and whether `paper/main.{aux,bbl,blg,log,out}` should be git-ignored (currently untracked, not ignored). md observations left unchanged: the intro quotes 98.7% where Section 4.4 quotes 98.6% (data: 98.64% at q=1, 98.67% at q=100 on M0); Section 3 says M1a is "left to the appendix" but the appendix has no M1a content and Limitations says "omitted"; Section 2 says Section 3 explains why the estimate and attacker are varied, which it does not; "14.2 pp" (M2L, q̄=100) is 14.148 in the CSV.

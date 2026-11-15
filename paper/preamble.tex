@@ -1,0 +1,53 @@
+% Preamble: document class, geometry, fonts, float and citation settings. The paper text in main.tex uses the macros below and plain LaTeX only.
+\documentclass[10pt,twocolumn]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[letterpaper,margin=0.75in,columnsep=0.25in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage[hyphens]{url}
+\Urlmuskip=0mu plus 1mu                    % allow line breaks inside long URLs in the reference list
+\usepackage[authoryear,round]{natbib}      % author-year citations: \citet, \citep
+\usepackage[hidelinks]{hyperref}
+\bibliographystyle{plainnat}
+
+% compact lists and floats
+\setlist{nosep,leftmargin=*}
+\setlist[itemize]{topsep=2pt}
+\setlist[enumerate]{topsep=2pt}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.8}
+\renewcommand{\dbltopfraction}{0.9}
+\renewcommand{\dblfloatpagefraction}{0.8}
+\setcounter{topnumber}{3}
+\setcounter{dbltopnumber}{3}
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\dbltextfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{6pt plus 2pt minus 2pt}
+\setlength{\abovecaptionskip}{4pt}
+\setlength{\belowcaptionskip}{0pt}
+\usepackage[font=small,labelfont=bf,justification=raggedright]{caption}
+
+% symbols used in the text
+\newcommand{\qbar}{\ensuremath{\bar q}}
+\newcommand{\phat}{\ensuremath{\hat p}}
+\newcommand{\shat}{\ensuremath{\hat\sigma}}
+\newcommand{\Stilde}{\ensuremath{\tilde S}}
+\newcommand{\Atrain}{\ensuremath{A_{\mathrm{train}}}}
+\newcommand{\Atest}{\ensuremath{A_{\mathrm{test}}}}
+
+% headings never break a word across lines (same sizes as article's defaults)
+\usepackage{titlesec}
+\titleformat*{\section}{\Large\bfseries\raggedright\hyphenpenalty=10000 \exhyphenpenalty=10000 }
+\titleformat*{\subsection}{\large\bfseries\raggedright\hyphenpenalty=10000 \exhyphenpenalty=10000 }
+
+% reference list in small type with tight spacing
+\renewcommand{\bibfont}{\footnotesize}
+\setlength{\bibsep}{0pt plus 0.5pt}
