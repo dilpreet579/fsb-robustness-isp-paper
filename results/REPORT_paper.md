@@ -78,5 +78,26 @@ Added after the floor experiments of `results/REPORT_1g.md`; each edit is non-me
 - **Pool difference**: the floor numbers are on A_fresh; plain FSB on A_fresh loses 10.68 pp (M0, q̄ = 100, emp) against 10.92 on A_test. Section 4.6 and the Table 4 note say so.
 - `docs/paper.md` was not updated.
 
+## Guideline revision (professor's review points)
+Changes made without needing the authors' decisions; everything blocked on them is listed in `results/QUESTIONS.md` Q40.
+1. **Abstract**: now says that the study is a simulation on RockYou (13.1M stored passwords, held-out accounts as targets, phpbb second target pool). Index Terms line added after the abstract.
+2. **Equations (numbered, all symbols defined)**: Eq. 1 (gamma), Eq. 2 (floor), Eq. 3 (estimate p^), Eq. 4 (attacker score), Eq. 5 (loss), Eq. 6 (Good-Turing value); the floor equation of Section 4.6 and the attacker weights are now stated through them.
+3. **Algorithms**: Algorithm 1 (FSB with a floor: bucket assignment, client query, server bucket) and Algorithm 2 (attacker's guess list). **Figure 1** (TikZ): client, server-as-attacker and what each knows.
+4. **New text**: "Security versus privacy" (Section 3), "Why these data" (Section 3, with singleton share 82.8% / 11.30% top-1000 mass for RockYou and 88.6% singletons for phpbb from `data_report.md`), "Implementation and reproducibility" with Table 2 (`T9_env.tex`).
+5. **Conditions table** is now Table 1 with a caption and a reference; Table 4 (noise crossings), Table 5 (head storage), Figure 6 (fixes) and Appendices B to D are now cited in the text (numbers as printed after the new Figure 1 and Tables 1 and 2 were added).
+6. **New Section 4.7 (C7) and Appendix E (Table 7, `T10_splits.tex`)**: the headline comparisons on four independent splits of RockYou (`e1h_splits.py`, `REPORT_1h.md`): plain FSB 10.96 ± 0.06 pp, floor 2,048 0.10 ± 0.03 pp, matched HPB 41.19 ± 0.20 pp (M0, q = qbar = 100); standard deviation over splits at most 0.22 pp in every cell. The floor was chosen on the first split's dev pool, so the other three splits are out of sample for it. The "One leak, one split" limitation became "One leak"; the intro lists seven measurements; the conclusion states that the results are lower bounds from one leak.
+- **Pipeline**: `paper_numlib.py` recipe `split_worst`; `paper_numbers.py` claim C7 (49 numbers; `numbers.csv` now 806, all recomputed); `paper_tables.py` `t9`, `t10`; `check_text_numbers.py`: split seeds and the three data-report shares are stated constants, physical lengths (TikZ) are ignored. Audit: same 4 unmatched tokens (436 twice, 1.5%, 16%).
+- **Length**: text plus references now end on page 10 (about 9.4 pages), appendices A to E on pages 11 and 12. The venue's page limit is unknown (Q40).
+- Not changed: the template (still `article`, author-year citations), the related-work comparison table, reference verification, the AI-disclosure wording.
+
+## FIST-2027 version (`paper/fist/`)
+Built from the conference's published rules (read from fistconference.com on 2026-11-22; see `results/QUESTIONS.md` Q41 for what could not be verified).
+- **Template and size**: `IEEEtran` conference class, A4, Times-like font; 6 pages including references (limit: 6, "maximum of 6 pages"; whether references count is not stated, so they are inside the 6); no extra-page fee needed.
+- **Double-blind**: `fist_blind.pdf` has no author names, affiliation, repository link or PDF author metadata (checked on the text and with `strings`; `tests/test_fist.py`). `fist_named.pdf` is the same paper with the author block and repository link.
+- **Content** (condensed from `main.tex`; same numbers, from `numbers.csv`): abstract, Index Terms, five contributions; Background with Eqs. 1 to 3 and Algorithm 1; Threat model and setup (Figure 1, security versus privacy, data justification, attackers, metric, conditions, implementation); results (Figures 2 to 4, Tables I and II): reproduction and noise, count-aware attacker, mechanism, floor on gamma with Eq. 6, stability over four splits and cost; discussion and limitations; related work; conclusion, ethics, AI disclosure, availability.
+- **Dropped from the long paper**: the appendices, the M1b/M2L/M2B ablation tables, the head-storage and calibration material, Algorithm 2 (the attacker is described by Eq. 4), the environment table (a one-line text instead), and the two claims that were never checked against their sources (1.5% of logins and 16% of accounts) together with the Ali and Microsoft Password Monitor sentences; their references are not cited.
+- **Audit**: 438 numeric tokens; the only unmatched token is `436` (twice, the base paper's leak size, confirmed in `docs/1905.13737v3.pdf`). Full suite: 49 passed.
+- **Still open for the human** (professor's review points and FIST): the related-work comparison table and more recent references, verification of every reference (Q40), the FIST template files (Q41), the AI-disclosure wording, a similarity check (FIST limit: 20%, including references).
+
 ## Open items for the human
 Author block is filled (Dilpreet Singh, Ishita Gupta, Madhav Raj; institute under each name; no emails or departments). Gen-AI disclosure wording; undated Hunt reference; whether `paper/main.pdf` should be committed (build files are currently untracked and not ignored).

@@ -10,6 +10,22 @@ Figures, LaTeX tables, a head-storage estimate and a checked number map for the 
                                                       # prints unmatched tokens with their lines (exit 1), writes paper/text_numbers_audit.tsv; fixes nothing
     results/REPORT_paper.md    # what was built, page counts, non-mechanical edits to docs/paper.md, audit result
 
+## FIST-2027 version (`paper/fist/`)
+
+A 6-page version for the FIST-2027 conference (IEEE conference template, A4; the long paper `main.tex` is unchanged and remains the extended version).
+
+    make paper-fist          # fist_blind.pdf (double-blind review copy) and fist_named.pdf (named copy); needs tectonic
+    make paper-fist-check    # number audit of fist_body.tex and the anonymity / page-limit tests
+
+| file | content |
+|---|---|
+| `fist/fist_body.tex` | the whole paper; `\ifblind` switches the author block and the availability sentence |
+| `fist/fist_blind.tex`, `fist/fist_named.tex` | two wrappers (`\documentclass[conference,a4paper]{IEEEtran}`, `\blindtrue` / `\blindfalse`) that `\input` the body |
+| `fist/fist_blind.pdf`, `fist/fist_named.pdf` | the two builds; the blind one carries no names, affiliation, repository link or PDF author metadata |
+| `text_numbers_audit_fist_body.tsv` | token-by-token audit of `fist_body.tex` (`.venv/bin/python -I paper/check_text_numbers.py paper/fist/fist_body.tex`): only `436` (the base paper's leak size, confirmed in `docs/1905.13737v3.pdf`) is unmatched |
+
+Fonts: TeX Gyre Termes (a Times clone) is loaded by file name because Tectonic is XeTeX-based and has no Times package; maths stays Computer Modern. Figures and tables are shared with the long paper (`../figs`, `../tables`); the numbers in the text come from `numbers.csv` as before.
+
 ## Regenerate
 
     make paper-assets          # runs the six steps below in order, ending with the number check
@@ -58,13 +74,18 @@ files hold one-paragraph table notes. No LaTeX engine is installed in this repos
 | `T6_estimator_error.tex`, `T6_note.tex` | head / tail sigma_hat, both methods, t = 1M | `e1d_esterror_summary.csv` |
 | `T7_m3_crossings.tex`, `T7_note.tex` | sigma at 5 points over 5 noise draws (est); emp crossing not defined | `e1d_noise.csv`, `e1c_e2.csv`, `e1e_headline.csv` |
 | `T8_floor.tex`, `T8_note.tex` | gamma floor (Phase 1g), fresh pool: worst-case loss over the emp, gt and est attackers at q=qbar and q=1000 for plain FSB, floors 256 / 1024 / 2048 / 4096 and size-matched HPB; M0 and M2x | `e1g_floor_fresh.csv`, `e1g_robust_fresh.csv` |
+| `T11_fist_headline.tex` | compact headline for the 6-page version: M0 and M2x, qbar 10/100/1000, loss at q=qbar (FSB est, FSB emp, matched HPB emp), share of HPB loss removed | `e1c_e2.csv`, `e1e_headline.csv` |
+| `T12_fist_floor.tex` | compact floor table for the 6-page version: worst-case loss over emp, gt, est at q=qbar (fresh pool), qbar 10/100/1000, selected floors | `e1g_floor_fresh.csv`, `e1g_robust_fresh.csv` |
+| `T13_env.tex` | one line of text (pinned versions and the machine) used inline in the 6-page version | `requirements.txt` |
+| `T9_env.tex` | implementation environment: pinned software versions (read from `requirements.txt`), Python, PDF engine and the machine (fixed strings) | `requirements.txt` |
+| `T10_splits.tex`, `T10_note.tex` | stability over four independent splits of the leak (Phase 1h): per scheme the largest loss over emp, gt and est, mean ± sd (min--max) over splits; plain FSB, floor 2,048, matched HPB; M0 and M2x; q = 1 and q = qbar = 100 | `e1h_splits.csv` |
 
 ### Data and checks (`paper/`)
 
 | file | content |
 |---|---|
 | `head_cost.csv` | estimated size of the histogram head for t = 100k, 300k, 1M, 3M, 10M (plain text, gzip -9, float32 probabilities) and of the 3-gram table; an estimate of data size, not an implementation |
-| `numbers.csv` | every number the text may quote: id, claim (C1..C6), description, value, unit, source_csv, filter, plus the recipe columns op, column, source_csv2, filter2, extra |
+| `numbers.csv` | every number the text may quote: id, claim (C1..C7), description, value, unit, source_csv, filter, plus the recipe columns op, column, source_csv2, filter2, extra |
 | `numbers.md` | the same numbers as a readable table grouped by claim |
 | `captions.md` | factual caption drafts for Figures 1-5, with numbers computed from the CSVs (includes the note that tail-only noise leaves emp at the clean 10.92) |
 | `check_numbers.py` | recomputes every row of `numbers.csv` from its source CSV and exits 1 on any mismatch |
@@ -80,7 +101,8 @@ files hold one-paragraph table notes. No LaTeX engine is installed in this repos
 C1 reproduction (est: HPB loss at q=1 and q=qbar at matched sizes; FSB max |loss| for q <= qbar) | C2 noise tolerance (sigma crossings at 5 points, head and tail sigma_hat) |
 C3 count-aware attacker (emp loss at q=qbar, fraction of HPB loss removed at q=qbar and q=1, M2x success ratios) | C4 mechanism (loss contribution by group, tail guess rate, leak-count and gamma
 of newly gained targets, t sweep, fixes at equal size, tail-only vs full noise) | C5 attacker cost (time and memory) | C6 gamma floor (Phase 1g, fresh pool: loss of the emp, gt and est attackers and the
-largest of the three at q=1, q=qbar and q=1000 for plain FSB and floors 256 to 4096; average bucket size and its ratio to plain FSB; matched-HPB emp loss).
+largest of the three at q=1, q=qbar and q=1000 for plain FSB and floors 256 to 4096; average bucket size and its ratio to plain FSB; matched-HPB emp loss) | C7 stability over four splits of the leak (Phase 1h: mean, sd, min, max over splits of the per-split largest loss
+over emp, gt, est, for plain FSB, floor 2,048 and matched HPB at q = 1 and q = qbar = 100, M0 and M2x).
 
 ## Things to know before using these assets
 

@@ -10,7 +10,7 @@ R = results
         e1c-e2 e1c-tsweep e1c-e3 e1c-fix-dev e1c-fix-fresh report1c \
         e1d-cap e1d-noise e1d-esterror e1d-m2 report1d \
         e1e-cost e1e-headline e1e-estconv e1e-fix e1e-tsweep e1e-tsweep-10m report1e \
-        phase1g e1g-floor-dev e1g-floor-fresh e1g-robust-dev e1g-robust-fresh report1g
+        phase1g e1g-floor-dev e1g-floor-fresh e1g-robust-dev e1g-robust-fresh report1g e1h-splits report1h
 
 all: venv fetch fetch-xato data test phase1 phase1b phase1c phase1d phase1e
 
@@ -141,3 +141,17 @@ e1g-robust-fresh:
 	$(PY) -m experiments.e1g_robust --pool fresh > $(R)/e1g_robust_fresh_log.txt 2>&1
 report1g:
 	$(PY) -m experiments.report1g
+
+# ---- Phase 1h: four independent splits of the leak (headline comparisons, emp/gt/est) ----
+e1h-splits:
+	$(PY) -m experiments.e1h_splits > $(R)/e1h_splits_log.txt 2>&1
+report1h:
+	$(PY) -m experiments.report1h
+
+# ---- FIST-2027 version: 6 pages, IEEE conference template (A4); fist_blind.pdf = double-blind review copy, fist_named.pdf = named copy. Needs tectonic. ----
+.PHONY: paper-fist paper-fist-check
+paper-fist:
+	cd paper/fist && tectonic --keep-logs --keep-intermediates fist_blind.tex && tectonic --keep-logs --keep-intermediates fist_named.tex
+paper-fist-check:
+	$(PY) paper/check_text_numbers.py paper/fist/fist_body.tex
+	$(PY) -m pytest -q tests/test_fist.py

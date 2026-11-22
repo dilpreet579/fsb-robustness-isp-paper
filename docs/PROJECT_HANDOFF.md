@@ -1,6 +1,6 @@
 # Project handoff: HPB vs FSB robustness simulator and paper
 
-Authors: Dilpreet Singh, Ishita Gupta, Madhav Raj (National Institute of Technology Delhi).
+Authors: Dilpreet Singh, Ishita Gupta, Madhav Raj and Dr. Sandhya Pundhir (Dept. of CSE, National Institute of Technology Delhi). The third author's surname is "Raj" in the paper but was typed "Sharma" in the FIST CMT form: confirm with him before the camera-ready.
 
 ## 1. What this project is
 
@@ -85,6 +85,8 @@ Fixed settings: seed 2000, pool A_test, 5 repeats of 5,000 targets, t = 1,000,00
 - Figure 4 shows a single est point for M2x at t = 1M because that is the only measurement; the est reference is not a flat zero everywhere (D30).
 - The calibration variant is exploratory (tuned on a held-out split).
 - The study uses one leak and one split; the standard deviations come from re-sampling targets, not from re-splitting the leak.
+- Professor's review points (see `results/QUESTIONS.md` Q40 and `REPORT_paper.md`, "Guideline revision"): equations, algorithms, Figure 1, data justification, implementation table, captions and citations of every float, Index Terms and abstract are done; Phase 1h (`make e1h-splits report1h`) adds four splits of the leak (C7). Blocked on the authors: IEEEtran template and venue page limit, related-work comparison table, reference verification, AI-disclosure wording, similarity check.
+- FIST-2027 version (`paper/fist/`, `make paper-fist paper-fist-check`): 6 pages, IEEEtran conference, A4; `fist_blind.pdf` is the double-blind review copy, `fist_named.pdf` the named one. Open items: `results/QUESTIONS.md` Q41 (template files not opened, IEEE claims unverified, one venue only) and Q40.
 - The floor (C6): one fresh pool, three stored-password attackers, a flawed pre-registered selection rule (D35), no M1b / M3 run, not tested at the scale of Li et al., server storage and lookup cost not measured (Q39). Text plus references now fill 8 pages (target was 7.5 to 7.75); Appendix D is on its own page.
 - `docs/paper.md` is an untracked local copy; it does not include the latest LaTeX edits (the Li et al. comparisons, the references added for Ali and Microsoft, and the M2x qbar = 1000 result). The LaTeX is the maintained source.
 - Tooling note: the PDF is built with `tectonic` (no pdflatex was installed on the build machine).

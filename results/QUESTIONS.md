@@ -134,3 +134,22 @@ The authors' text cited "(Microsoft Research, 2021)". The year could not be conf
 5. **qbar = 1000.** At 1.25x the plain-FSB bucket (floor 4096) the gt attacker still gets 2.2 points (M0) and 5.8 (M2x) at q = 1000. Floors 8192 and 16384 were run for emp only, so the cost of closing this was not measured against gt.
 6. **Cost not measured:** server storage and lookup time with floored gamma (the sum of gamma grows by the same factor as the average bucket, 1.56x at qbar = 100, floor 2048); only bucket size (bandwidth) was measured.
 7. **Paper.** Whether and how to report this in the paper (Section 5 says the remedy was not run) is the authors' decision; nothing was changed.
+
+## Q40. Professor's review points: what is blocked on the authors
+The paper was revised for the points that need no decision (see `REPORT_paper.md`, "Guideline revision"). These are open:
+1. **Template and venue.** IEEE conference or IEEE journal? The paper is still the plain `article` class with author-year citations (`natbib`, `plainnat`); IEEE needs `IEEEtran`, numeric citations and IEEE reference style, plus the venue's page limit (the paper is now about 9.4 pages plus 2 of appendices).
+2. **Related work.** The comparison table (method, dataset, results, limitations) and more recent references need facts that must be verified from the sources; nothing was added to avoid unverified entries.
+3. **Reference verification.** Authors, titles, venues, years and DOIs of every reference; the two unchecked claims (1.5% of logins, Thomas et al.; 16% of accounts, Pal et al.); the undated Microsoft Password Monitor and SecLists entries; the sentence "we are not aware of an earlier study".
+4. **Generative-AI disclosure.** The wording must follow the target venue's policy (some require naming the tools).
+5. **Similarity (plagiarism) check** of the final text.
+6. **Affiliation block.** IEEE templates usually want department, city, country and an email per author; none is in the paper.
+
+## Q41. FIST-2027 (fistconference.com): what was read, what could not be verified
+Read on 2026-11-22: the home, paper-submission, guidelines, publication, registration, peer-review, TPC, download, call-for-paper, date, venue and contact pages. Rules used: 6 pages maximum (2 more pages for INR 1000 / USD 50 each), IEEE conference template (the downloads are IEEE's LaTeX template and `IEEEtranBST2`; the "Manuscript guidelines" link goes to IEEE's template page), PDF only, double-blind, English, similarity at most 20% including references and self-plagiarism, original and not under review elsewhere, at least one author registers, submission by 15 January 2027 on Microsoft CMT.
+1. **The template files were not opened.** The paper uses the standard `IEEEtran` conference class (`a4paper`). Compare it with the FIST Word/LaTeX template (their Word file is `conference-template-a4.docx`) before submitting.
+2. **Page limit and references.** The site does not say whether references count toward the 6 pages; the paper fits in 6 pages including them.
+3. **Anonymity rules.** The site says "double-blind" but gives no author-formatting instructions; the review copy omits names, affiliation, repository and PDF metadata. Check CMT's submission form for anything further (e.g. file naming).
+4. **IEEE claims could not be verified.** The site shows "IEEE Record #72851", "Scopus" and "Technically Sponsored by IEEE"; a web search found none of these. Check the IEEE Conference Search listing for the record number and ask the professor, before paying fees. Other points seen on the site: TPC page ends with "to be updated" and repeats several names; review process described inconsistently across pages; footer text "CYPHER2026"; an 18% convenience fee plus non-refundable payments.
+5. **No generative-AI policy found**; the paper keeps its disclosure paragraph (IEEE's general author policy asks for disclosure in the acknowledgments; confirm on IEEE's site).
+6. **Choose one venue.** FIST requires original work not under review elsewhere; the same paper cannot go to DISHA 2026 at the same time (DISHA's deadlines had passed and its track list was not found).
+7. **Camera-ready** needs the named copy (`fist_named.pdf`), the IEEE copyright form and, per the site, registration of at least one author.

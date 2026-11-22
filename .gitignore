@@ -11,3 +11,9 @@ paper/main.bbl
 paper/main.blg
 paper/main.log
 paper/main.out
+# FIST version build files (paper/fist/*.pdf are kept)
+paper/fist/*.aux
+paper/fist/*.bbl
+paper/fist/*.blg
+paper/fist/*.log
+paper/fist/*.out
