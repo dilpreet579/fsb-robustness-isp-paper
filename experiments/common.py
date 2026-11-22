@@ -62,10 +62,11 @@ def memo(fn):
 class World:
     """Leak S~ = A_train, server estimate, and attackers/target pools for M0-M3."""
 
-    def __init__(self, t=100_000, smoothing="adddelta", n_cand=N_CAND, postproc=None):
-        """postproc(world) -> (phat_fn, ph_S) replaces the deployed estimate (Phase 1b calibration)."""
+    def __init__(self, t=100_000, smoothing="adddelta", n_cand=N_CAND, postproc=None, split_seeds=None):
+        """postproc(world) -> (phat_fn, ph_S) replaces the deployed estimate (Phase 1b calibration).
+        split_seeds = (seed_a, seed_b, seed_dev) re-splits the corpora (Phase 1h); None = the paper's split (101, 102, 103)."""
         self.t, self.smoothing, self.n_cand = t, smoothing, n_cand
-        self.sp = data.splits()
+        self.sp = data.splits(*split_seeds) if split_seeds else data.splits()
         self.xato = load_xato()  # Phase 1c banned list (first 370 lines of the Xato top-1000); None if the file is absent
         self.pw, self.cnt = self.sp["A_train"]
         self.N = len(self.pw)
