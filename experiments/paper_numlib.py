@@ -91,6 +91,8 @@ def compute(row):
     extra = json.loads(row["extra"]) if isinstance(row.get("extra"), str) and row["extra"] else {}
     if op == "value":
         return _one(src, filt, col)
+    if op == "max_of":  # largest of several single-row values of one column: extra = {"parts": [[source_csv, filter], ...]} (Phase 1g: worst case over attackers)
+        return max(_one(s, f, col) for s, f in extra["parts"])
     d = select(csv(src), filt) if src else None
     if op == "sum":
         return float(d[col].sum())

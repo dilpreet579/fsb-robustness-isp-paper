@@ -8,10 +8,10 @@ import pytest
 from experiments.paper_common import FIGS, PAPER, RES, TABLES, sources_exist
 
 SOURCES = ["e1c_e2", "e1c_tsweep", "e1d_ablation", "e1d_esterror_summary", "e1d_noise", "e1e_cost", "e1e_fix", "e1e_headline", "e1e_ratio", "e1e_tsweep", "e1e_tsweep_10M",
-           "e1f_mech_dist", "e1f_mech_groups", "e1f_mech_quantiles", "e1f_tailnoise", "e1f_tailnoise_emp"]
+           "e1f_mech_dist", "e1f_mech_groups", "e1f_mech_quantiles", "e1f_tailnoise", "e1f_tailnoise_emp", "e1g_floor_fresh", "e1g_robust_fresh"]
 FIGURES = [f"fig{i}{w}.{e}" for i in range(1, 6) for w in ("", "_wide") for e in ("pdf", "png")]
-TABLES_TEX = ["T1_headline", "T2_m2_ablation", "T3_tsweep_head_storage", "T4_fixes", "T5_cost", "T6_estimator_error", "T7_m3_crossings"]
-NOTES = ["T2_m2_ablation_note", "T3_note", "T4_note", "T5_note", "T6_note", "T7_note"]
+TABLES_TEX = ["T1_headline", "T2_m2_ablation", "T3_tsweep_head_storage", "T4_fixes", "T5_cost", "T6_estimator_error", "T7_m3_crossings", "T8_floor"]
+NOTES = ["T2_m2_ablation_note", "T3_note", "T4_note", "T5_note", "T6_note", "T7_note", "T8_note"]
 OTHER = ["head_cost.csv", "numbers.csv", "numbers.md", "captions.md", "check_numbers.py", "README.md"]
 
 pytestmark = pytest.mark.skipif(not sources_exist(SOURCES), reason="results/*.csv not available")
@@ -29,7 +29,7 @@ def test_number_check_passes_and_covers_all_claims():
     assert not problems, problems[:10]
     df = pd.read_csv(os.path.join(PAPER, "numbers.csv"))
     assert n == len(df) > 300
-    assert set(df.claim) == {"C1", "C2", "C3", "C4", "C5"}
+    assert set(df.claim) == {"C1", "C2", "C3", "C4", "C5", "C6"}
     assert {"id", "claim", "description", "value", "unit", "source_csv", "filter"} <= set(df.columns)
     assert df.value.notna().all() or df.id[df.value.isna()].str.contains("fix").all()  # only an out-of-range interpolation may be nan
 

@@ -56,6 +56,7 @@ CONSTANTS = {  # value -> stated setup constant (text states it as a definition,
     0.01: "add-delta smoothing delta = 0.01", 90: "90% training split", 8: "policy: length >= 8", 30: "cleaning: length 1 to 30", 370: "Xato top-370 blocklist",
     3000: "qbar sweep 1 to 3000 (e1e_fix.csv)", 0: "zero (e.g. sigma = 0)", 4: "4-byte probability",
     2000: "fix comparison bucket size (T4)", 6500: "fix comparison bucket size 6,500 entries (T4: 2,000 / 6,500 / 20,000)", 20000: "fix comparison bucket size (T4)",
+    256: "floor grid g (e1g_floor.py)", 1024: "floor grid g", 2048: "floor grid g", 4096: "floor grid g", 8192: "floor grid g", 16384: "floor grid g (largest floor)",
 }
 # t grid sizes etc. from head_cost.csv are constants too
 for r in HC:

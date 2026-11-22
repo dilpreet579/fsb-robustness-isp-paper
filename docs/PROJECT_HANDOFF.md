@@ -18,9 +18,9 @@ Only public leaked-password corpora are used (RockYou and phpbb via SecLists, pl
 | `docs/1905.13737v3.pdf` | base paper |
 | `docs/paper.md` | local markdown source of the paper text (kept untracked on purpose; the LaTeX in `paper/` is the maintained version) |
 | `c3sim/` | library: `data`, `estimators`, `bucketizers`, `attacker`, `calibration`, `esterror` |
-| `experiments/` | experiment drivers (`e1`, `e2`, `e3`, then `e1b_*` to `e1f_*`), the shared harness `common.py`, report writers `report*.py`, paper-asset scripts `paper_*.py` |
+| `experiments/` | experiment drivers (`e1`, `e2`, `e3`, then `e1b_*` to `e1g_*`), the shared harness `common.py`, report writers `report*.py`, paper-asset scripts `paper_*.py` |
 | `tests/` | pytest suite (39 tests; corpus-dependent tests skip when the data is absent) |
-| `results/` | result CSVs, `REPORT.md` and `REPORT_1b` to `REPORT_1f`, `REPORT_paper.md`, `DISCREPANCIES.md` (D1 to D34), `QUESTIONS.md` (Q1 to Q37), `data_report.md`, `worked_examples.txt` |
+| `results/` | result CSVs, `REPORT.md` and `REPORT_1b` to `REPORT_1g`, `REPORT_paper.md`, `DISCREPANCIES.md` (D1 to D35), `QUESTIONS.md` (Q1 to Q39), `data_report.md`, `worked_examples.txt` |
 | `figs/` | the original E1 to E3 figures |
 | `paper/` | LaTeX paper: `main.tex`, `preamble.tex`, `refs.bib`; generated `figs/`, `tables/`, `numbers.csv`, `captions.md`, `head_cost.csv`; the checkers `check_numbers.py` and `check_text_numbers.py`; `main.pdf` |
 | `Makefile`, `README.md` | entry points (see section 5) |
@@ -32,7 +32,7 @@ Corpora and caches live in `data/` and `cache/` and are git-ignored. Never commi
 The plan in `docs/PLAN.md` was the specification. Work proceeded in phases, each ending in a report that states numbers and method only:
 
 1. **Phase 1 (T1 to T8 of the plan).** Data loading and seeded binomial account splits; estimators (histogram head plus smoothed character 3-gram tail); bucketizers (HPB, FSB with a difference-array bucket-size count and a sorted-class lookup); the attacker and the Guess / BucketGuess games; then E1 (matched), E2 (mismatch conditions M1 to M3) and E3 (conservative fixes), with the gate statistic and worked examples.
-2. **Phases 1b to 1f.** Follow-ups on the same simulator: cross-corpus and fix variants (1b), larger sweeps and the t sweep (1c), noise calibration, estimator-error measurement and the policy ablations (1d), the count-aware attacker over all stored passwords and the cost measurements (1e), and the mechanism analysis by target group and tail-only noise (1f).
+2. **Phases 1b to 1f.** Follow-ups on the same simulator: cross-corpus and fix variants (1b), larger sweeps and the t sweep (1c), noise calibration, estimator-error measurement and the policy ablations (1d), the count-aware attacker over all stored passwords and the cost measurements (1e), and the mechanism analysis by target group and tail-only noise (1f). **Phase 1g** tests a floor on gamma (every string stored in at least g buckets; class `FSBFloor`, `experiments/e1g_floor.py`, `e1g_robust.py`, `report1g.py`, `make phase1g`) against three attackers: emp (raw counts), gt (Good-Turing adjusted counts) and est; tuned on A_dev, reported once on A_fresh (`results/REPORT_1g.md`, D35, Q39).
 3. **Paper assets.** Scripts that turn result CSVs into the five figures, the LaTeX tables, a head-storage estimate, a caption draft file and a checked number map (`paper/numbers.csv`, 364 numbers, claims C1 to C5).
 
 Working rules used throughout:
@@ -75,6 +75,7 @@ Fixed settings: seed 2000, pool A_test, 5 repeats of 5,000 targets, t = 1,000,00
 - C3: the count-aware attacker gains 10.5, 10.9, 10.9 pp, still about 73% below HPB; under a length-and-blocklist policy FSB removes under 1% of HPB's loss at q = 1 for qbar = 100, and at qbar = 1000 it is worse than size-matched HPB (it removes -41.7% of HPB's loss).
 - C4: the residual loss sits on rare stored passwords outside the histogram head; a 10M-entry head cuts it to 2.3 pp.
 - C5: a cold run of the count-aware attacker takes 14 s and 3.6 GB.
+- C6 (fresh pool, worst case over emp, gt, est, at q = qbar): for qbar = 100 a floor of 2,048 cuts the loss from 10.68 to 0.08 pp on M0 and from 14.54 to 2.16 pp on M2x at 1.56 times the average bucket; it does not help for q > qbar, and at qbar = 1000 it is not enough (2.72 pp M0 at 1.12 times).
 
 ## 7. Open items and known limits
 
@@ -84,5 +85,6 @@ Fixed settings: seed 2000, pool A_test, 5 repeats of 5,000 targets, t = 1,000,00
 - Figure 4 shows a single est point for M2x at t = 1M because that is the only measurement; the est reference is not a flat zero everywhere (D30).
 - The calibration variant is exploratory (tuned on a held-out split).
 - The study uses one leak and one split; the standard deviations come from re-sampling targets, not from re-splitting the leak.
+- The floor (C6): one fresh pool, three stored-password attackers, a flawed pre-registered selection rule (D35), no M1b / M3 run, not tested at the scale of Li et al., server storage and lookup cost not measured (Q39). Text plus references now fill 8 pages (target was 7.5 to 7.75); Appendix D is on its own page.
 - `docs/paper.md` is an untracked local copy; it does not include the latest LaTeX edits (the Li et al. comparisons, the references added for Ali and Microsoft, and the M2x qbar = 1000 result). The LaTeX is the maintained source.
 - Tooling note: the PDF is built with `tectonic` (no pdflatex was installed on the build machine).

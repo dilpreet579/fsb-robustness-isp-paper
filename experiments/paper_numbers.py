@@ -1,7 +1,7 @@
 """Paper number map: every number the text may quote, computed by code from results/*.csv -> paper/numbers.csv and paper/numbers.md.
 Columns of numbers.csv: id, claim (C1..C5), description, value, unit, source_csv, filter (column=value pairs), plus the recipe columns op, column, source_csv2, filter2, extra
 that paper/check_numbers.py needs to recompute the value. Frozen framing: est = weights p^, 2M list; emp = weights from leak counts, ALL of S~; t = 1M unless stated; loss in pp.
-  C1 reproduction     C2 noise tolerance     C3 count-aware attacker     C4 mechanism     C5 attacker cost"""
+  C1 reproduction     C2 noise tolerance     C3 count-aware attacker     C4 mechanism     C5 attacker cost     C6 floor on gamma (Phase 1g, fresh pool)"""
 import os
 
 import numpy as np
@@ -118,6 +118,29 @@ def main():
             for col, nm, unit in (("n_candidates", "number of candidates", "candidates"), ("total_s", "time of one cold run (5 x 5,000 targets)", "s"), ("index_build_s", "index build time", "s"),
                                   ("games_5x5000_s", "time of the 25,000 bucket queries", "s"), ("peak_rss_gb", "peak resident memory of the process", "GB")):
                 add("C5", f"C5_{att}_{cand}_{col}", f"{att} attacker, candidate list {'all of S~' if cand == 'all' else cand}: {nm}", unit, "value", "e1e_cost.csv", f, col)
+    # ------------------------------------------------------------------------------------------------ C6 gamma floor (fresh pool A_fresh, seed 6000, M0 and M2x)
+    # emp rows: e1g_floor_fresh.csv (all of S~, raw counts); est and gt rows: e1g_robust_fresh.csv (est = p^ over all of S~; gt = Good-Turing adjusted counts)
+    src6 = {"emp": "e1g_floor_fresh.csv", "est": "e1g_robust_fresh.csv", "gt": "e1g_robust_fresh.csv"}
+    cfgs6 = [("fsb_base", "plain")] + [(f"floor{g}", f"floor{g}") for g in (256, 1024, 2048, 4096)]
+    for c in ("M0", "M2x"):
+        for qb in QBARS:
+            for v, tag in cfgs6:
+                flt = lambda a, q: f"condition={c};scheme=fsb;variant={v};param={qb};attacker={a};q={q}"  # noqa: E731
+                for q, qt in ((1, "q1"), (qb, "qbar"), (1000, "q1000")):
+                    for a in ("emp", "gt", "est"):
+                        add("C6", f"C6_{c}_qbar{qb}_{tag}_{a}_loss_{qt}", f"{c}, fresh pool, FSB qbar={qb} {tag}, {a} attacker: loss at q={q}", "pp", "value", src6[a], flt(a, q))
+                    add("C6", f"C6_{c}_qbar{qb}_{tag}_worst_{qt}", f"{c}, fresh pool, FSB qbar={qb} {tag}: largest loss over the emp, gt and est attackers at q={q}", "pp", "max_of", "",
+                        col="loss", extra=json.dumps({"parts": [[src6[a], flt(a, q)] for a in ("emp", "gt", "est")]}))
+            add("C6", f"C6_{c}_qbar{qb}_hpb_emp_loss_qbar", f"{c}, fresh pool, matched HPB, emp: loss at q=qbar={qb}", "pp", "value", "e1g_floor_fresh.csv",
+                f"condition={c};scheme=hpb;variant=match_qbar{qb};attacker=emp;q={qb}")
+    for qb in QBARS:
+        for v, tag in cfgs6:
+            add("C6", f"C6_qbar{qb}_{tag}_avg", f"FSB qbar={qb} {tag}: average bucket size", "entries", "value", "e1g_floor_fresh.csv",
+                f"condition=M0;scheme=fsb;variant={v};param={qb};attacker=emp;q=1", "avg_bucket")
+            if tag != "plain":
+                add("C6", f"C6_qbar{qb}_{tag}_avg_ratio", f"FSB qbar={qb} {tag}: average bucket size relative to plain FSB with the same qbar", "ratio", "ratio", "e1g_floor_fresh.csv",
+                    f"condition=M0;scheme=fsb;variant={v};param={qb};attacker=emp;q=1", "avg_bucket", "e1g_floor_fresh.csv",
+                    f"condition=M0;scheme=fsb;variant=fsb_base;param={qb};attacker=emp;q=1")
     df = pd.DataFrame(ROWS)
     assert df.id.is_unique, df.id[df.id.duplicated()].tolist()
     cols = ["id", "claim", "description", "value", "unit", "source_csv", "filter", "op", "column", "source_csv2", "filter2", "extra"]
@@ -128,8 +151,8 @@ def main():
              "Frozen framing: est = attacker weights p^ with the 2M list; emp = weights from leak counts with ALL of S~; t = 1M unless stated; loss = bucket success - baseline success of the "
              "same attacker, in percentage points (pp).", ""]
     names = {"C1": "C1 Reproduction (est): HPB vs FSB at matched bucket sizes", "C2": "C2 Noise tolerance (est)", "C3": "C3 Count-aware attacker (emp, all of S~)",
-             "C4": "C4 Mechanism", "C5": "C5 Attacker cost"}
-    for cl in ("C1", "C2", "C3", "C4", "C5"):
+             "C4": "C4 Mechanism", "C5": "C5 Attacker cost", "C6": "C6 Floor on gamma (fresh pool; emp, gt, est attackers)"}
+    for cl in ("C1", "C2", "C3", "C4", "C5", "C6"):
         sub = df[df.claim == cl]
         lines += [f"## {names[cl]} ({len(sub)} numbers)", "", "| id | description | value | unit | source |", "|---|---|---|---|---|"]
         for r in sub.itertuples():
