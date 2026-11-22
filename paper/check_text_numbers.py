@@ -22,7 +22,9 @@ import tempfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 RES = os.environ.get("C3SIM_RESULTS", os.path.join(ROOT, "results"))
-TEX = os.path.join(HERE, "main.tex")
+TEX = os.path.abspath(sys.argv[1]) if len(sys.argv) > 1 else os.path.join(HERE, "main.tex")  # optional argument: another paper source, e.g. paper/fist/fist_body.tex
+BASE = os.path.dirname(TEX)  # \input paths are relative to the audited file
+AUDIT_TSV = "text_numbers_audit.tsv" if os.path.basename(TEX) == "main.tex" else f"text_numbers_audit_{os.path.splitext(os.path.basename(TEX))[0]}.tsv"
 
 # ------------------------------------------------------------------------------------------------------------- reference values
 _ROWS = list(csv.DictReader(open(os.path.join(HERE, "numbers.csv"))))
@@ -43,7 +45,8 @@ if os.path.exists(os.path.join(RES, "e1d_ablation.csv")):
         if (_r["condition"], _r["scheme"], _r["variant"], _r.get("attacker")) == ("M2B", "fsb", "fsb_base", "emp") and _r["q"] == _r["param"]:
             ABL.append((f"e1d_ablation.csv M2B emp loss q=qbar={_r['q']}", float(_r["loss"])))
 DR = open(os.path.join(RES, "data_report.md")).read() if os.path.exists(os.path.join(RES, "data_report.md")) else ""
-DATA_REPORT = [("RockYou unique passwords", 14326970), ("RockYou accounts", 32581870), ("phpbb unique passwords", 184381), ("phpbb accounts", 255417)]
+DATA_REPORT = [("RockYou unique passwords", 14326970), ("RockYou accounts", 32581870), ("phpbb unique passwords", 184381), ("phpbb accounts", 255417),
+               ("RockYou singleton share of unique (%)", 82.8), ("RockYou top-1000 mass share (%)", 11.3), ("phpbb singleton share of unique (%)", 88.6)]
 DATA_REPORT = [(n, v) for n, v in DATA_REPORT if f"{v:,}" in DR]  # only constants that really occur in results/data_report.md
 
 CONSTANTS = {  # value -> stated setup constant (text states it as a definition, not as a measured result)
@@ -56,8 +59,13 @@ CONSTANTS = {  # value -> stated setup constant (text states it as a definition,
     0.01: "add-delta smoothing delta = 0.01", 90: "90% training split", 8: "policy: length >= 8", 30: "cleaning: length 1 to 30", 370: "Xato top-370 blocklist",
     3000: "qbar sweep 1 to 3000 (e1e_fix.csv)", 0: "zero (e.g. sigma = 0)", 4: "4-byte probability",
     2000: "fix comparison bucket size (T4)", 6500: "fix comparison bucket size 6,500 entries (T4: 2,000 / 6,500 / 20,000)", 20000: "fix comparison bucket size (T4)",
+    101: "split seed (e1h_splits.py; paper's split)", 102: "split seed", 103: "split seed", 111: "split seed (e1h_splits.py)", 121: "split seed (e1h_splits.py)", 131: "split seed (e1h_splits.py)",
+    6000: "fresh-pool target seed (e1g_floor.py)",
+    3.12: "software version (tables/T13_env.tex)", 2.5: "software version (tables/T13_env.tex)", 0.68: "software version (tables/T13_env.tex)", 3.1: "software version (tables/T13_env.tex)",
+    1.18: "software version (tables/T13_env.tex)", 16: "machine RAM in GB (tables/T13_env.tex)",
     256: "floor grid g (e1g_floor.py)", 1024: "floor grid g", 2048: "floor grid g", 4096: "floor grid g", 8192: "floor grid g", 16384: "floor grid g (largest floor)",
 }
+NOT_PERCENT = {3.12, 2.5, 0.68, 3.1, 1.18, 16}  # software versions and RAM (tables/T13_env.tex): plain numbers only
 # t grid sizes etc. from head_cost.csv are constants too
 for r in HC:
     CONSTANTS[float(r["t"])] = "t sweep grid (paper/head_cost.csv)"
@@ -106,13 +114,23 @@ def source_lines():
             line = re.sub(r"(?<!\\)%.*$", "", line.rstrip("\n"))
             m = re.match(r"^\s*\\input\{([^}]*)\}\s*$", line)
             if m and not m.group(1).startswith("preamble"):
-                p = os.path.join(HERE, m.group(1))
+                p = os.path.normpath(os.path.join(BASE, m.group(1)))
+                p = p if os.path.exists(p) else p + ".tex"
                 add(p, os.path.relpath(p, HERE))
                 continue
+
+            def inline(mm):  # an \input inside a sentence is replaced by the file's text (a one-line snippet such as tables/T13_env.tex)
+                if mm.group(1).startswith("preamble"):
+                    return mm.group(0)
+                q = os.path.normpath(os.path.join(BASE, mm.group(1)))
+                q = q if os.path.exists(q) else q + ".tex"
+                return open(q, encoding="utf8").read().strip() if os.path.exists(q) else mm.group(0)
+
+            line = re.sub(r"\\input\{([^}]*)\}", inline, line)
             if line.strip():
                 out.append((label, i, line))
 
-    add(TEX, "main.tex")
+    add(TEX, os.path.basename(TEX))
     return out
 
 
@@ -126,6 +144,7 @@ def clean(line):
     s = re.sub(r"\\url\{[^}]*\}", " ", s)
     s = re.sub(r"p\{[^}]*\}", " ", s)
     s = re.sub(r"\{[0-9.]+(\\[a-z]+|pt|em|in)\}", " ", s)
+    s = re.sub(r"(?<![\w.])\d+(?:\.\d+)?\s?(?:cm|mm|pt|em)\b", " ", s)  # layout lengths (TikZ node sizes, spacing)
     s = re.sub(r"\\\{[^}]*\\\}", lambda m: m.group(0).replace(",", ", "), s)  # sets \{10,100,1000\}: keep the commas from reading as thousands separators
     s = re.sub(r"\\(\{|\})", lambda m: " ", s)  # set braces \{ \}
     s = s.replace("{,}", ",").replace(r"\,", "").replace("~", " ").replace("$", "")
@@ -204,6 +223,8 @@ def match(val, d, pct, mult):
         elif kind == "lt1" and pct and val == 1 and v < 1:
             out.append(("derived", f"{lab}: {form} = {v:.3f}"))
     for c, lab in CONSTANTS.items():
+        if pct and c in NOT_PERCENT:  # version numbers and RAM sizes must never explain a printed percentage (e.g. the unchecked '16%')
+            continue
         if close(c, val, d, mult) and (d == 0 or c != int(c) or val == c):
             out.append(("constant", lab))
     return out
@@ -263,7 +284,7 @@ def main():
             if status == "UNMATCHED":
                 unmatched.append((origin, ln, raw, text.strip()))
             rows.append((origin, ln, raw, status, src, text.strip()[:100]))
-    with open(os.path.join(HERE, "text_numbers_audit.tsv"), "w", encoding="utf8") as f:
+    with open(os.path.join(HERE, AUDIT_TSV), "w", encoding="utf8") as f:
         f.write("origin\tline\ttoken\tstatus\tsource\tcontext\n")
         for r in rows:
             f.write("\t".join(str(x) for x in r) + "\n")
@@ -271,7 +292,7 @@ def main():
     for r in rows:
         k = r[3].split(":")[0] if r[3].startswith("weak") else r[3]
         cnt[k] = cnt.get(k, 0) + 1
-    print(f"numeric tokens audited: {len(rows)}   (full list: paper/text_numbers_audit.tsv)")
+    print(f"numeric tokens audited: {len(rows)}   (full list: paper/{AUDIT_TSV})")
     for k, v in sorted(cnt.items()):
         print(f"  {k:12s} {v}")
     print(f"table provenance: {prov_msg or {k: ('identical' if v else 'DIFFERENT') for k, v in prov.items()}}")

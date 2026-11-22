@@ -788,3 +788,57 @@ Every number the paper text may quote, computed from `results/*.csv` by `experim
 | `C6_qbar1000_floor2048_avg_ratio` | FSB qbar=1000 floor2048: average bucket size relative to plain FSB with the same qbar | 1.12 | ratio | `e1g_floor_fresh.csv` |
 | `C6_qbar1000_floor4096_avg` | FSB qbar=1000 floor4096: average bucket size | 14,167 | entries | `e1g_floor_fresh.csv` |
 | `C6_qbar1000_floor4096_avg_ratio` | FSB qbar=1000 floor4096: average bucket size relative to plain FSB with the same qbar | 1.25 | ratio | `e1g_floor_fresh.csv` |
+
+## C7 Stability across four splits of the leak (A_test of each split; worst case over emp, gt, est) (49 numbers)
+
+| id | description | value | unit | source |
+|---|---|---|---|---|
+| `C7_M0_plain_q1_worst_mean` | M0, plain, qbar=100, q=1: mean over 4 splits of the per-split largest loss over emp, gt, est | 5.03 | pp | `e1h_splits.csv` |
+| `C7_M0_plain_q1_worst_sd` | M0, plain, qbar=100, q=1: sd over 4 splits of the per-split largest loss over emp, gt, est | 0.19 | pp | `e1h_splits.csv` |
+| `C7_M0_plain_q1_worst_min` | M0, plain, qbar=100, q=1: min over 4 splits of the per-split largest loss over emp, gt, est | 4.82 | pp | `e1h_splits.csv` |
+| `C7_M0_plain_q1_worst_max` | M0, plain, qbar=100, q=1: max over 4 splits of the per-split largest loss over emp, gt, est | 5.28 | pp | `e1h_splits.csv` |
+| `C7_M0_plain_q100_worst_mean` | M0, plain, qbar=100, q=100: mean over 4 splits of the per-split largest loss over emp, gt, est | 10.96 | pp | `e1h_splits.csv` |
+| `C7_M0_plain_q100_worst_sd` | M0, plain, qbar=100, q=100: sd over 4 splits of the per-split largest loss over emp, gt, est | 0.06 | pp | `e1h_splits.csv` |
+| `C7_M0_plain_q100_worst_min` | M0, plain, qbar=100, q=100: min over 4 splits of the per-split largest loss over emp, gt, est | 10.89 | pp | `e1h_splits.csv` |
+| `C7_M0_plain_q100_worst_max` | M0, plain, qbar=100, q=100: max over 4 splits of the per-split largest loss over emp, gt, est | 11.02 | pp | `e1h_splits.csv` |
+| `C7_M0_floor2048_q1_worst_mean` | M0, floor2048, qbar=100, q=1: mean over 4 splits of the per-split largest loss over emp, gt, est | 0.00 | pp | `e1h_splits.csv` |
+| `C7_M0_floor2048_q1_worst_sd` | M0, floor2048, qbar=100, q=1: sd over 4 splits of the per-split largest loss over emp, gt, est | 0.00 | pp | `e1h_splits.csv` |
+| `C7_M0_floor2048_q1_worst_min` | M0, floor2048, qbar=100, q=1: min over 4 splits of the per-split largest loss over emp, gt, est | 0.00 | pp | `e1h_splits.csv` |
+| `C7_M0_floor2048_q1_worst_max` | M0, floor2048, qbar=100, q=1: max over 4 splits of the per-split largest loss over emp, gt, est | 0.00 | pp | `e1h_splits.csv` |
+| `C7_M0_floor2048_q100_worst_mean` | M0, floor2048, qbar=100, q=100: mean over 4 splits of the per-split largest loss over emp, gt, est | 0.10 | pp | `e1h_splits.csv` |
+| `C7_M0_floor2048_q100_worst_sd` | M0, floor2048, qbar=100, q=100: sd over 4 splits of the per-split largest loss over emp, gt, est | 0.03 | pp | `e1h_splits.csv` |
+| `C7_M0_floor2048_q100_worst_min` | M0, floor2048, qbar=100, q=100: min over 4 splits of the per-split largest loss over emp, gt, est | 0.06 | pp | `e1h_splits.csv` |
+| `C7_M0_floor2048_q100_worst_max` | M0, floor2048, qbar=100, q=100: max over 4 splits of the per-split largest loss over emp, gt, est | 0.14 | pp | `e1h_splits.csv` |
+| `C7_M0_hpb_q1_worst_mean` | M0, hpb, qbar=100, q=1: mean over 4 splits of the per-split largest loss over emp, gt, est | 14.59 | pp | `e1h_splits.csv` |
+| `C7_M0_hpb_q1_worst_sd` | M0, hpb, qbar=100, q=1: sd over 4 splits of the per-split largest loss over emp, gt, est | 0.08 | pp | `e1h_splits.csv` |
+| `C7_M0_hpb_q1_worst_min` | M0, hpb, qbar=100, q=1: min over 4 splits of the per-split largest loss over emp, gt, est | 14.54 | pp | `e1h_splits.csv` |
+| `C7_M0_hpb_q1_worst_max` | M0, hpb, qbar=100, q=1: max over 4 splits of the per-split largest loss over emp, gt, est | 14.71 | pp | `e1h_splits.csv` |
+| `C7_M0_hpb_q100_worst_mean` | M0, hpb, qbar=100, q=100: mean over 4 splits of the per-split largest loss over emp, gt, est | 41.19 | pp | `e1h_splits.csv` |
+| `C7_M0_hpb_q100_worst_sd` | M0, hpb, qbar=100, q=100: sd over 4 splits of the per-split largest loss over emp, gt, est | 0.20 | pp | `e1h_splits.csv` |
+| `C7_M0_hpb_q100_worst_min` | M0, hpb, qbar=100, q=100: min over 4 splits of the per-split largest loss over emp, gt, est | 41.00 | pp | `e1h_splits.csv` |
+| `C7_M0_hpb_q100_worst_max` | M0, hpb, qbar=100, q=100: max over 4 splits of the per-split largest loss over emp, gt, est | 41.45 | pp | `e1h_splits.csv` |
+| `C7_M2x_plain_q1_worst_mean` | M2x, plain, qbar=100, q=1: mean over 4 splits of the per-split largest loss over emp, gt, est | 9.78 | pp | `e1h_splits.csv` |
+| `C7_M2x_plain_q1_worst_sd` | M2x, plain, qbar=100, q=1: sd over 4 splits of the per-split largest loss over emp, gt, est | 0.11 | pp | `e1h_splits.csv` |
+| `C7_M2x_plain_q1_worst_min` | M2x, plain, qbar=100, q=1: min over 4 splits of the per-split largest loss over emp, gt, est | 9.67 | pp | `e1h_splits.csv` |
+| `C7_M2x_plain_q1_worst_max` | M2x, plain, qbar=100, q=1: max over 4 splits of the per-split largest loss over emp, gt, est | 9.93 | pp | `e1h_splits.csv` |
+| `C7_M2x_plain_q100_worst_mean` | M2x, plain, qbar=100, q=100: mean over 4 splits of the per-split largest loss over emp, gt, est | 15.02 | pp | `e1h_splits.csv` |
+| `C7_M2x_plain_q100_worst_sd` | M2x, plain, qbar=100, q=100: sd over 4 splits of the per-split largest loss over emp, gt, est | 0.22 | pp | `e1h_splits.csv` |
+| `C7_M2x_plain_q100_worst_min` | M2x, plain, qbar=100, q=100: min over 4 splits of the per-split largest loss over emp, gt, est | 14.79 | pp | `e1h_splits.csv` |
+| `C7_M2x_plain_q100_worst_max` | M2x, plain, qbar=100, q=100: max over 4 splits of the per-split largest loss over emp, gt, est | 15.26 | pp | `e1h_splits.csv` |
+| `C7_M2x_floor2048_q1_worst_mean` | M2x, floor2048, qbar=100, q=1: mean over 4 splits of the per-split largest loss over emp, gt, est | 0.002 | pp | `e1h_splits.csv` |
+| `C7_M2x_floor2048_q1_worst_sd` | M2x, floor2048, qbar=100, q=1: sd over 4 splits of the per-split largest loss over emp, gt, est | 0.004 | pp | `e1h_splits.csv` |
+| `C7_M2x_floor2048_q1_worst_min` | M2x, floor2048, qbar=100, q=1: min over 4 splits of the per-split largest loss over emp, gt, est | 0.00 | pp | `e1h_splits.csv` |
+| `C7_M2x_floor2048_q1_worst_max` | M2x, floor2048, qbar=100, q=1: max over 4 splits of the per-split largest loss over emp, gt, est | 0.008 | pp | `e1h_splits.csv` |
+| `C7_M2x_floor2048_q100_worst_mean` | M2x, floor2048, qbar=100, q=100: mean over 4 splits of the per-split largest loss over emp, gt, est | 2.23 | pp | `e1h_splits.csv` |
+| `C7_M2x_floor2048_q100_worst_sd` | M2x, floor2048, qbar=100, q=100: sd over 4 splits of the per-split largest loss over emp, gt, est | 0.06 | pp | `e1h_splits.csv` |
+| `C7_M2x_floor2048_q100_worst_min` | M2x, floor2048, qbar=100, q=100: min over 4 splits of the per-split largest loss over emp, gt, est | 2.16 | pp | `e1h_splits.csv` |
+| `C7_M2x_floor2048_q100_worst_max` | M2x, floor2048, qbar=100, q=100: max over 4 splits of the per-split largest loss over emp, gt, est | 2.30 | pp | `e1h_splits.csv` |
+| `C7_M2x_hpb_q1_worst_mean` | M2x, hpb, qbar=100, q=1: mean over 4 splits of the per-split largest loss over emp, gt, est | 9.79 | pp | `e1h_splits.csv` |
+| `C7_M2x_hpb_q1_worst_sd` | M2x, hpb, qbar=100, q=1: sd over 4 splits of the per-split largest loss over emp, gt, est | 0.08 | pp | `e1h_splits.csv` |
+| `C7_M2x_hpb_q1_worst_min` | M2x, hpb, qbar=100, q=1: min over 4 splits of the per-split largest loss over emp, gt, est | 9.68 | pp | `e1h_splits.csv` |
+| `C7_M2x_hpb_q1_worst_max` | M2x, hpb, qbar=100, q=1: max over 4 splits of the per-split largest loss over emp, gt, est | 9.87 | pp | `e1h_splits.csv` |
+| `C7_M2x_hpb_q100_worst_mean` | M2x, hpb, qbar=100, q=100: mean over 4 splits of the per-split largest loss over emp, gt, est | 30.68 | pp | `e1h_splits.csv` |
+| `C7_M2x_hpb_q100_worst_sd` | M2x, hpb, qbar=100, q=100: sd over 4 splits of the per-split largest loss over emp, gt, est | 0.07 | pp | `e1h_splits.csv` |
+| `C7_M2x_hpb_q100_worst_min` | M2x, hpb, qbar=100, q=100: min over 4 splits of the per-split largest loss over emp, gt, est | 30.58 | pp | `e1h_splits.csv` |
+| `C7_M2x_hpb_q100_worst_max` | M2x, hpb, qbar=100, q=100: max over 4 splits of the per-split largest loss over emp, gt, est | 30.74 | pp | `e1h_splits.csv` |
+| `C7_n_splits` | number of independent splits of the leak | 4.00 | splits | `e1h_splits.csv` |

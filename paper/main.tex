@@ -2,9 +2,9 @@
 \input{preamble}
 
 \title{\bfseries Beyond $k$-Anonymity in Password Breach Checking:\\ How Robust Is Frequency-Smoothing Bucketization?}
-\author{\begin{tabular}[t]{c@{\hspace{1.2em}}c@{\hspace{1.2em}}c}
-Dilpreet Singh & Ishita Gupta & Madhav Raj\\
-{\footnotesize National Institute of Technology Delhi} & {\footnotesize National Institute of Technology Delhi} & {\footnotesize National Institute of Technology Delhi}
+\author{\begin{tabular}[t]{c}
+Dilpreet Singh, Ishita Gupta, Madhav Raj and Dr.\ Sandhya Pundhir\\
+{\footnotesize National Institute of Technology Delhi}
 \end{tabular}}  % author block: name with the institute in small font below (no emails or departments)
 \date{}
 
@@ -12,8 +12,10 @@ Dilpreet Singh & Ishita Gupta & Madhav Raj\\
 \maketitle
 
 \begin{abstract}
-Frequency-smoothing bucketization (FSB) lets a compromised-credential-checking server hide which leaked password a client is asking about, but its guarantee holds relative to the server's own estimate of the password distribution. We measure how far that guarantee carries when the estimate is noisy and the attacker holds the leak. Against the estimate-based attacker of Li et al.\ (CCS 2019), we reproduce FSB's result: at $q=\qbar=100$ guesses its loss over the no-bucket baseline is 0.0 percentage points (pp), against 41.1 pp for size-matched hash-prefix bucketization (HPB). That result tolerates multiplicative noise of about $\sigma=0.7$ on the estimate (5-point crossing; the head estimate we measure on held-out data has $\shat=0.31$). A count-aware attacker who ranks guesses by leak counts is stronger: FSB then loses 10.5 to 10.9 pp at $q=\qbar$, still about 73\% below HPB, but under a length-and-blocklist password policy it removes under 1\% of HPB's loss at $q=1$ for $\qbar=100$. The loss comes from rare passwords stored outside the estimate's histogram head, whereas HPB leaks popular head passwords. A larger head helps (2.3 pp at a 10M-entry head) but costs an estimated 77 MB of client data. A floor on the number of buckets per password works better: at $\qbar=100$ it cuts the worst-case loss over three attackers from 10.68 to 0.08 pp at 1.56 times the bucket size, but not for $q>\qbar$. A cold run of the attacker takes 14 s and 3.6 GB. Code and data-derivation scripts are public.
+Frequency-smoothing bucketization (FSB) lets a compromised-credential-checking server hide which leaked password a client is asking about, but its guarantee holds relative to the server's own estimate of the password distribution. We measure by simulation, on the RockYou leak (13.1M stored passwords, held-out accounts as targets, phpbb as a second target pool), how far that guarantee carries when the estimate is noisy and the attacker holds the leak. Against the estimate-based attacker of Li et al.\ (CCS 2019), we reproduce FSB's result: at $q=\qbar=100$ guesses its loss over the no-bucket baseline is 0.0 percentage points (pp), against 41.1 pp for size-matched hash-prefix bucketization (HPB). That result tolerates multiplicative noise of about $\sigma=0.7$ on the estimate (5-point crossing; the head estimate we measure on held-out data has $\shat=0.31$). A count-aware attacker who ranks guesses by leak counts is stronger: FSB then loses 10.5 to 10.9 pp at $q=\qbar$, still about 73\% below HPB, but under a length-and-blocklist password policy it removes under 1\% of HPB's loss at $q=1$ for $\qbar=100$. The loss comes from rare passwords stored outside the estimate's histogram head, whereas HPB leaks popular head passwords. A larger head helps (2.3 pp at a 10M-entry head) but costs an estimated 77 MB of client data. A floor on the number of buckets per password works better: at $\qbar=100$ it cuts the worst-case loss over three attackers from 10.68 to 0.08 pp at 1.56 times the bucket size, but not for $q>\qbar$. A cold run of the attacker takes 14 s and 3.6 GB. Code and data-derivation scripts are public.
 \end{abstract}
+
+\noindent\textbf{Index Terms}---compromised credential checking, password breach, frequency-smoothing bucketization, $k$-anonymity, privacy, password guessing.
 
 \section{Introduction}\label{sec:intro}
 
@@ -28,7 +30,7 @@ To reduce that leakage they proposed frequency-smoothing bucketization (FSB). FS
 
 We answer both with a measurement study built on a 14M-password RockYou-based corpus. The server stores $N=13{,}125{,}513$ distinct passwords in $2^{24}$ buckets, and the estimate is a histogram head of the top $t=1{,}000{,}000$ passwords plus a character 3-gram tail. We compare FSB with size-matched HPB, giving HPB the larger bucket whenever the two cannot match exactly (up to 25\% larger), so any advantage we report for FSB is conservative.
 
-Our contributions are six measurements.
+Our contributions are seven measurements.
 
 \begin{enumerate}
 \item \textbf{Reproduction (C1).} Against the estimate-based attacker, FSB's loss at $q=\qbar$ is 0.0 pp for $\qbar=10$, 100 and 1000, while size-matched HPB loses 37.0, 41.1 and 40.2 pp.
@@ -37,6 +39,7 @@ Our contributions are six measurements.
 \item \textbf{Mechanism (C4).} FSB's residual loss is on rare passwords stored outside the histogram head (leak count 1 or 2 for 98.6\% of the targets gained at $q=1$), while HPB leaks the popular head passwords. Raising $t$ cuts the loss to 2.3 pp at 10M, but smoothing the 3-gram and calibrating the tail do not help, and noise confined to the tail does not move the count-aware attacker.
 \item \textbf{Cost (C5).} The count-aware attacker needs 14 s and 3.6 GB for a cold run over all stored passwords.
 \item \textbf{A floor on $\gamma$ (C6).} Storing every string in at least $g$ buckets tests the mechanism by intervention: for $\qbar=100$ and $g=2{,}048$ the worst-case loss over three attackers at $q=\qbar$ falls from 10.68 to 0.08 pp on a fresh pool at 1.56 times the average bucket. It does not help for $q>\qbar$.
+\item \textbf{Stability (C7).} Over four independent splits of the leak, the worst-case loss at $q=\qbar=100$ on M0 is $10.96\pm0.06$ pp for plain FSB and $0.10\pm0.03$ pp with the floor.
 \end{enumerate}
 
 We also state what we did not measure: a leak larger than 14M passwords, usernames, generated guesses beyond the stored set, and a second corpus used as the leak. Section~\ref{sec:disc} lists them. Section~\ref{sec:bg} gives the protocols, Section~\ref{sec:setup} the threat model and setup, Section~\ref{sec:results} the results, and Sections~\ref{sec:related} and~\ref{sec:concl} related work and conclusions.
@@ -48,26 +51,86 @@ A C3 server holds a set $S$ of leaked passwords and publishes a bucketization: e
 \textbf{Hash-prefix bucketization (HPB).} HIBP-style services assign $w$ to the bucket named by the first $l$ bits of its hash, so a bucket has about $|S|/2^l$ entries on average and each password lives in exactly one bucket. The bucket identifier is a deterministic function of $w$. A bucket therefore concentrates the probability mass of every popular password it contains, and a server that sees it can guess the most likely one.
 
 \textbf{Frequency-smoothing bucketization (FSB).} FSB spreads popular passwords over many buckets so that a revealed bucket carries less information about which password produced it. Given an estimate $\phat$ of the password distribution and a target guess budget $\qbar$, let $w_{\bar q}$ be the $\qbar$-th most probable password under $\phat$. Password $w$ is stored in $\gamma(w)$ buckets and the client picks one of them uniformly at random:
-\begin{equation*}
+\begin{equation}\label{eq:gamma}
 \gamma(w) = \min\left(|B|,\ \left\lceil |B| \cdot \frac{\hat p(w)}{\hat p(w_{\bar q})} \right\rceil\right)
-\end{equation*}
-Passwords at least as rare as $w_{\bar q}$ therefore sit in one or a few buckets, and the most popular passwords sit in many. Li et al.\ show that against an attacker who ranks guesses with the same $\phat$ and the true distribution equals $\phat$, a server seeing the bucket gains nothing over a server that sees nothing, as long as it makes at most $\qbar$ guesses. The price is bandwidth, because buckets grow.
+\end{equation}
+Here $|B|$ is the number of buckets. The $\gamma(w)$ buckets of $w$ are consecutive identifiers (modulo $|B|$) starting at $f(w)$, the first $\log_2|B|$ bits of the salted SHA-256 hash of $w$ (Algorithm~\ref{alg:fsb}). Passwords at least as rare as $w_{\bar q}$ therefore sit in one or a few buckets, and the most popular passwords sit in many. Li et al.\ show that against an attacker who ranks guesses with the same $\phat$ and the true distribution equals $\phat$, a server seeing the bucket gains nothing over a server that sees nothing, as long as it makes at most $\qbar$ guesses. The price is bandwidth, because buckets grow. A floor $g$ on the number of copies, studied in Section~\ref{sec:c6}, replaces $\gamma$ by
+\begin{equation}\label{eq:floor}
+\gamma_g(w)=\min\bigl(|B|,\ \max(\gamma(w),\,g)\bigr),
+\end{equation}
+and $g=1$ is plain FSB.
 
-\textbf{The estimate.} In practice $\phat$ comes from a leak. Following Li et al., our primary estimator stores the top $t=1{,}000{,}000$ passwords of the training leak by count as a histogram (the head) and scores every other string with a character 3-gram model with add-$\delta$ smoothing ($\delta=0.01$), rescaled so the tail mass is consistent with the head. We also evaluate a Kneser--Ney 3-gram and a cross-fitted isotonic calibration of the tail. Section~\ref{sec:intro} explains why we vary the estimate and the attacker, and Section~\ref{sec:results} what each variation shows.
+\begin{algorithm}[t]
+\caption{FSB with a floor $g$ ($g=1$: plain FSB). $b=\log_2|B|$.}
+\label{alg:fsb}
+\begin{algorithmic}[1]
+\Require estimate $\hat p$, guess budget $\bar q$, floor $g$, salted hash $h$
+\Function{Buckets}{$w$}
+  \State $\gamma \gets \min\bigl(|B|,\ \max(g,\ \lceil |B|\,\hat p(w)/\hat p(w_{\bar q})\rceil)\bigr)$ \Comment{Eqs.~\eqref{eq:gamma}, \eqref{eq:floor}}
+  \State $f \gets$ the first $b$ bits of $h(w)$
+  \State \Return $\{(f+i) \bmod |B| : i=0,\dots,\gamma-1\}$
+\EndFunction
+\Function{ClientQuery}{$w$}
+  \State draw $j$ uniformly from \Call{Buckets}{$w$}; send $j$ to the server
+  \State run the set-intersection step with the server's bucket $j$
+\EndFunction
+\Function{ServerBucket}{$j$} \Comment{all stored $w\in\tilde S$ with $j\in$ \Call{Buckets}{$w$}}
+  \State \Return $\{w\in\tilde S : (j-f(w)) \bmod |B| < \gamma(w)\}$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\textbf{The estimate.} In practice $\phat$ comes from a leak. Following Li et al., our primary estimator stores the top $t=1{,}000{,}000$ passwords of the training leak by count as a histogram (the head) and scores every other string with a character 3-gram model with add-$\delta$ smoothing ($\delta=0.01$), rescaled so the tail mass is consistent with the head:
+\begin{equation}\label{eq:est}
+\hat p(w)=\begin{cases} p_h(w) & w\in H_t,\\[2pt] p_n(w)\,\dfrac{1-\sum_{v\in H_t}p_h(v)}{1-\sum_{v\in H_t}p_n(v)} & \text{otherwise,}\end{cases}
+\end{equation}
+where $H_t$ is the head, $p_h$ the histogram probability (count over total) and $p_n$ the 3-gram probability. We also evaluate a Kneser--Ney 3-gram and a cross-fitted isotonic calibration of the tail. Section~\ref{sec:intro} explains why we vary the estimate and the attacker, and Section~\ref{sec:results} what each variation shows.
 
 \textbf{Guess budgets.} The attacker makes $q$ guesses after seeing the bucket. FSB's guarantee covers $q\le\qbar$. We report $q=1$, 10 and 100 for $\qbar=100$ and $q=\qbar$ for $\qbar\in\{10,100,1000\}$, and flag $q>\qbar$ separately because the guarantee does not extend there.
 
 \section{Threat Model and Experimental Setup}\label{sec:setup}
 
-\textbf{Threat model.} A C3 server, or anyone who reads its logs, sees the bucket identifier of a client's query and tries to guess the client's password within $q$ guesses. The attacker knows the bucketization, including the estimate $\phat$ and the bucket contents, and has no other side information about the target: we model password-only checking, as in HIBP and FSB, so there is no username. We measure the attacker's gain from the bucket, not its absolute success, because a no-bucket attacker already succeeds on common passwords.
+\textbf{Threat model.} A C3 server, or anyone who reads its logs, sees the bucket identifier of a client's query and tries to guess the client's password within $q$ guesses. The attacker knows the bucketization, including the estimate $\phat$ and the bucket contents, and has no other side information about the target: we model password-only checking, as in HIBP and FSB, so there is no username. We measure the attacker's gain from the bucket, not its absolute success, because a no-bucket attacker already succeeds on common passwords. Figure~\ref{fig:system} shows the parties and what each knows.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[font=\footnotesize, box/.style={draw, rounded corners=2pt, align=center, inner sep=3pt, minimum height=1.05cm}, >={Stealth[length=4pt]}]
+\node[box, text width=1.85cm] (c) {\textbf{Client}\\ password $w$\\ picks $j\in\textsc{Buckets}(w)$};
+\node[box, text width=2.35cm, right=1.1cm of c] (s) {\textbf{Server = attacker}\\ knows $\tilde S$, $\hat p$, scheme;\\ ranks bucket $j$};
+\node[box, text width=1.3cm, right=0.55cm of s] (g) {$q$ guesses\\ $L_q(j)$};
+\draw[->] (c) -- node[above, font=\scriptsize, inner sep=1pt]{$j$} (s);
+\draw[->] (s) -- (g);
+\end{tikzpicture}
+\caption{System and threat model. The honest-but-curious server (or anyone who reads its logs) sees only the bucket identifier $j$ of a query, knows the stored set $\tilde S$, the estimate $\hat p$ and the bucketization, and makes $q$ guesses; it wins if $w\in L_q(j)$.}
+\label{fig:system}
+\end{figure}
+
+\textbf{Security versus privacy.} The property at stake is the privacy of the queried password against the server, that is, the confidentiality of the client's input. FSB does not improve the security of any account: it does not stop guessing or credential stuffing at the target site, and it says nothing about integrity or availability. The loss we measure is the confidentiality that a bucket identifier gives up. We assume an honest-but-curious server and a passive observer of identifiers. A malicious client that probes the server's data, an actively malicious server, and repeated queries of one password (which let an observer intersect bucket sets; Li et al.\ propose a client-side derandomization) are outside our measurements.
 
 \textbf{Data.} The leak is RockYou (14,326,970 unique passwords, 32,581,870 accounts after cleaning to printable ASCII of length 1 to 30). We split its accounts at random: 90\% form the training leak \Atrain, which the server stores as $\Stilde$ ($N=13{,}125{,}513$ unique passwords) and uses to build $\phat$, and the other 10\% form the target pool \Atest. phpbb (184,381 unique passwords, 255,417 accounts) serves as an out-of-distribution target pool. All splits use fixed seeds. The server has $2^{24}$ buckets, and the hash is a salted SHA-256 prefix.
 
-\textbf{Attackers.} Both attackers see the bucket and rank its members to produce $q$ guesses; they differ in what they know.
+\textbf{Why these data.} RockYou is the largest public leak of real, user-chosen passwords with occurrence counts that we found in SecLists. It is dominated by rare passwords (82.8\% of its unique passwords occur once, while the top 1,000 cover 11.30\% of accounts), which is the regime where an estimate of the tail matters. It is a 2009 leak from one site, so we do not claim that its tail matches other populations. phpbb (a forum, 88.6\% singletons) differs in kind but is small, so it serves only as a target pool. We did not use the RockYou2021 and RockYou2024 compilations (concatenations of many leaks) or a honeypot log (attackers' guesses, not user-chosen passwords).
+
+\textbf{Attackers.} Both attackers see the bucket $j$ and rank the stored candidates $c$ with $j\in\textsc{Buckets}(c)$ (all of $\tilde S$, or the 2M most probable) by the score
+\begin{equation}\label{eq:score}
+s(c)=a(c)\,/\,\gamma(c),
+\end{equation}
+breaking ties by $a(c)$ and then lexicographically, and guess the top $q$ (Algorithm~\ref{alg:att}); they differ in the weight $a(c)$, that is, in what they know.
+
+\begin{algorithm}[t]
+\caption{Attacker's guess list for bucket $j$ and budget $q$.}
+\label{alg:att}
+\begin{algorithmic}[1]
+\Require bucket $j$, budget $q$, candidates $C$ with weights $a(c)$, the scheme (gives $\gamma(c)$ and $f(c)$)
+\State $L\gets\{c\in C : (j-f(c)) \bmod |B| < \gamma(c)\}$ \Comment{sorted-interval lookup, no scan of $\tilde S$}
+\State sort $L$ by $a(c)/\gamma(c)$ descending, ties by $a(c)$, then lexicographically
+\State \Return the first $q$ elements of $L$
+\end{algorithmic}
+\end{algorithm}
 
 \begin{itemize}
-\item \textbf{est} weights each stored password by $\phat(w)/\gamma(w)$, the information Li et al.\ give the attacker. We run it over the 2M most probable stored passwords and check in Section~\ref{sec:c1} that using all of $\Stilde$ changes nothing for $q\le\qbar$.
-\item \textbf{emp} weights each stored password by its leak count $/\ \gamma(w)$, as an attacker would who holds the same leak the server does. It searches all 13.1M stored passwords and generates no strings that are absent from the leak, so its results are lower bounds on what a stronger attacker could do. emp uses information that the threat model of Li et al.\ already grants the attacker (the leak) but that their simulations do not use. It is the headline attacker of this study.
+\item \textbf{est} uses $a(c)=\phat(c)$, the information Li et al.\ give the attacker. We run it over the 2M most probable stored passwords and check in Section~\ref{sec:c1} that using all of $\Stilde$ changes nothing for $q\le\qbar$.
+\item \textbf{emp} uses $a(c)=$ the leak count of $c$, as an attacker would who holds the same leak the server does. It searches all 13.1M stored passwords and generates no strings that are absent from the leak, so its results are lower bounds on what a stronger attacker could do. emp uses information that the threat model of Li et al.\ already grants the attacker (the leak) but that their simulations do not use. It is the headline attacker of this study.
 \end{itemize}
 
 \begin{figure*}[t]
@@ -77,13 +140,20 @@ Passwords at least as rare as $w_{\bar q}$ therefore sit in one or a few buckets
 \label{fig:loss}
 \end{figure*}
 
-\textbf{Metric.} For each target we play the client's side (HPB: the bucket of the hash prefix; FSB: one of the $\gamma(w)$ buckets, uniformly) and let the attacker guess. Bucket success is the share of targets guessed within $q$ guesses. The baseline is the same attacker's success without a bucket, i.e.\ with its $q$ top candidates overall. The loss is bucket success minus baseline, in percentage points (pp). We use 5 repeats of 5,000 targets, drawn with replacement in proportion to leak count, and report the standard deviation over repeats. Targets that are not in $\Stilde$ can never be guessed, so they lower every success rate and add nothing to the loss.
+\textbf{Metric.} For each target we play the client's side (HPB: the bucket of the hash prefix; FSB: one of the $\gamma(w)$ buckets, uniformly) and let the attacker guess. Bucket success is the share of targets guessed within $q$ guesses. The baseline is the same attacker's success without a bucket, i.e.\ with its $q$ top candidates overall. The loss is bucket success minus baseline, in percentage points (pp):
+\begin{equation}\label{eq:loss}
+\mathrm{loss}(q)=\mathrm{success}_{\text{bucket}}(q)-\mathrm{success}_{\text{baseline}}(q).
+\end{equation}
+We use 5 repeats of 5,000 targets, drawn with replacement in proportion to leak count, and report the standard deviation over repeats. Targets that are not in $\Stilde$ can never be guessed, so they lower every success rate and add nothing to the loss.
 
 \textbf{Size matching.} FSB with parameter $\qbar$ has an average bucket of 790, 2,565 and 11,336 entries for $\qbar=10$, 100 and 1000. We compare it with HPB at the nearest power-of-two prefix length ($l=14$, 12 and 10 bits), whose average buckets are 801, 3,204 and 12,818 entries. HPB therefore gets buckets that are 1\%, 25\% and 13\% larger, which favours HPB.
 
-\textbf{Conditions.}
+\textbf{Conditions.} Table~\ref{tab:conditions} lists the five conditions.
 
-\begin{center}
+\begin{table}[t]
+\centering
+\caption{Experimental conditions: which targets are guessed and what the server and attacker use.}
+\label{tab:conditions}
 \small
 \renewcommand{\arraystretch}{1.1}
 \setlength{\tabcolsep}{4pt}
@@ -98,9 +168,19 @@ M2L, M2B & policy ablations: length $\geq 8$ only, blocklist only & as M2x \\
 M3 (noise) & \Atest & $\phat$ multiplied by $\exp(\sigma z_w)$, $z_w$ a fixed per-password standard normal; 5 independent draws; variants: all strings, tail only \\
 \bottomrule
 \end{tabular}
-\end{center}
+\end{table}
 
 The policy conditions model a site that forbids weak passwords: the target distribution changes, but the server's data and the buckets do not. A further condition, in which the attacker is trained on a separate corpus, is saturated by confounds and is omitted (Section~\ref{sec:disc}).
+
+\textbf{Implementation and reproducibility.} The simulator is Python with NumPy and Numba; Table~\ref{tab:env} gives the pinned versions and the machine. Bucket sizes are counted exactly with a difference array over the circular ranges, and a bucket query is answered by binary search over start-sorted classes of equal $\gamma$, never by a scan of $\tilde S$. All random choices are seeded: the three split seeds are 101, 102 and 103, and targets are drawn with seed 2000 (test pool), 5000 (development pool) and 6000 (fresh pool). Every result row carries a configuration hash, and \texttt{make all} regenerates every table, figure and number from the raw files.
+
+\begin{table}[t]
+\centering
+\caption{Implementation environment (versions pinned in \texttt{requirements.txt}).}
+\label{tab:env}
+\small
+\input{tables/T9_env.tex}
+\end{table}
 
 \section{Results}\label{sec:results}
 
@@ -137,7 +217,7 @@ Two boundaries are visible in Figure~\ref{fig:loss}. First, the guarantee stops 
 \label{fig:groups}
 \end{figure*}
 
-We multiply $\phat(w)$ by $\exp(\sigma z_w)$, where $z_w$ is a standard normal fixed per password by hashing, and rerun the est attacker. The loss at $q=\qbar$ reaches 5 pp at $\sigma=0.874\pm0.059$, $0.693\pm0.027$ and $0.658\pm0.013$ for $\qbar=10$, 100 and 1000 (mean and standard deviation over 5 independent draws of the noise). Smaller values of $\qbar$ tolerate more noise. The table in Appendix~\ref{app:noise} lists the per-draw crossings.
+We multiply $\phat(w)$ by $\exp(\sigma z_w)$, where $z_w$ is a standard normal fixed per password by hashing, and rerun the est attacker. The loss at $q=\qbar$ reaches 5 pp at $\sigma=0.874\pm0.059$, $0.693\pm0.027$ and $0.658\pm0.013$ for $\qbar=10$, 100 and 1000 (mean and standard deviation over 5 independent draws of the noise). Smaller values of $\qbar$ tolerate more noise. Table~\ref{tab:noise} in Appendix~\ref{app:noise} lists the per-draw crossings.
 
 To place these thresholds, we measure the error of our own estimate on held-out data. Among passwords in the head, the log-ratio of true to estimated probability has a per-password dispersion $\shat=0.31$ (standard error 0.01 over 5 folds) and a bias of $-0.09$ log units. A coarser measurement that bins probability mass rather than passwords gives 0.11 and is a lower bound. The head error is therefore about half the 5-point threshold, and the margin of $\approx$ 2 to 1 is the main robustness result for FSB: the estimate has room to be wrong.
 
@@ -169,7 +249,7 @@ Three further measurements are consistent with this reading, though none proves 
 
 \begin{enumerate}
 \item \textbf{A larger head shrinks the loss.} On M0 at $q=\qbar=100$ the loss is 24.5, 17.5, 10.9, 7.2 and 2.3 pp for $t=100$k, 300k, 1M, 3M and 10M (on M2x: 28.9, 22.4, 14.8, 10.1, 4.3). The average bucket also grows with $t$, from 1,733 to 4,682 entries, so the comparison holds $\qbar$ fixed and not the bucket size (Figure~\ref{fig:tsweep}).
-\item \textbf{A better tail model should not help much.} Kneser--Ney and add-$\delta$ smoothing give the same loss at equal bucket size (for example 10.14 pp on M0 at $q=100$ and 6,500 entries, for both). A cross-fitted isotonic calibration of the tail, tuned on a held-out split and exploratory, helps by 0.0 to 0.8 pp at $q=100$ and by up to 2.3 pp at $q=1000$.
+\item \textbf{A better tail model should not help much.} Kneser--Ney and add-$\delta$ smoothing give the same loss at equal bucket size (for example 10.14 pp on M0 at $q=100$ and 6,500 entries, for both). A cross-fitted isotonic calibration of the tail, tuned on a held-out split and exploratory, helps by 0.0 to 0.8 pp at $q=100$ and by up to 2.3 pp at $q=1000$ (Figure~\ref{fig:fix} in Appendix~\ref{app:fix}).
 \item \textbf{Noise in the tail should leave the emp attacker unchanged.} With tail-only noise at $\sigma=0.5$, 1.0 and 1.6 its loss is 10.88, 10.84 and 10.94 pp, against 10.92 pp for the clean estimate. Noise on every string, which scrambles the head, raises it to 12.92, 19.60 and 33.03 pp (Figure~\ref{fig:noise}).
 \end{enumerate}
 
@@ -179,15 +259,23 @@ Section~\ref{sec:c6} tests the explanation with an intervention instead.
 
 A cold run of the emp attacker over all 13,125,513 stored passwords takes 14.1 s and 3.57 GB, of which 8.6 s builds the index and 2.3 s plays the 25,000 bucket queries. With the 2M list it takes 4.9 s and 2.66 GB. The est attacker over all of $\Stilde$ needs 22.2 s and 3.63 GB. This is an attack that fits on a laptop.
 
-The defender's side of the trade is a larger head. We estimate the storage of the head as the sum of string lengths plus one byte per entry, gzip-compressed, plus a 4-byte probability per entry (an estimate of data size, not an implementation). At $t=1$M the head covers 54.5\% of the training mass and takes 3.5 MB compressed text plus 4.0 MB of probabilities, 7.5 MB in total. At $t=10$M it covers 89.3\% and takes 36.9 MB plus 40 MB, 76.9 MB in total. The 3-gram table adds 3.6 MB (float32). Li et al.\ report an 8.9 MB estimate shipped as client code, which is of the same order as our 7.5 MB head plus 3.6 MB 3-gram table. The head at $t=10$M cuts the M0 loss to 2.3 pp but is about ten times the size of the $t=1$M head.
+The defender's side of the trade is a larger head. We estimate the storage of the head as the sum of string lengths plus one byte per entry, gzip-compressed, plus a 4-byte probability per entry (an estimate of data size, not an implementation). At $t=1$M the head covers 54.5\% of the training mass and takes 3.5 MB compressed text plus 4.0 MB of probabilities, 7.5 MB in total. At $t=10$M it covers 89.3\% and takes 36.9 MB plus 40 MB, 76.9 MB in total (Table~\ref{tab:head} in Appendix~\ref{app:head} gives all head sizes). The 3-gram table adds 3.6 MB (float32). Li et al.\ report an 8.9 MB estimate shipped as client code, which is of the same order as our 7.5 MB head plus 3.6 MB 3-gram table. The head at $t=10$M cuts the M0 loss to 2.3 pp but is about ten times the size of the $t=1$M head.
 
 \subsection{A floor on $\gamma$ (C6)}\label{sec:c6}
 
-If rare stored passwords cause the loss, giving them more copies should remove it. We store every string in at least $g$ buckets, $\gamma'(w)=\min(|B|,\max(\gamma(w),g))$, which a client computes from its password alone (``floor $g$''; $g=1$ is plain FSB). We swept $g$ from 2 to 16,384 for $\qbar\in\{10,100,1000\}$ on a development pool (A\_dev) and ran the whole grid once on a fresh pool (A\_fresh; both are halves of A\_test). All numbers below are from the fresh pool, where plain FSB with $\qbar=100$ loses 10.68 pp on M0, slightly less than on A\_test. The selection rule we fixed in advance was a poor one (Section~\ref{sec:disc}), so we report the whole grid (Table~\ref{tab:floor}). Because emp takes a count-1 password at face value, the floor can mislead it, so we add two attackers that hold all of $\tilde S$: gt ranks by Good--Turing adjusted counts, which discount count-1 passwords, and est ranks by the server's estimate. We report the largest loss over the three.
+If rare stored passwords cause the loss, giving them more copies should remove it. We store every string in at least $g$ buckets (Equation~\eqref{eq:floor}), which a client computes from its password alone (``floor $g$''). We swept $g$ from 2 to 16,384 for $\qbar\in\{10,100,1000\}$ on a development pool (A\_dev) and ran the whole grid once on a fresh pool (A\_fresh; both are halves of A\_test). All numbers below are from the fresh pool, where plain FSB with $\qbar=100$ loses 10.68 pp on M0, slightly less than on A\_test. The selection rule we fixed in advance was a poor one (Section~\ref{sec:disc}), so we report the whole grid (Table~\ref{tab:floor}). Because emp takes a count-1 password at face value, the floor can mislead it, so we add two attackers that hold all of $\tilde S$: gt uses $a(c)=r^*$ for a leak count $r\le 5$ and the raw count above, with the Good--Turing value
+\begin{equation}\label{eq:gt}
+r^*=(r+1)\,n_{r+1}/n_r,
+\end{equation}
+where $n_r$ is the number of stored passwords with count $r$; it discounts count-1 passwords. est ranks by the server's estimate. We report the largest loss over the three (Table~\ref{tab:floor} in Appendix~\ref{app:floor}).
 
 For $\qbar=100$ a floor of 2,048 raises the average bucket from 2,565 to 4,007 entries (1.56 times) and cuts the loss at $q=\qbar$ from 10.68 to 0.08 pp on M0 and from 14.54 to 2.16 pp on M2x; floors of 256 and 1,024 give 3.74 and 1.80 pp on M0. What remains on M2x is the est attacker's policy loss, which plain FSB shows as well (2.12 pp): the floor removes the tail contribution, not the policy mismatch. At $\qbar=1000$ the floor is cheaper (1.12 times at $g=2{,}048$) but not enough (2.72 pp on M0, 6.91 on M2x). Unlike a larger head, the floor needs no client data beyond the constant $g$.
 
 The floor does nothing beyond $\qbar$. At $\qbar=100$ and $q=1000$ the worst case is 13.94 pp with $g=2{,}048$ (24.32 for plain FSB). Against emp alone the same cell reads 0.24 pp, because emp ranks count-1 passwords above the head, while gt and est give 13.94 and 11.45 pp: a low emp loss outside $q\le\qbar$ is not evidence of safety.
+
+\subsection{Stability across splits of the leak (C7)}\label{sec:c7}
+
+The results above use one split of RockYou. We repeated the main comparison on three further independent account splits (four in all), each with its own server estimate and attackers; targets are the held-out pool of that split. The floor $g=2{,}048$ was chosen on the development pool of the first split, so the other three splits are out of sample for it. Table~\ref{tab:splits} in Appendix~\ref{app:splits} gives, per scheme, the largest loss over emp, gt and est. For $\qbar=100$ the loss at $q=\qbar$ on M0 is $10.96\pm0.06$ pp for plain FSB (10.89 to 11.02), $0.10\pm0.03$ pp with the floor and $41.19\pm0.20$ pp for size-matched HPB; on M2x it is $15.02\pm0.22$, $2.23\pm0.06$ and $30.68\pm0.07$ pp. The standard deviation over splits is at most 0.22 pp in every cell, far below the differences between schemes, so the one-split results are not an artefact of that split. This does not cover other leaks.
 
 \section{Discussion and Limitations}\label{sec:disc}
 
@@ -198,7 +286,7 @@ The floor does nothing beyond $\qbar$. At $\qbar=100$ and $q=1000$ the worst cas
 \textbf{Limitations.} We list them because several of them could move the numbers.
 
 \begin{itemize}
-\item \textbf{One leak, one split.} The leak is RockYou (14.3M unique passwords) split once at random. It is much smaller than the corpora production services hold (Google's service covers over 4 billion credentials). Li et al.\ simulate on a leak of about 436 million passwords, so ours is about 3\% of that. The standard deviations we report come from re-sampling targets, not from re-splitting the leak.
+\item \textbf{One leak.} The leak is RockYou (14.3M unique passwords). It is much smaller than the corpora production services hold (Google's service covers over 4 billion credentials). Li et al.\ simulate on a leak of about 436 million passwords, so ours is about 3\% of that. The standard deviations in the tables come from re-sampling targets; re-splitting the leak for the headline comparisons changes the results little (Section~\ref{sec:c7}), but a second leak was not tested.
 \item \textbf{Small second corpus.} phpbb has 255,417 accounts, so M1b is a sanity check on out-of-distribution targets, not a precise measurement.
 \item \textbf{The emp attacker only guesses stored passwords.} It generates no strings that are absent from the leak, and the 2M-candidate version is lower still, so all emp numbers are lower bounds on a stronger attacker.
 \item \textbf{emp and the threat model of Li et al.} emp uses the leak counts. Li et al.\ grant the attacker the leak, so this is within their threat model, but an outside observer who sees only bucket identifiers may not have the counts.
@@ -221,7 +309,7 @@ The floor does nothing beyond $\qbar$. At $\qbar=100$ and $q=1000$ the worst cas
 
 \section{Conclusion}\label{sec:concl}
 
-FSB does what it promises against the attacker it was designed for: zero loss for $q\le\qbar$, with a head estimate that can be about twice as noisy as ours. Against an attacker who holds the leak counts it leaves 10.5 to 10.9 pp of loss at $q=\qbar$ and, under a password policy, offers almost no protection at $q=1$ for $\qbar=100$. The loss comes from rare stored passwords, which the estimate underrates, and shrinks as the histogram head grows, at a storage cost we estimate at 77 MB for the 10M-entry head. A floor on $\gamma$ removes most of it for $q\le\qbar$ (0.08 pp at $\qbar=100$ for 1.56 times the average bucket, 2.16 pp under the policy), but not for $q>\qbar$. Practitioners who deploy FSB should state its guarantee as relative to the estimate and size the head or the floor against an attacker with counts. Future work should test the floor at the scale of Li et al.\ and against stronger attackers, repeat the study on a second corpus used as the leak, and give the attacker generated guesses.
+FSB does what it promises against the attacker it was designed for: zero loss for $q\le\qbar$, with a head estimate that can be about twice as noisy as ours. Against an attacker who holds the leak counts it leaves 10.5 to 10.9 pp of loss at $q=\qbar$ and, under a password policy, offers almost no protection at $q=1$ for $\qbar=100$. The loss comes from rare stored passwords, which the estimate underrates, and shrinks as the histogram head grows, at a storage cost we estimate at 77 MB for the 10M-entry head. A floor on $\gamma$ removes most of it for $q\le\qbar$ (0.08 pp at $\qbar=100$ for 1.56 times the average bucket, 2.16 pp under the policy), but not for $q>\qbar$. Practitioners who deploy FSB should state its guarantee as relative to the estimate and size the head or the floor against an attacker with counts. These results come from simulation on one leak (stable over four splits) against attackers that only guess stored passwords, so they are lower bounds on the leakage. Future work should test the floor at the scale of Li et al.\ and against stronger attackers, repeat the study on a second corpus used as the leak, and give the attacker generated guesses.
 
 \textbf{Ethics.} We use publicly available leaked password corpora (RockYou and phpbb, via SecLists) and simulate the server and the attacker on held-out accounts. We contacted no service, and no real account or live C3 query was involved. The attacker we describe needs only the leak and a laptop, so we report its cost to let defenders size their parameters.
 
@@ -286,6 +374,22 @@ For the emp attacker (all of $\Stilde$) no crossing exists, because its loss at 
 \vspace{4pt}
 \begin{minipage}{0.95\textwidth}\footnotesize
 \input{tables/T8_note.tex}
+\end{minipage}
+\end{table}
+
+\section{Stability across splits}\label{app:splits}
+
+\begin{table}[h]
+\centering
+\caption{Worst-case loss over the emp, gt and est attackers on four independent splits of the leak (mean $\pm$ sd over splits, minimum--maximum in parentheses).}
+\label{tab:splits}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\input{tables/T10_splits.tex}
+
+\vspace{4pt}
+\begin{minipage}{0.95\textwidth}\footnotesize
+\input{tables/T10_note.tex}
 \end{minipage}
 \end{table}
 

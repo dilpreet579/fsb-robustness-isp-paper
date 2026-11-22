@@ -206,9 +206,88 @@ def t8():
         "$\\bar q$. Plain FSB on this pool loses slightly less than on A\\_test (Table~\\ref{tab:headline}). The guarantee covers $q\\le\\bar q$; the $q=1000$ columns are outside it for $\\bar q<1000$.\n")
 
 
+# ----------------------------------------------------------------------------------------------------------------- T10 stability across splits (Phase 1h)
+def t10():
+    d = load("e1h_splits")
+    body = []
+    for name, sch, v in (("plain FSB", "fsb", "fsb_base"), ("FSB, floor 2,048", "fsb", "floor2048"), (r"matched HPB ($l=12$)", "hpb", "match_qbar100")):
+        cells = []
+        for c in ("M0", "M2x"):
+            for q in (1, 100):
+                w = sel(d, condition=c, scheme=sch, variant=v, q=q).groupby("split").loss.max().to_numpy(dtype=float)  # per split: largest loss over emp, gt, est
+                cells.append(f"${w.mean():.2f} {PM} {w.std(ddof=1):.2f}$ ({w.min():.2f}--{w.max():.2f})")
+        body.append(" & ".join([name, *cells]) + r" \\")
+    hdr = [r"Scheme ($\bar q=100$) & \multicolumn{2}{c}{M0 (pp)} & \multicolumn{2}{c}{M2x (pp)} \\", r"\cmidrule(lr){2-3}\cmidrule(lr){4-5}", r" & $q=1$ & $q=100$ & $q=1$ & $q=100$ \\"]
+    write("T10_splits.tex", "lllll", hdr, body)
+    open(os.path.join(TABLES, "T10_note.tex"), "w").write(
+        "Four independent account splits of RockYou (seeds 101, 111, 121, 131), each with its own server estimate and attackers; targets are the held-out pool A\\_test of that split, "
+        "5 repeats of 5,000 targets. Each cell is the mean $\\pm$ sd over the four splits of the largest loss over the emp, gt and est attackers (minimum--maximum in parentheses). "
+        "The floor $g=2{,}048$ was chosen on the development pool of the first split, so the other three splits are out of sample for it.\n")
+
+
+# ----------------------------------------------------------------------------------------------------------------- T9 implementation environment
+def t9():
+    """Pinned versions from requirements.txt (deterministic); Python and the machine are the authors' build environment, stated as fixed strings."""
+    req = {}
+    for ln in open(os.path.join(os.path.dirname(PAPER), "requirements.txt")):
+        if "==" in ln:
+            k, v = ln.strip().split("==", 1)
+            req[k.lower()] = v
+    rows = [("Python", "3.12"), ("NumPy", req["numpy"]), ("Numba", req["numba"]), ("pandas", req["pandas"]), ("SciPy", req["scipy"]), ("Matplotlib", req["matplotlib"]),
+            ("PDF build", "Tectonic 0.17"), ("Machine", "laptop, Apple M5, 10 cores, 16 GB RAM")]
+    write("T9_env.tex", "ll", [r"Component & Version \\"], [f"{a} & {b}" + r" \\" for a, b in rows])
+
+
+# ----------------------------------------------------------------------------------------------------------------- T11-T13: compact tables for the 6-page conference version
+def t11():
+    """Headline (M0 and M2x only): loss at q = qbar, FSB est, FSB emp, matched HPB emp, share of HPB's loss removed (emp)."""
+    est, emp = load("e1c_e2"), load("e1e_headline")
+    body = []
+    for ci, c in enumerate(("M0", "M2x")):
+        if ci:
+            body.append(None)
+        for qb in QBARS:
+            f = one(sel(emp, condition=c, scheme="fsb", variant="fsb_base", attacker="emp"), param=qb, q=qb)
+            h = one(sel(emp, condition=c, scheme="hpb", variant=f"match_qbar{qb}", attacker="emp"), q=qb)
+            e = one(sel(est, condition=c, scheme="fsb", variant="fsb_base", attacker="est"), param=qb, q=qb)
+            body.append(" & ".join([c if qb == 10 else "", str(qb), f"{f.avg_bucket:,.0f}", pm(e.loss, e.std_over_repeats), pm(f.loss, f.std_over_repeats), pm(h.loss, h.std_over_repeats),
+                                    f"${100 * (1 - f.loss / h.loss):.0f}$"]) + r" \\")
+    hdr = [r"Cond. & $\bar q$ & Avg.\ bucket & \multicolumn{3}{c}{Loss at $q=\bar q$ (pp)} & Removed \\", r"\cmidrule(lr){4-6}", r" & & (entries) & FSB est & FSB emp & HPB emp & (\%) \\"]
+    write("T11_fist_headline.tex", "llrrrrr", hdr, body)
+
+
+def t12():
+    """Floor (fresh pool), worst case over emp, gt, est at q = qbar: selected floors for qbar = 10, 100, 1000."""
+    d = load("e1g_floor_fresh")
+    body = []
+    for qi, (qb, floors) in enumerate(((10, (256, 1024)), (100, (256, 1024, 2048, 4096)), (1000, (2048, 4096)))):
+        if qi:
+            body.append(None)
+        base = float(one(sel(d, condition="M0", scheme="fsb", variant="fsb_base", attacker="emp"), param=qb, q=1).avg_bucket)
+        rows = [("plain FSB", "fsb_base")] + [(f"floor {g:,}", f"floor{g}") for g in floors]
+        for ri, (name, v) in enumerate(rows):
+            avg = float(one(sel(d, condition="M0", scheme="fsb", variant=v, attacker="emp"), param=qb, q=1).avg_bucket)
+            ab = f"{avg:,.0f}" if v == "fsb_base" else f"{avg:,.0f} (${avg / base:.2f}\\times$)"
+            cells = [f"${_worst(c, 'fsb', v, qb, qb):.2f}$" for c in ("M0", "M2x")]
+            body.append(" & ".join([str(qb) if ri == 0 else "", name, ab, *cells]) + r" \\")
+    hdr = [r"$\bar q$ & Scheme & Avg.\ bucket & M0 (pp) & M2x (pp) \\"]
+    write("T12_fist_floor.tex", "llrrr", hdr, body)
+
+
+def t13():
+    """One line of text for the implementation paragraph (versions from requirements.txt; Python and the machine are fixed strings, as in T9)."""
+    req = {}
+    for ln in open(os.path.join(os.path.dirname(PAPER), "requirements.txt")):
+        if "==" in ln:
+            k, v = ln.strip().split("==", 1)
+            req[k.lower()] = v
+    open(os.path.join(TABLES, "T13_env.tex"), "w").write(
+        f"Python 3.12, NumPy {req['numpy']}, Numba {req['numba']}, pandas {req['pandas']} and SciPy {req['scipy']}, on a laptop with an Apple M5 processor (10 cores, 16 GB RAM)")
+
+
 def main():
     os.makedirs(TABLES, exist_ok=True)
-    for f in (t1, t2, t3, t4, t5, t6, t7, t8):
+    for f in (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13):
         f()
     print("tables written to", TABLES, sorted(os.listdir(TABLES)))
 

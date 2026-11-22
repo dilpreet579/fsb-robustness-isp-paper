@@ -141,6 +141,14 @@ def main():
                 add("C6", f"C6_qbar{qb}_{tag}_avg_ratio", f"FSB qbar={qb} {tag}: average bucket size relative to plain FSB with the same qbar", "ratio", "ratio", "e1g_floor_fresh.csv",
                     f"condition=M0;scheme=fsb;variant={v};param={qb};attacker=emp;q=1", "avg_bucket", "e1g_floor_fresh.csv",
                     f"condition=M0;scheme=fsb;variant=fsb_base;param={qb};attacker=emp;q=1")
+    # ------------------------------------------------------------------------------------------------ C7 stability across four splits of the leak (Phase 1h, A_test of each split)
+    for c in ("M0", "M2x"):
+        for v, tag, sch in (("fsb_base", "plain", "fsb"), ("floor2048", "floor2048", "fsb"), ("match_qbar100", "hpb", "hpb")):
+            for q in (1, 100):
+                for st in ("mean", "sd", "min", "max"):
+                    add("C7", f"C7_{c}_{tag}_q{q}_worst_{st}", f"{c}, {tag}, qbar=100, q={q}: {st} over 4 splits of the per-split largest loss over emp, gt, est", "pp", "split_worst",
+                        "e1h_splits.csv", f"condition={c};scheme={sch};variant={v};q={q}", "loss", extra=json.dumps({"stat": st}))
+    add("C7", "C7_n_splits", "number of independent splits of the leak", "splits", "split_worst", "e1h_splits.csv", "condition=M0;scheme=fsb;variant=fsb_base;q=100", "loss", extra=json.dumps({"stat": "n"}))
     df = pd.DataFrame(ROWS)
     assert df.id.is_unique, df.id[df.id.duplicated()].tolist()
     cols = ["id", "claim", "description", "value", "unit", "source_csv", "filter", "op", "column", "source_csv2", "filter2", "extra"]
@@ -151,8 +159,9 @@ def main():
              "Frozen framing: est = attacker weights p^ with the 2M list; emp = weights from leak counts with ALL of S~; t = 1M unless stated; loss = bucket success - baseline success of the "
              "same attacker, in percentage points (pp).", ""]
     names = {"C1": "C1 Reproduction (est): HPB vs FSB at matched bucket sizes", "C2": "C2 Noise tolerance (est)", "C3": "C3 Count-aware attacker (emp, all of S~)",
-             "C4": "C4 Mechanism", "C5": "C5 Attacker cost", "C6": "C6 Floor on gamma (fresh pool; emp, gt, est attackers)"}
-    for cl in ("C1", "C2", "C3", "C4", "C5", "C6"):
+             "C4": "C4 Mechanism", "C5": "C5 Attacker cost", "C6": "C6 Floor on gamma (fresh pool; emp, gt, est attackers)",
+             "C7": "C7 Stability across four splits of the leak (A_test of each split; worst case over emp, gt, est)"}
+    for cl in ("C1", "C2", "C3", "C4", "C5", "C6", "C7"):
         sub = df[df.claim == cl]
         lines += [f"## {names[cl]} ({len(sub)} numbers)", "", "| id | description | value | unit | source |", "|---|---|---|---|---|"]
         for r in sub.itertuples():

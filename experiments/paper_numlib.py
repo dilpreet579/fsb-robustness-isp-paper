@@ -93,6 +93,9 @@ def compute(row):
         return _one(src, filt, col)
     if op == "max_of":  # largest of several single-row values of one column: extra = {"parts": [[source_csv, filter], ...]} (Phase 1g: worst case over attackers)
         return max(_one(s, f, col) for s, f in extra["parts"])
+    if op == "split_worst":  # Phase 1h: per split the largest loss over the rows left by the filter (attackers), then extra["stat"] over the splits
+        v = select(csv(src), filt).groupby("split")[col].max().to_numpy(dtype=float)
+        return {"mean": float(v.mean()), "sd": float(v.std(ddof=1)), "min": float(v.min()), "max": float(v.max()), "n": float(len(v))}[extra["stat"]]
     d = select(csv(src), filt) if src else None
     if op == "sum":
         return float(d[col].sum())
