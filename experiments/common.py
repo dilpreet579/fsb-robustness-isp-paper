@@ -111,7 +111,7 @@ class World:
         # Phase 1c: M1a = M1 (alias), M2x = M2 with the Xato top-370 banned list, M0s / M2s = est-attacker sanity (short candidates removed)
         key = ({"M3": "M0", "M1b": "M0", "M1a": "M1"}.get(cond, cond), model if cond not in ("M1", "M1a") else "emp")  # attackers shared; pools are not
         if key not in self._att:
-            w = self.cnt if model == "emp" else self.ph_S  # weights over S~ (aligned with self.pw)
+            w = self.cnt if model == "emp" else self.gt_weights() if model == "gt" else self.ph_S  # weights over S~ (aligned with self.pw)
             if key[0] == "M0":
                 self._att[key] = atk.Attacker(self.pw, w, self.n_cand, name=f"A_train/{model}")
             elif key[0] == "M1":
@@ -145,6 +145,16 @@ class World:
             m = self._ablate(cond, pw)
             return self._att[key], (pw[m], cnt[m]), name + ("|len8_only" if cond == "M2L" else "|blocklist_only")
         return self._att[key], (pw, cnt), name
+
+    def gt_weights(self, rmax=5):
+        """Phase 1g attacker 'gt': leak counts with Good-Turing adjusted values for counts r <= rmax (Turing: r* = (r+1) n_{r+1} / n_r,
+        n_r = number of passwords with count r), raw counts above. The leak-holding attacker that does not take a count-1 password at face value."""
+        c = self.cnt
+        n = np.bincount(c, minlength=rmax + 2)[: rmax + 2].astype(np.float64)
+        w = c.astype(np.float64)
+        for r in range(1, rmax + 1):
+            w[c == r] = (r + 1) * n[r + 1] / n[r]
+        return w
 
     # ---- estimates --------------------------------------------------------------------------------------------
     def noise(self, strings, salt=None):

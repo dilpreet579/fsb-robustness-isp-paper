@@ -9,7 +9,8 @@ R = results
         e1b-basics e1b-m1b e1b-fix-dev e1b-fix-fresh report1b \
         e1c-e2 e1c-tsweep e1c-e3 e1c-fix-dev e1c-fix-fresh report1c \
         e1d-cap e1d-noise e1d-esterror e1d-m2 report1d \
-        e1e-cost e1e-headline e1e-estconv e1e-fix e1e-tsweep e1e-tsweep-10m report1e
+        e1e-cost e1e-headline e1e-estconv e1e-fix e1e-tsweep e1e-tsweep-10m report1e \
+        phase1g e1g-floor-dev e1g-floor-fresh e1g-robust-dev e1g-robust-fresh report1g
 
 all: venv fetch fetch-xato data test phase1 phase1b phase1c phase1d phase1e
 
@@ -127,3 +128,16 @@ e1e-tsweep-10m:
 	$(PY) -m experiments.e1e_tsweep --ts 10000000 --out e1e_tsweep_10M.csv > $(R)/e1e_tsweep_10M_log.txt 2>&1
 report1e:
 	$(PY) -m experiments.report1e
+
+# ---- Phase 1g: a floor on gamma (not part of `all`; the fresh runs refuse to rerun) ----
+phase1g: e1g-floor-dev e1g-floor-fresh e1g-robust-dev e1g-robust-fresh report1g
+e1g-floor-dev:
+	$(PY) -m experiments.e1g_floor --pool dev > $(R)/e1g_floor_dev_log.txt 2>&1
+e1g-floor-fresh:
+	$(PY) -m experiments.e1g_floor --pool fresh > $(R)/e1g_floor_fresh_log.txt 2>&1
+e1g-robust-dev:
+	$(PY) -m experiments.e1g_robust --pool dev > $(R)/e1g_robust_dev_log.txt 2>&1
+e1g-robust-fresh:
+	$(PY) -m experiments.e1g_robust --pool fresh > $(R)/e1g_robust_fresh_log.txt 2>&1
+report1g:
+	$(PY) -m experiments.report1g
