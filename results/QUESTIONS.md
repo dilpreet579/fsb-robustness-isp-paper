@@ -125,3 +125,12 @@ Author block: filled with Dilpreet Singh, Ishita Gupta, Madhav Raj (National Ins
 
 ## Q38. Added references: Microsoft Password Monitor date and the two external claims
 The authors' text cited "(Microsoft Research, 2021)". The year could not be confirmed from the page (no network use), so `msr` in `paper/refs.bib` is undated and prints "n.d."; add the year from the page if confirmed. Also unchecked against the cited pages: "HIBP added padded responses in 2020 against passive response-size analysis" (Ali, Cloudflare Blog, 4 March 2020, date as given) and "Microsoft's Password Monitor avoids bucketization with an OPRF and homomorphic encryption". The statements about Li et al. in the same edit (436 million passwords, histogram of the top 10^6 passwords plus 3-gram, 8.9 MB estimate, policy experiment with some loss at q = 100, attack "no longer optimal") were confirmed in `docs/1905.13737v3.pdf`. `docs/paper.md` has not been updated for these edits.
+
+## Q39. Phase 1g (gamma floor): open questions for the authors
+1. **Scale.** In our data a floor near |B| / count(rank-qbar password) (3,101 for qbar = 100) is where the emp-attacker loss reaches about 0. Whether the same rule holds at the base paper's scale (436M passwords, |B| = 2^30) was not tested.
+2. **Stronger attackers.** Three attackers were run (emp, gt, est). A Bayesian attacker with better shrinkage than Good-Turing, or one that generates strings outside the leak, was not tried; all numbers are lower bounds on leakage, as for emp in the paper.
+3. **Beyond qbar.** The floor does not help for q > qbar (e.g. qbar = 100, q = 1000: about 14 points on M0 against gt and est, 11.5 for est against plain FSB).
+4. **Policy residual.** On M2x at q = qbar = 100 the worst case over the three attackers stays at about 2.2 points for floors >= 2048; plain FSB gives the est attacker 2.1 there, so this residual is the policy mismatch, not the tail.
+5. **qbar = 1000.** At 1.25x the plain-FSB bucket (floor 4096) the gt attacker still gets 2.2 points (M0) and 5.8 (M2x) at q = 1000. Floors 8192 and 16384 were run for emp only, so the cost of closing this was not measured against gt.
+6. **Cost not measured:** server storage and lookup time with floored gamma (the sum of gamma grows by the same factor as the average bucket, 1.56x at qbar = 100, floor 2048); only bucket size (bandwidth) was measured.
+7. **Paper.** Whether and how to report this in the paper (Section 5 says the remedy was not run) is the authors' decision; nothing was changed.
