@@ -1,0 +1,123 @@
+[world] N=13,125,513 |B|=2^24 estimator built in 1s
+[ref] count of rank-10 password = 15,003; |B| / count = 1,118 copies for a count-1 password
+[ref] count of rank-100 password = 5,410; |B| / count = 3,101 copies for a count-1 password
+[ref] count of rank-1000 password = 1,209; |B| / count = 13,877 copies for a count-1 password
+[M0/emp] fsb fsb_base   param=1      avg=     68.3 max=     111 loss q1/10/100/1000 =  +7.17 +16.92 +58.34 +51.77   base@1000=11.12 cand/bucket=69 [8s]
+[M2x/emp] fsb fsb_base   param=1      avg=     68.3 max=     111 loss q1/10/100/1000 = +11.30 +28.60 +43.88 +39.50   base@1000=6.89 cand/bucket=22 [5s]
+[M0/emp] fsb fsb_base   param=3      avg=    254.6 max=     324 loss q1/10/100/1000 =  +6.45 +11.50 +29.92 +51.77   base@1000=11.12 cand/bucket=255 [6s]
+[M2x/emp] fsb fsb_base   param=3      avg=    254.6 max=     324 loss q1/10/100/1000 = +10.38 +16.51 +43.88 +39.50   base@1000=6.89 cand/bucket=79 [3s]
+[M0/emp] fsb fsb_base   param=10     avg=    790.2 max=     908 loss q1/10/100/1000 =  +5.71 +10.40 +14.80 +51.77   base@1000=11.12 cand/bucket=791 [7s]
+[M2x/emp] fsb fsb_base   param=10     avg=    790.2 max=     908 loss q1/10/100/1000 =  +9.95 +13.44 +24.62 +39.50   base@1000=6.89 cand/bucket=248 [3s]
+[M0/emp] fsb fsb_base   param=30     avg=   1416.5 max=    1535 loss q1/10/100/1000 =  +5.28  +9.88 +11.80 +41.82   base@1000=11.12 cand/bucket=1417 [8s]
+[M2x/emp] fsb fsb_base   param=30     avg=   1416.5 max=    1535 loss q1/10/100/1000 =  +9.76 +12.65 +18.04 +39.50   base@1000=6.89 cand/bucket=447 [3s]
+[M0/emp] fsb fsb_base   param=100    avg=   2564.8 max=    2732 loss q1/10/100/1000 =  +4.87  +9.16 +10.68 +24.32   base@1000=11.12 cand/bucket=2565 [8s]
+[M2x/emp] fsb fsb_base   param=100    avg=   2564.8 max=    2732 loss q1/10/100/1000 =  +9.50 +12.44 +14.54 +39.50   base@1000=6.89 cand/bucket=821 [3s]
+[M0/emp] fsb fsb_base   param=300    avg=   4958.7 max=    5169 loss q1/10/100/1000 =  +4.52  +8.48 +10.18 +14.20   base@1000=11.12 cand/bucket=4959 [10s]
+[M2x/emp] fsb fsb_base   param=300    avg=   4958.7 max=    5169 loss q1/10/100/1000 =  +9.08 +12.37 +12.76 +28.41   base@1000=6.89 cand/bucket=1625 [4s]
+[M0/emp] fsb fsb_base   param=1000   avg=  11335.9 max=   11580 loss q1/10/100/1000 =  +3.97  +7.57  +9.35 +10.70   base@1000=11.12 cand/bucket=11336 [12s]
+[M2x/emp] fsb fsb_base   param=1000   avg=  11335.9 max=   11580 loss q1/10/100/1000 =  +8.34 +12.12 +12.37 +16.06   base@1000=6.89 cand/bucket=3845 [4s]
+[M0/emp] fsb fsb_base   param=3000   avg=  26297.1 max=   26782 loss q1/10/100/1000 =  +3.38  +6.45  +8.40 +10.07   base@1000=11.12 cand/bucket=26298 [17s]
+[M2x/emp] fsb fsb_base   param=3000   avg=  26297.1 max=   26782 loss q1/10/100/1000 =  +7.61 +11.58 +12.19 +12.62   base@1000=6.89 cand/bucket=9294 [5s]
+[M0/emp] hpb match_qbar10 param=14     avg=    801.1 max=     919 loss q1/10/100/1000 = +21.22 +37.41 +48.71 +51.77   base@1000=11.12 cand/bucket=801 [3s]
+[M2x/emp] hpb match_qbar10 param=14     avg=    801.1 max=     919 loss q1/10/100/1000 = +14.74 +27.93 +35.42 +39.50   base@1000=6.89 cand/bucket=535 [2s]
+[M0/emp] hpb match_qbar100 param=12     avg=   3204.5 max=    3425 loss q1/10/100/1000 = +14.36 +27.96 +41.51 +45.11   base@1000=11.12 cand/bucket=3205 [3s]
+[M2x/emp] hpb match_qbar100 param=12     avg=   3204.5 max=    3425 loss q1/10/100/1000 =  +9.57 +20.30 +30.74 +33.44   base@1000=6.89 cand/bucket=2138 [2s]
+[M0/emp] hpb match_qbar1000 param=10     avg=  12817.9 max=   13159 loss q1/10/100/1000 =  +8.76 +19.86 +32.08 +40.32   base@1000=11.12 cand/bucket=12815 [3s]
+[M2x/emp] hpb match_qbar1000 param=10     avg=  12817.9 max=   13159 loss q1/10/100/1000 =  +5.75 +13.81 +23.64 +30.01   base@1000=6.89 cand/bucket=8552 [2s]
+[M0/emp] fsb floor2     param=10     avg=    790.8 max=     909 loss q1/10/100/1000 =  +4.40 +10.24 +14.82 +51.77   base@1000=11.12 cand/bucket=792 [7s]
+[M2x/emp] fsb floor2     param=10     avg=    790.8 max=     909 loss q1/10/100/1000 =  +8.20 +13.32 +24.59 +39.50   base@1000=6.89 cand/bucket=248 [3s]
+[M0/emp] fsb floor4     param=10     avg=    791.9 max=     910 loss q1/10/100/1000 =  +2.96 +10.02 +14.79 +51.77   base@1000=11.12 cand/bucket=793 [7s]
+[M2x/emp] fsb floor4     param=10     avg=    791.9 max=     910 loss q1/10/100/1000 =  +6.04 +13.16 +24.46 +39.50   base@1000=6.89 cand/bucket=249 [3s]
+[M0/emp] fsb floor16    param=10     avg=    799.5 max=     920 loss q1/10/100/1000 =  +1.00  +6.35 +14.23 +51.77   base@1000=11.12 cand/bucket=800 [7s]
+[M2x/emp] fsb floor16    param=10     avg=    799.5 max=     920 loss q1/10/100/1000 =  +2.90 +11.80 +23.50 +39.50   base@1000=6.89 cand/bucket=255 [3s]
+[M0/emp] fsb floor64    param=10     avg=    831.9 max=     954 loss q1/10/100/1000 =  -0.27  +1.76 +11.76 +51.77   base@1000=11.12 cand/bucket=833 [6s]
+[M2x/emp] fsb floor64    param=10     avg=    831.9 max=     954 loss q1/10/100/1000 =  +1.18  +4.86 +20.10 +39.50   base@1000=6.89 cand/bucket=278 [3s]
+[M0/emp] fsb floor256   param=10     avg=    966.7 max=    1107 loss q1/10/100/1000 =  +0.00  +0.54  +3.71 +51.77   base@1000=11.12 cand/bucket=967 [6s]
+[M2x/emp] fsb floor256   param=10     avg=    966.7 max=    1107 loss q1/10/100/1000 =  +0.20  +2.68  +7.77 +39.50   base@1000=6.89 cand/bucket=373 [3s]
+[M0/emp] fsb floor1024  param=10     avg=   1516.1 max=    1699 loss q1/10/100/1000 =  +0.00  -0.12  +2.59 +46.01   base@1000=11.12 cand/bucket=1517 [6s]
+[M2x/emp] fsb floor1024  param=10     avg=   1516.1 max=    1699 loss q1/10/100/1000 =  -0.02  +0.26  +9.87 +39.50   base@1000=6.89 cand/bucket=753 [3s]
+[M0/emp] fsb floor2048  param=10     avg=   2252.8 max=    2486 loss q1/10/100/1000 =  +0.00  -0.03  +4.13 +44.53   base@1000=11.12 cand/bucket=2253 [6s]
+[M2x/emp] fsb floor2048  param=10     avg=   2252.8 max=    2486 loss q1/10/100/1000 =  -0.01  +1.00 +12.24 +36.78   base@1000=6.89 cand/bucket=1259 [3s]
+[M0/emp] fsb floor4096  param=10     avg=   3776.1 max=    4047 loss q1/10/100/1000 =  +0.00  +0.06  +4.16 +43.19   base@1000=11.12 cand/bucket=3777 [6s]
+[M2x/emp] fsb floor4096  param=10     avg=   3776.1 max=    4047 loss q1/10/100/1000 =  +0.11  +1.08 +12.28 +32.74   base@1000=6.89 cand/bucket=2295 [3s]
+[M0/emp] fsb floor8192  param=10     avg=   6906.3 max=    7281 loss q1/10/100/1000 =  +0.00  +0.06  +4.16 +40.69   base@1000=11.12 cand/bucket=6907 [7s]
+[M2x/emp] fsb floor8192  param=10     avg=   6906.3 max=    7281 loss q1/10/100/1000 =  +0.11  +1.08 +12.27 +31.16   base@1000=6.89 cand/bucket=4404 [4s]
+[M0/emp] fsb floor16384 param=10     avg=  13243.3 max=   13717 loss q1/10/100/1000 =  +0.00  +0.06  +4.14 +37.74   base@1000=11.12 cand/bucket=13244 [8s]
+[M2x/emp] fsb floor16384 param=10     avg=  13243.3 max=   13717 loss q1/10/100/1000 =  +0.11  +1.07 +12.22 +29.45   base@1000=6.89 cand/bucket=8654 [4s]
+[M0/emp] fsb floor2     param=100    avg=   2565.3 max=    2732 loss q1/10/100/1000 =  +3.69  +9.06 +10.66 +24.30   base@1000=11.12 cand/bucket=2566 [8s]
+[M2x/emp] fsb floor2     param=100    avg=   2565.3 max=    2732 loss q1/10/100/1000 =  +7.93 +12.42 +14.56 +39.50   base@1000=6.89 cand/bucket=822 [3s]
+[M0/emp] fsb floor4     param=100    avg=   2566.4 max=    2734 loss q1/10/100/1000 =  +2.54  +8.86 +10.64 +24.28   base@1000=11.12 cand/bucket=2567 [8s]
+[M2x/emp] fsb floor4     param=100    avg=   2566.4 max=    2734 loss q1/10/100/1000 =  +5.79 +12.38 +14.52 +39.50   base@1000=6.89 cand/bucket=822 [3s]
+[M0/emp] fsb floor16    param=100    avg=   2573.4 max=    2744 loss q1/10/100/1000 =  +0.87  +5.59 +10.48 +24.14   base@1000=11.12 cand/bucket=2574 [8s]
+[M2x/emp] fsb floor16    param=100    avg=   2573.4 max=    2744 loss q1/10/100/1000 =  +2.74 +11.44 +14.22 +39.50   base@1000=6.89 cand/bucket=828 [3s]
+[M0/emp] fsb floor64    param=100    avg=   2604.1 max=    2780 loss q1/10/100/1000 =  -0.29  +1.39  +9.75 +23.46   base@1000=11.12 cand/bucket=2605 [8s]
+[M2x/emp] fsb floor64    param=100    avg=   2604.1 max=    2780 loss q1/10/100/1000 =  +1.15  +4.74 +13.16 +39.50   base@1000=6.89 cand/bucket=851 [3s]
+[M0/emp] fsb floor256   param=100    avg=   2734.4 max=    2929 loss q1/10/100/1000 =  +0.00  +0.40  +3.27 +20.26   base@1000=11.12 cand/bucket=2735 [7s]
+[M2x/emp] fsb floor256   param=100    avg=   2734.4 max=    2929 loss q1/10/100/1000 =  +0.20  +2.66  +7.70 +39.50   base@1000=6.89 cand/bucket=946 [3s]
+[M0/emp] fsb floor1024  param=100    avg=   3275.6 max=    3506 loss q1/10/100/1000 =  +0.00  -0.12  +1.19  +8.36   base@1000=11.12 cand/bucket=3276 [7s]
+[M2x/emp] fsb floor1024  param=100    avg=   3275.6 max=    3506 loss q1/10/100/1000 =  -0.02  +0.26  +2.00 +27.51   base@1000=6.89 cand/bucket=1325 [3s]
+[M0/emp] fsb floor2048  param=100    avg=   4006.5 max=    4239 loss q1/10/100/1000 =  +0.00  -0.06  -0.32  +0.24   base@1000=11.12 cand/bucket=4007 [7s]
+[M2x/emp] fsb floor2048  param=100    avg=   4006.5 max=    4239 loss q1/10/100/1000 =  -0.06  -0.20  +1.44  +6.03   base@1000=6.89 cand/bucket=1831 [3s]
+[M0/emp] fsb floor4096  param=100    avg=   5476.3 max=    5790 loss q1/10/100/1000 =  +0.00  +0.00  -0.52 +10.64   base@1000=11.12 cand/bucket=5477 [7s]
+[M2x/emp] fsb floor4096  param=100    avg=   5476.3 max=    5790 loss q1/10/100/1000 =  +0.00  -0.16  -0.16 +30.53   base@1000=6.89 cand/bucket=2843 [4s]
+[M0/emp] fsb floor8192  param=100    avg=   8435.6 max=    8810 loss q1/10/100/1000 =  +0.00  +0.00  +0.02 +13.76   base@1000=11.12 cand/bucket=8436 [8s]
+[M2x/emp] fsb floor8192  param=100    avg=   8435.6 max=    8810 loss q1/10/100/1000 =  +0.00  +0.05  +2.16 +28.88   base@1000=6.89 cand/bucket=4874 [4s]
+[M0/emp] fsb floor16384 param=100    avg=  14589.8 max=   15052 loss q1/10/100/1000 =  +0.00  +0.00  +0.02 +13.76   base@1000=11.12 cand/bucket=14590 [9s]
+[M2x/emp] fsb floor16384 param=100    avg=  14589.8 max=   15052 loss q1/10/100/1000 =  +0.00  +0.05  +2.16 +27.25   base@1000=6.89 cand/bucket=9044 [5s]
+[M0/emp] fsb floor2     param=1000   avg=  11336.3 max=   11581 loss q1/10/100/1000 =  +3.22  +7.43  +9.37 +10.70   base@1000=11.12 cand/bucket=11337 [12s]
+[M2x/emp] fsb floor2     param=1000   avg=  11336.3 max=   11581 loss q1/10/100/1000 =  +7.12 +12.10 +12.37 +16.02   base@1000=6.89 cand/bucket=3845 [4s]
+[M0/emp] fsb floor4     param=1000   avg=  11337.2 max=   11583 loss q1/10/100/1000 =  +2.11  +7.26  +9.34 +10.69   base@1000=11.12 cand/bucket=11338 [12s]
+[M2x/emp] fsb floor4     param=1000   avg=  11337.2 max=   11583 loss q1/10/100/1000 =  +5.22 +12.06 +12.36 +16.02   base@1000=6.89 cand/bucket=3846 [4s]
+[M0/emp] fsb floor16    param=1000   avg=  11343.3 max=   11591 loss q1/10/100/1000 =  +0.67  +4.91  +9.19 +10.66   base@1000=11.12 cand/bucket=11344 [12s]
+[M2x/emp] fsb floor16    param=1000   avg=  11343.3 max=   11591 loss q1/10/100/1000 =  +2.53 +10.76 +12.28 +15.98   base@1000=6.89 cand/bucket=3851 [4s]
+[M0/emp] fsb floor64    param=1000   avg=  11371.0 max=   11624 loss q1/10/100/1000 =  -0.30  +0.97  +8.40 +10.52   base@1000=11.12 cand/bucket=11372 [11s]
+[M2x/emp] fsb floor64    param=1000   avg=  11371.0 max=   11624 loss q1/10/100/1000 =  +1.03  +4.45 +11.90 +15.78   base@1000=6.89 cand/bucket=3874 [4s]
+[M0/emp] fsb floor256   param=1000   avg=  11492.6 max=   11763 loss q1/10/100/1000 =  +0.00  +0.32  +2.66  +9.93   base@1000=11.12 cand/bucket=11493 [11s]
+[M2x/emp] fsb floor256   param=1000   avg=  11492.6 max=   11763 loss q1/10/100/1000 =  +0.16  +2.54  +7.42 +14.98   base@1000=6.89 cand/bucket=3967 [4s]
+[M0/emp] fsb floor1024  param=1000   avg=  12010.4 max=   12287 loss q1/10/100/1000 =  +0.00  -0.13  +0.88  +6.35   base@1000=11.12 cand/bucket=12011 [10s]
+[M2x/emp] fsb floor1024  param=1000   avg=  12010.4 max=   12287 loss q1/10/100/1000 =  -0.01  +0.26  +1.99 +11.66   base@1000=6.89 cand/bucket=4344 [4s]
+[M0/emp] fsb floor2048  param=1000   avg=  12721.9 max=   13048 loss q1/10/100/1000 =  +0.00  -0.04  -0.40  -0.18   base@1000=11.12 cand/bucket=12723 [10s]
+[M2x/emp] fsb floor2048  param=1000   avg=  12721.9 max=   13048 loss q1/10/100/1000 =  -0.05  -0.18  +1.42  +5.83   base@1000=6.89 cand/bucket=4849 [4s]
+[M0/emp] fsb floor4096  param=1000   avg=  14166.8 max=   14570 loss q1/10/100/1000 =  +0.00  +0.00  -0.58  -0.82   base@1000=11.12 cand/bucket=14167 [10s]
+[M2x/emp] fsb floor4096  param=1000   avg=  14166.8 max=   14570 loss q1/10/100/1000 =  +0.00  -0.16  -0.17  +1.11   base@1000=6.89 cand/bucket=5861 [4s]
+[M0/emp] fsb floor8192  param=1000   avg=  17084.6 max=   17575 loss q1/10/100/1000 =  +0.00  +0.00  -0.06  +0.48   base@1000=11.12 cand/bucket=17085 [10s]
+[M2x/emp] fsb floor8192  param=1000   avg=  17084.6 max=   17575 loss q1/10/100/1000 =  +0.00  -0.06  -0.72  +0.28   base@1000=6.89 cand/bucket=7885 [4s]
+[M0/emp] fsb floor16384 param=1000   avg=  22956.0 max=   23542 loss q1/10/100/1000 =  +0.00  +0.00  +0.00  -1.02   base@1000=11.12 cand/bucket=22956 [11s]
+[M2x/emp] fsb floor16384 param=1000   avg=  22956.0 max=   23542 loss q1/10/100/1000 =  +0.00  +0.00  -0.04  +1.49   base@1000=6.89 cand/bucket=11934 [5s]
+Gamma floor on the fresh pool (emp attacker, all of S~, t=1M). gain = floored loss at q=100 minus plain-FSB loss at q=100 at the SAME average bucket size (interpolated on the qbar sweep); negative = the floor beats raising qbar.
+ qbar  floor avg_bucket |        M0: floor/base/gain       M2x: floor/base/gain |  score
+   10      2      790.8 |    14.82/   14.80/  +0.02    24.59/   24.62/  -0.03 |   -0.00
+   10      4      791.9 |    14.79/   14.79/  -0.00    24.46/   24.60/  -0.14 |   -0.07
+   10     16      799.5 |    14.23/   14.74/  -0.51    23.50/   24.49/  -0.99 |   -0.75
+   10     64      831.9 |    11.76/   14.54/  -2.78    20.10/   24.04/  -3.94 |   -3.36
+   10    256      966.7 |     3.71/   13.77/ -10.05     7.77/   22.35/ -14.58 |  -12.32
+   10   1024     1516.1 |     2.59/   11.68/  -9.09     9.87/   17.64/  -7.76 |   -8.43
+   10   2048     2252.8 |     4.13/   10.93/  -6.80    12.24/   15.31/  -3.07 |   -4.94
+   10   4096     3776.1 |     4.16/   10.39/  -6.23    12.28/   13.50/  -1.22 |   -3.73
+   10   8192     6906.3 |     4.16/    9.85/  -5.69    12.27/   12.61/  -0.33 |   -3.01
+   10  16384    13243.3 |     4.14/    9.18/  -5.04    12.22/   12.33/  -0.12 |   -2.58
+  100      2     2565.3 |    10.66/   10.68/  -0.02    14.56/   14.54/  +0.02 |   -0.00
+  100      4     2566.4 |    10.64/   10.68/  -0.04    14.52/   14.54/  -0.03 |   -0.03
+  100     16     2573.4 |    10.48/   10.68/  -0.20    14.22/   14.54/  -0.32 |   -0.26
+  100     64     2604.1 |     9.75/   10.67/  -0.92    13.16/   14.50/  -1.35 |   -1.14
+  100    256     2734.4 |     3.27/   10.64/  -7.36     7.70/   14.37/  -6.68 |   -7.02
+  100   1024     3275.6 |     1.19/   10.50/  -9.31     2.00/   13.88/ -11.88 |  -10.59
+  100   2048     4006.6 |    -0.32/   10.34/ -10.66     1.44/   13.34/ -11.90 |  -11.28
+  100   4096     5476.3 |    -0.52/   10.08/ -10.60    -0.16/   12.72/ -12.88 |  -11.74
+  100   8192     8435.6 |     0.02/    9.65/  -9.62     2.16/   12.51/ -10.35 |   -9.98
+  100  16384    14589.8 |     0.02/    9.07/  -9.04     2.16/   12.31/ -10.15 |   -9.60
+ 1000      2    11336.3 |     9.37/    9.35/  +0.02    12.37/   12.37/  +0.00 |   +0.01
+ 1000      4    11337.2 |     9.34/    9.35/  -0.02    12.36/   12.37/  -0.01 |   -0.01
+ 1000     16    11343.3 |     9.19/    9.35/  -0.16    12.28/   12.37/  -0.08 |   -0.12
+ 1000     64    11371.0 |     8.40/    9.35/  -0.94    11.90/   12.37/  -0.47 |   -0.71
+ 1000    256    11492.6 |     2.66/    9.34/  -6.68     7.42/   12.37/  -4.94 |   -5.81
+ 1000   1024    12010.4 |     0.88/    9.29/  -8.41     1.99/   12.36/ -10.36 |   -9.39
+ 1000   2048    12721.9 |    -0.40/    9.22/  -9.62     1.42/   12.34/ -10.92 |  -10.27
+ 1000   4096    14166.8 |    -0.58/    9.10/  -9.67    -0.17/   12.32/ -12.49 |  -11.08
+ 1000   8192    17084.6 |    -0.06/    8.89/  -8.95    -0.72/   12.28/ -13.00 |  -10.98
+ 1000  16384    22956.0 |     0.00/    8.55/  -8.55    -0.04/   12.22/ -12.26 |  -10.40
+dev-selected configuration (flag only): qbar=10 floor=256
+
+real	8m33.692s
+user	27m3.267s
+sys	0m9.678s

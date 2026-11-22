@@ -390,3 +390,401 @@ Every number the paper text may quote, computed from `results/*.csv` by `experim
 | `C5_est_all_index_build_s` | est attacker, candidate list all of S~: index build time | 13.30 | s | `e1e_cost.csv` |
 | `C5_est_all_games_5x5000_s` | est attacker, candidate list all of S~: time of the 25,000 bucket queries | 2.20 | s | `e1e_cost.csv` |
 | `C5_est_all_peak_rss_gb` | est attacker, candidate list all of S~: peak resident memory of the process | 3.63 | GB | `e1e_cost.csv` |
+
+## C6 Floor on gamma (fresh pool; emp, gt, est attackers) (393 numbers)
+
+| id | description | value | unit | source |
+|---|---|---|---|---|
+| `C6_M0_qbar10_plain_emp_loss_q1` | M0, fresh pool, FSB qbar=10 plain, emp attacker: loss at q=1 | 5.71 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar10_plain_gt_loss_q1` | M0, fresh pool, FSB qbar=10 plain, gt attacker: loss at q=1 | 5.76 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_plain_est_loss_q1` | M0, fresh pool, FSB qbar=10 plain, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_plain_worst_q1` | M0, fresh pool, FSB qbar=10 plain: largest loss over the emp, gt and est attackers at q=1 | 5.76 | pp | `` |
+| `C6_M0_qbar10_plain_emp_loss_qbar` | M0, fresh pool, FSB qbar=10 plain, emp attacker: loss at q=10 | 10.40 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar10_plain_gt_loss_qbar` | M0, fresh pool, FSB qbar=10 plain, gt attacker: loss at q=10 | 10.30 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_plain_est_loss_qbar` | M0, fresh pool, FSB qbar=10 plain, est attacker: loss at q=10 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_plain_worst_qbar` | M0, fresh pool, FSB qbar=10 plain: largest loss over the emp, gt and est attackers at q=10 | 10.40 | pp | `` |
+| `C6_M0_qbar10_plain_emp_loss_q1000` | M0, fresh pool, FSB qbar=10 plain, emp attacker: loss at q=1000 | 51.77 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar10_plain_gt_loss_q1000` | M0, fresh pool, FSB qbar=10 plain, gt attacker: loss at q=1000 | 51.77 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_plain_est_loss_q1000` | M0, fresh pool, FSB qbar=10 plain, est attacker: loss at q=1000 | 52.37 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_plain_worst_q1000` | M0, fresh pool, FSB qbar=10 plain: largest loss over the emp, gt and est attackers at q=1000 | 52.37 | pp | `` |
+| `C6_M0_qbar10_floor256_emp_loss_q1` | M0, fresh pool, FSB qbar=10 floor256, emp attacker: loss at q=1 | 0.00 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar10_floor256_gt_loss_q1` | M0, fresh pool, FSB qbar=10 floor256, gt attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor256_est_loss_q1` | M0, fresh pool, FSB qbar=10 floor256, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor256_worst_q1` | M0, fresh pool, FSB qbar=10 floor256: largest loss over the emp, gt and est attackers at q=1 | 0.00 | pp | `` |
+| `C6_M0_qbar10_floor256_emp_loss_qbar` | M0, fresh pool, FSB qbar=10 floor256, emp attacker: loss at q=10 | 0.54 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar10_floor256_gt_loss_qbar` | M0, fresh pool, FSB qbar=10 floor256, gt attacker: loss at q=10 | 0.65 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor256_est_loss_qbar` | M0, fresh pool, FSB qbar=10 floor256, est attacker: loss at q=10 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor256_worst_qbar` | M0, fresh pool, FSB qbar=10 floor256: largest loss over the emp, gt and est attackers at q=10 | 0.65 | pp | `` |
+| `C6_M0_qbar10_floor256_emp_loss_q1000` | M0, fresh pool, FSB qbar=10 floor256, emp attacker: loss at q=1000 | 51.77 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar10_floor256_gt_loss_q1000` | M0, fresh pool, FSB qbar=10 floor256, gt attacker: loss at q=1000 | 51.77 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor256_est_loss_q1000` | M0, fresh pool, FSB qbar=10 floor256, est attacker: loss at q=1000 | 52.32 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor256_worst_q1000` | M0, fresh pool, FSB qbar=10 floor256: largest loss over the emp, gt and est attackers at q=1000 | 52.32 | pp | `` |
+| `C6_M0_qbar10_floor1024_emp_loss_q1` | M0, fresh pool, FSB qbar=10 floor1024, emp attacker: loss at q=1 | 0.00 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar10_floor1024_gt_loss_q1` | M0, fresh pool, FSB qbar=10 floor1024, gt attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor1024_est_loss_q1` | M0, fresh pool, FSB qbar=10 floor1024, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor1024_worst_q1` | M0, fresh pool, FSB qbar=10 floor1024: largest loss over the emp, gt and est attackers at q=1 | 0.00 | pp | `` |
+| `C6_M0_qbar10_floor1024_emp_loss_qbar` | M0, fresh pool, FSB qbar=10 floor1024, emp attacker: loss at q=10 | -0.12 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar10_floor1024_gt_loss_qbar` | M0, fresh pool, FSB qbar=10 floor1024, gt attacker: loss at q=10 | 0.09 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor1024_est_loss_qbar` | M0, fresh pool, FSB qbar=10 floor1024, est attacker: loss at q=10 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor1024_worst_qbar` | M0, fresh pool, FSB qbar=10 floor1024: largest loss over the emp, gt and est attackers at q=10 | 0.09 | pp | `` |
+| `C6_M0_qbar10_floor1024_emp_loss_q1000` | M0, fresh pool, FSB qbar=10 floor1024, emp attacker: loss at q=1000 | 46.01 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar10_floor1024_gt_loss_q1000` | M0, fresh pool, FSB qbar=10 floor1024, gt attacker: loss at q=1000 | 46.04 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor1024_est_loss_q1000` | M0, fresh pool, FSB qbar=10 floor1024, est attacker: loss at q=1000 | 46.76 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor1024_worst_q1000` | M0, fresh pool, FSB qbar=10 floor1024: largest loss over the emp, gt and est attackers at q=1000 | 46.76 | pp | `` |
+| `C6_M0_qbar10_floor2048_emp_loss_q1` | M0, fresh pool, FSB qbar=10 floor2048, emp attacker: loss at q=1 | 0.00 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar10_floor2048_gt_loss_q1` | M0, fresh pool, FSB qbar=10 floor2048, gt attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor2048_est_loss_q1` | M0, fresh pool, FSB qbar=10 floor2048, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor2048_worst_q1` | M0, fresh pool, FSB qbar=10 floor2048: largest loss over the emp, gt and est attackers at q=1 | 0.00 | pp | `` |
+| `C6_M0_qbar10_floor2048_emp_loss_qbar` | M0, fresh pool, FSB qbar=10 floor2048, emp attacker: loss at q=10 | -0.03 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar10_floor2048_gt_loss_qbar` | M0, fresh pool, FSB qbar=10 floor2048, gt attacker: loss at q=10 | 0.06 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor2048_est_loss_qbar` | M0, fresh pool, FSB qbar=10 floor2048, est attacker: loss at q=10 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor2048_worst_qbar` | M0, fresh pool, FSB qbar=10 floor2048: largest loss over the emp, gt and est attackers at q=10 | 0.06 | pp | `` |
+| `C6_M0_qbar10_floor2048_emp_loss_q1000` | M0, fresh pool, FSB qbar=10 floor2048, emp attacker: loss at q=1000 | 44.53 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar10_floor2048_gt_loss_q1000` | M0, fresh pool, FSB qbar=10 floor2048, gt attacker: loss at q=1000 | 44.56 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor2048_est_loss_q1000` | M0, fresh pool, FSB qbar=10 floor2048, est attacker: loss at q=1000 | 44.58 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor2048_worst_q1000` | M0, fresh pool, FSB qbar=10 floor2048: largest loss over the emp, gt and est attackers at q=1000 | 44.58 | pp | `` |
+| `C6_M0_qbar10_floor4096_emp_loss_q1` | M0, fresh pool, FSB qbar=10 floor4096, emp attacker: loss at q=1 | 0.00 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar10_floor4096_gt_loss_q1` | M0, fresh pool, FSB qbar=10 floor4096, gt attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor4096_est_loss_q1` | M0, fresh pool, FSB qbar=10 floor4096, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor4096_worst_q1` | M0, fresh pool, FSB qbar=10 floor4096: largest loss over the emp, gt and est attackers at q=1 | 0.00 | pp | `` |
+| `C6_M0_qbar10_floor4096_emp_loss_qbar` | M0, fresh pool, FSB qbar=10 floor4096, emp attacker: loss at q=10 | 0.06 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar10_floor4096_gt_loss_qbar` | M0, fresh pool, FSB qbar=10 floor4096, gt attacker: loss at q=10 | 0.06 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor4096_est_loss_qbar` | M0, fresh pool, FSB qbar=10 floor4096, est attacker: loss at q=10 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor4096_worst_qbar` | M0, fresh pool, FSB qbar=10 floor4096: largest loss over the emp, gt and est attackers at q=10 | 0.06 | pp | `` |
+| `C6_M0_qbar10_floor4096_emp_loss_q1000` | M0, fresh pool, FSB qbar=10 floor4096, emp attacker: loss at q=1000 | 43.19 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar10_floor4096_gt_loss_q1000` | M0, fresh pool, FSB qbar=10 floor4096, gt attacker: loss at q=1000 | 43.19 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor4096_est_loss_q1000` | M0, fresh pool, FSB qbar=10 floor4096, est attacker: loss at q=1000 | 42.78 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar10_floor4096_worst_q1000` | M0, fresh pool, FSB qbar=10 floor4096: largest loss over the emp, gt and est attackers at q=1000 | 43.19 | pp | `` |
+| `C6_M0_qbar10_hpb_emp_loss_qbar` | M0, fresh pool, matched HPB, emp: loss at q=qbar=10 | 37.41 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar100_plain_emp_loss_q1` | M0, fresh pool, FSB qbar=100 plain, emp attacker: loss at q=1 | 4.87 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar100_plain_gt_loss_q1` | M0, fresh pool, FSB qbar=100 plain, gt attacker: loss at q=1 | 4.98 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_plain_est_loss_q1` | M0, fresh pool, FSB qbar=100 plain, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_plain_worst_q1` | M0, fresh pool, FSB qbar=100 plain: largest loss over the emp, gt and est attackers at q=1 | 4.98 | pp | `` |
+| `C6_M0_qbar100_plain_emp_loss_qbar` | M0, fresh pool, FSB qbar=100 plain, emp attacker: loss at q=100 | 10.68 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar100_plain_gt_loss_qbar` | M0, fresh pool, FSB qbar=100 plain, gt attacker: loss at q=100 | 10.52 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_plain_est_loss_qbar` | M0, fresh pool, FSB qbar=100 plain, est attacker: loss at q=100 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_plain_worst_qbar` | M0, fresh pool, FSB qbar=100 plain: largest loss over the emp, gt and est attackers at q=100 | 10.68 | pp | `` |
+| `C6_M0_qbar100_plain_emp_loss_q1000` | M0, fresh pool, FSB qbar=100 plain, emp attacker: loss at q=1000 | 24.32 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar100_plain_gt_loss_q1000` | M0, fresh pool, FSB qbar=100 plain, gt attacker: loss at q=1000 | 24.17 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_plain_est_loss_q1000` | M0, fresh pool, FSB qbar=100 plain, est attacker: loss at q=1000 | 11.49 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_plain_worst_q1000` | M0, fresh pool, FSB qbar=100 plain: largest loss over the emp, gt and est attackers at q=1000 | 24.32 | pp | `` |
+| `C6_M0_qbar100_floor256_emp_loss_q1` | M0, fresh pool, FSB qbar=100 floor256, emp attacker: loss at q=1 | 0.00 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar100_floor256_gt_loss_q1` | M0, fresh pool, FSB qbar=100 floor256, gt attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor256_est_loss_q1` | M0, fresh pool, FSB qbar=100 floor256, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor256_worst_q1` | M0, fresh pool, FSB qbar=100 floor256: largest loss over the emp, gt and est attackers at q=1 | 0.00 | pp | `` |
+| `C6_M0_qbar100_floor256_emp_loss_qbar` | M0, fresh pool, FSB qbar=100 floor256, emp attacker: loss at q=100 | 3.27 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar100_floor256_gt_loss_qbar` | M0, fresh pool, FSB qbar=100 floor256, gt attacker: loss at q=100 | 3.74 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor256_est_loss_qbar` | M0, fresh pool, FSB qbar=100 floor256, est attacker: loss at q=100 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor256_worst_qbar` | M0, fresh pool, FSB qbar=100 floor256: largest loss over the emp, gt and est attackers at q=100 | 3.74 | pp | `` |
+| `C6_M0_qbar100_floor256_emp_loss_q1000` | M0, fresh pool, FSB qbar=100 floor256, emp attacker: loss at q=1000 | 20.26 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar100_floor256_gt_loss_q1000` | M0, fresh pool, FSB qbar=100 floor256, gt attacker: loss at q=1000 | 20.13 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor256_est_loss_q1000` | M0, fresh pool, FSB qbar=100 floor256, est attacker: loss at q=1000 | 11.45 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor256_worst_q1000` | M0, fresh pool, FSB qbar=100 floor256: largest loss over the emp, gt and est attackers at q=1000 | 20.26 | pp | `` |
+| `C6_M0_qbar100_floor1024_emp_loss_q1` | M0, fresh pool, FSB qbar=100 floor1024, emp attacker: loss at q=1 | 0.00 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar100_floor1024_gt_loss_q1` | M0, fresh pool, FSB qbar=100 floor1024, gt attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor1024_est_loss_q1` | M0, fresh pool, FSB qbar=100 floor1024, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor1024_worst_q1` | M0, fresh pool, FSB qbar=100 floor1024: largest loss over the emp, gt and est attackers at q=1 | 0.00 | pp | `` |
+| `C6_M0_qbar100_floor1024_emp_loss_qbar` | M0, fresh pool, FSB qbar=100 floor1024, emp attacker: loss at q=100 | 1.19 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar100_floor1024_gt_loss_qbar` | M0, fresh pool, FSB qbar=100 floor1024, gt attacker: loss at q=100 | 1.80 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor1024_est_loss_qbar` | M0, fresh pool, FSB qbar=100 floor1024, est attacker: loss at q=100 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor1024_worst_qbar` | M0, fresh pool, FSB qbar=100 floor1024: largest loss over the emp, gt and est attackers at q=100 | 1.80 | pp | `` |
+| `C6_M0_qbar100_floor1024_emp_loss_q1000` | M0, fresh pool, FSB qbar=100 floor1024, emp attacker: loss at q=1000 | 8.36 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar100_floor1024_gt_loss_q1000` | M0, fresh pool, FSB qbar=100 floor1024, gt attacker: loss at q=1000 | 15.60 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor1024_est_loss_q1000` | M0, fresh pool, FSB qbar=100 floor1024, est attacker: loss at q=1000 | 11.45 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor1024_worst_q1000` | M0, fresh pool, FSB qbar=100 floor1024: largest loss over the emp, gt and est attackers at q=1000 | 15.60 | pp | `` |
+| `C6_M0_qbar100_floor2048_emp_loss_q1` | M0, fresh pool, FSB qbar=100 floor2048, emp attacker: loss at q=1 | 0.00 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar100_floor2048_gt_loss_q1` | M0, fresh pool, FSB qbar=100 floor2048, gt attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor2048_est_loss_q1` | M0, fresh pool, FSB qbar=100 floor2048, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor2048_worst_q1` | M0, fresh pool, FSB qbar=100 floor2048: largest loss over the emp, gt and est attackers at q=1 | 0.00 | pp | `` |
+| `C6_M0_qbar100_floor2048_emp_loss_qbar` | M0, fresh pool, FSB qbar=100 floor2048, emp attacker: loss at q=100 | -0.32 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar100_floor2048_gt_loss_qbar` | M0, fresh pool, FSB qbar=100 floor2048, gt attacker: loss at q=100 | 0.08 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor2048_est_loss_qbar` | M0, fresh pool, FSB qbar=100 floor2048, est attacker: loss at q=100 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor2048_worst_qbar` | M0, fresh pool, FSB qbar=100 floor2048: largest loss over the emp, gt and est attackers at q=100 | 0.08 | pp | `` |
+| `C6_M0_qbar100_floor2048_emp_loss_q1000` | M0, fresh pool, FSB qbar=100 floor2048, emp attacker: loss at q=1000 | 0.24 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar100_floor2048_gt_loss_q1000` | M0, fresh pool, FSB qbar=100 floor2048, gt attacker: loss at q=1000 | 13.94 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor2048_est_loss_q1000` | M0, fresh pool, FSB qbar=100 floor2048, est attacker: loss at q=1000 | 11.45 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor2048_worst_q1000` | M0, fresh pool, FSB qbar=100 floor2048: largest loss over the emp, gt and est attackers at q=1000 | 13.94 | pp | `` |
+| `C6_M0_qbar100_floor4096_emp_loss_q1` | M0, fresh pool, FSB qbar=100 floor4096, emp attacker: loss at q=1 | 0.00 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar100_floor4096_gt_loss_q1` | M0, fresh pool, FSB qbar=100 floor4096, gt attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor4096_est_loss_q1` | M0, fresh pool, FSB qbar=100 floor4096, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor4096_worst_q1` | M0, fresh pool, FSB qbar=100 floor4096: largest loss over the emp, gt and est attackers at q=1 | 0.00 | pp | `` |
+| `C6_M0_qbar100_floor4096_emp_loss_qbar` | M0, fresh pool, FSB qbar=100 floor4096, emp attacker: loss at q=100 | -0.52 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar100_floor4096_gt_loss_qbar` | M0, fresh pool, FSB qbar=100 floor4096, gt attacker: loss at q=100 | 0.04 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor4096_est_loss_qbar` | M0, fresh pool, FSB qbar=100 floor4096, est attacker: loss at q=100 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor4096_worst_qbar` | M0, fresh pool, FSB qbar=100 floor4096: largest loss over the emp, gt and est attackers at q=100 | 0.04 | pp | `` |
+| `C6_M0_qbar100_floor4096_emp_loss_q1000` | M0, fresh pool, FSB qbar=100 floor4096, emp attacker: loss at q=1000 | 10.64 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar100_floor4096_gt_loss_q1000` | M0, fresh pool, FSB qbar=100 floor4096, gt attacker: loss at q=1000 | 13.73 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor4096_est_loss_q1000` | M0, fresh pool, FSB qbar=100 floor4096, est attacker: loss at q=1000 | 11.46 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar100_floor4096_worst_q1000` | M0, fresh pool, FSB qbar=100 floor4096: largest loss over the emp, gt and est attackers at q=1000 | 13.73 | pp | `` |
+| `C6_M0_qbar100_hpb_emp_loss_qbar` | M0, fresh pool, matched HPB, emp: loss at q=qbar=100 | 41.51 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar1000_plain_emp_loss_q1` | M0, fresh pool, FSB qbar=1000 plain, emp attacker: loss at q=1 | 3.97 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar1000_plain_gt_loss_q1` | M0, fresh pool, FSB qbar=1000 plain, gt attacker: loss at q=1 | 4.04 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_plain_est_loss_q1` | M0, fresh pool, FSB qbar=1000 plain, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_plain_worst_q1` | M0, fresh pool, FSB qbar=1000 plain: largest loss over the emp, gt and est attackers at q=1 | 4.04 | pp | `` |
+| `C6_M0_qbar1000_plain_emp_loss_qbar` | M0, fresh pool, FSB qbar=1000 plain, emp attacker: loss at q=1000 | 10.70 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar1000_plain_gt_loss_qbar` | M0, fresh pool, FSB qbar=1000 plain, gt attacker: loss at q=1000 | 10.55 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_plain_est_loss_qbar` | M0, fresh pool, FSB qbar=1000 plain, est attacker: loss at q=1000 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_plain_worst_qbar` | M0, fresh pool, FSB qbar=1000 plain: largest loss over the emp, gt and est attackers at q=1000 | 10.70 | pp | `` |
+| `C6_M0_qbar1000_plain_emp_loss_q1000` | M0, fresh pool, FSB qbar=1000 plain, emp attacker: loss at q=1000 | 10.70 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar1000_plain_gt_loss_q1000` | M0, fresh pool, FSB qbar=1000 plain, gt attacker: loss at q=1000 | 10.55 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_plain_est_loss_q1000` | M0, fresh pool, FSB qbar=1000 plain, est attacker: loss at q=1000 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_plain_worst_q1000` | M0, fresh pool, FSB qbar=1000 plain: largest loss over the emp, gt and est attackers at q=1000 | 10.70 | pp | `` |
+| `C6_M0_qbar1000_floor256_emp_loss_q1` | M0, fresh pool, FSB qbar=1000 floor256, emp attacker: loss at q=1 | 0.00 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar1000_floor256_gt_loss_q1` | M0, fresh pool, FSB qbar=1000 floor256, gt attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor256_est_loss_q1` | M0, fresh pool, FSB qbar=1000 floor256, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor256_worst_q1` | M0, fresh pool, FSB qbar=1000 floor256: largest loss over the emp, gt and est attackers at q=1 | 0.00 | pp | `` |
+| `C6_M0_qbar1000_floor256_emp_loss_qbar` | M0, fresh pool, FSB qbar=1000 floor256, emp attacker: loss at q=1000 | 9.93 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar1000_floor256_gt_loss_qbar` | M0, fresh pool, FSB qbar=1000 floor256, gt attacker: loss at q=1000 | 9.88 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor256_est_loss_qbar` | M0, fresh pool, FSB qbar=1000 floor256, est attacker: loss at q=1000 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor256_worst_qbar` | M0, fresh pool, FSB qbar=1000 floor256: largest loss over the emp, gt and est attackers at q=1000 | 9.93 | pp | `` |
+| `C6_M0_qbar1000_floor256_emp_loss_q1000` | M0, fresh pool, FSB qbar=1000 floor256, emp attacker: loss at q=1000 | 9.93 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar1000_floor256_gt_loss_q1000` | M0, fresh pool, FSB qbar=1000 floor256, gt attacker: loss at q=1000 | 9.88 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor256_est_loss_q1000` | M0, fresh pool, FSB qbar=1000 floor256, est attacker: loss at q=1000 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor256_worst_q1000` | M0, fresh pool, FSB qbar=1000 floor256: largest loss over the emp, gt and est attackers at q=1000 | 9.93 | pp | `` |
+| `C6_M0_qbar1000_floor1024_emp_loss_q1` | M0, fresh pool, FSB qbar=1000 floor1024, emp attacker: loss at q=1 | 0.00 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar1000_floor1024_gt_loss_q1` | M0, fresh pool, FSB qbar=1000 floor1024, gt attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor1024_est_loss_q1` | M0, fresh pool, FSB qbar=1000 floor1024, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor1024_worst_q1` | M0, fresh pool, FSB qbar=1000 floor1024: largest loss over the emp, gt and est attackers at q=1 | 0.00 | pp | `` |
+| `C6_M0_qbar1000_floor1024_emp_loss_qbar` | M0, fresh pool, FSB qbar=1000 floor1024, emp attacker: loss at q=1000 | 6.35 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar1000_floor1024_gt_loss_qbar` | M0, fresh pool, FSB qbar=1000 floor1024, gt attacker: loss at q=1000 | 6.12 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor1024_est_loss_qbar` | M0, fresh pool, FSB qbar=1000 floor1024, est attacker: loss at q=1000 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor1024_worst_qbar` | M0, fresh pool, FSB qbar=1000 floor1024: largest loss over the emp, gt and est attackers at q=1000 | 6.35 | pp | `` |
+| `C6_M0_qbar1000_floor1024_emp_loss_q1000` | M0, fresh pool, FSB qbar=1000 floor1024, emp attacker: loss at q=1000 | 6.35 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar1000_floor1024_gt_loss_q1000` | M0, fresh pool, FSB qbar=1000 floor1024, gt attacker: loss at q=1000 | 6.12 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor1024_est_loss_q1000` | M0, fresh pool, FSB qbar=1000 floor1024, est attacker: loss at q=1000 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor1024_worst_q1000` | M0, fresh pool, FSB qbar=1000 floor1024: largest loss over the emp, gt and est attackers at q=1000 | 6.35 | pp | `` |
+| `C6_M0_qbar1000_floor2048_emp_loss_q1` | M0, fresh pool, FSB qbar=1000 floor2048, emp attacker: loss at q=1 | 0.00 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar1000_floor2048_gt_loss_q1` | M0, fresh pool, FSB qbar=1000 floor2048, gt attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor2048_est_loss_q1` | M0, fresh pool, FSB qbar=1000 floor2048, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor2048_worst_q1` | M0, fresh pool, FSB qbar=1000 floor2048: largest loss over the emp, gt and est attackers at q=1 | 0.00 | pp | `` |
+| `C6_M0_qbar1000_floor2048_emp_loss_qbar` | M0, fresh pool, FSB qbar=1000 floor2048, emp attacker: loss at q=1000 | -0.18 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar1000_floor2048_gt_loss_qbar` | M0, fresh pool, FSB qbar=1000 floor2048, gt attacker: loss at q=1000 | 2.72 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor2048_est_loss_qbar` | M0, fresh pool, FSB qbar=1000 floor2048, est attacker: loss at q=1000 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor2048_worst_qbar` | M0, fresh pool, FSB qbar=1000 floor2048: largest loss over the emp, gt and est attackers at q=1000 | 2.72 | pp | `` |
+| `C6_M0_qbar1000_floor2048_emp_loss_q1000` | M0, fresh pool, FSB qbar=1000 floor2048, emp attacker: loss at q=1000 | -0.18 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar1000_floor2048_gt_loss_q1000` | M0, fresh pool, FSB qbar=1000 floor2048, gt attacker: loss at q=1000 | 2.72 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor2048_est_loss_q1000` | M0, fresh pool, FSB qbar=1000 floor2048, est attacker: loss at q=1000 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor2048_worst_q1000` | M0, fresh pool, FSB qbar=1000 floor2048: largest loss over the emp, gt and est attackers at q=1000 | 2.72 | pp | `` |
+| `C6_M0_qbar1000_floor4096_emp_loss_q1` | M0, fresh pool, FSB qbar=1000 floor4096, emp attacker: loss at q=1 | 0.00 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar1000_floor4096_gt_loss_q1` | M0, fresh pool, FSB qbar=1000 floor4096, gt attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor4096_est_loss_q1` | M0, fresh pool, FSB qbar=1000 floor4096, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor4096_worst_q1` | M0, fresh pool, FSB qbar=1000 floor4096: largest loss over the emp, gt and est attackers at q=1 | 0.00 | pp | `` |
+| `C6_M0_qbar1000_floor4096_emp_loss_qbar` | M0, fresh pool, FSB qbar=1000 floor4096, emp attacker: loss at q=1000 | -0.82 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar1000_floor4096_gt_loss_qbar` | M0, fresh pool, FSB qbar=1000 floor4096, gt attacker: loss at q=1000 | 2.19 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor4096_est_loss_qbar` | M0, fresh pool, FSB qbar=1000 floor4096, est attacker: loss at q=1000 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor4096_worst_qbar` | M0, fresh pool, FSB qbar=1000 floor4096: largest loss over the emp, gt and est attackers at q=1000 | 2.19 | pp | `` |
+| `C6_M0_qbar1000_floor4096_emp_loss_q1000` | M0, fresh pool, FSB qbar=1000 floor4096, emp attacker: loss at q=1000 | -0.82 | pp | `e1g_floor_fresh.csv` |
+| `C6_M0_qbar1000_floor4096_gt_loss_q1000` | M0, fresh pool, FSB qbar=1000 floor4096, gt attacker: loss at q=1000 | 2.19 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor4096_est_loss_q1000` | M0, fresh pool, FSB qbar=1000 floor4096, est attacker: loss at q=1000 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M0_qbar1000_floor4096_worst_q1000` | M0, fresh pool, FSB qbar=1000 floor4096: largest loss over the emp, gt and est attackers at q=1000 | 2.19 | pp | `` |
+| `C6_M0_qbar1000_hpb_emp_loss_qbar` | M0, fresh pool, matched HPB, emp: loss at q=qbar=1000 | 40.32 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar10_plain_emp_loss_q1` | M2x, fresh pool, FSB qbar=10 plain, emp attacker: loss at q=1 | 9.95 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar10_plain_gt_loss_q1` | M2x, fresh pool, FSB qbar=10 plain, gt attacker: loss at q=1 | 9.98 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_plain_est_loss_q1` | M2x, fresh pool, FSB qbar=10 plain, est attacker: loss at q=1 | 0.08 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_plain_worst_q1` | M2x, fresh pool, FSB qbar=10 plain: largest loss over the emp, gt and est attackers at q=1 | 9.98 | pp | `` |
+| `C6_M2x_qbar10_plain_emp_loss_qbar` | M2x, fresh pool, FSB qbar=10 plain, emp attacker: loss at q=10 | 13.44 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar10_plain_gt_loss_qbar` | M2x, fresh pool, FSB qbar=10 plain, gt attacker: loss at q=10 | 13.40 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_plain_est_loss_qbar` | M2x, fresh pool, FSB qbar=10 plain, est attacker: loss at q=10 | 1.11 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_plain_worst_qbar` | M2x, fresh pool, FSB qbar=10 plain: largest loss over the emp, gt and est attackers at q=10 | 13.44 | pp | `` |
+| `C6_M2x_qbar10_plain_emp_loss_q1000` | M2x, fresh pool, FSB qbar=10 plain, emp attacker: loss at q=1000 | 39.50 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar10_plain_gt_loss_q1000` | M2x, fresh pool, FSB qbar=10 plain, gt attacker: loss at q=1000 | 39.50 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_plain_est_loss_q1000` | M2x, fresh pool, FSB qbar=10 plain, est attacker: loss at q=1000 | 39.50 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_plain_worst_q1000` | M2x, fresh pool, FSB qbar=10 plain: largest loss over the emp, gt and est attackers at q=1000 | 39.50 | pp | `` |
+| `C6_M2x_qbar10_floor256_emp_loss_q1` | M2x, fresh pool, FSB qbar=10 floor256, emp attacker: loss at q=1 | 0.20 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar10_floor256_gt_loss_q1` | M2x, fresh pool, FSB qbar=10 floor256, gt attacker: loss at q=1 | 0.19 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor256_est_loss_q1` | M2x, fresh pool, FSB qbar=10 floor256, est attacker: loss at q=1 | 0.11 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor256_worst_q1` | M2x, fresh pool, FSB qbar=10 floor256: largest loss over the emp, gt and est attackers at q=1 | 0.20 | pp | `` |
+| `C6_M2x_qbar10_floor256_emp_loss_qbar` | M2x, fresh pool, FSB qbar=10 floor256, emp attacker: loss at q=10 | 2.68 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar10_floor256_gt_loss_qbar` | M2x, fresh pool, FSB qbar=10 floor256, gt attacker: loss at q=10 | 2.80 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor256_est_loss_qbar` | M2x, fresh pool, FSB qbar=10 floor256, est attacker: loss at q=10 | 1.09 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor256_worst_qbar` | M2x, fresh pool, FSB qbar=10 floor256: largest loss over the emp, gt and est attackers at q=10 | 2.80 | pp | `` |
+| `C6_M2x_qbar10_floor256_emp_loss_q1000` | M2x, fresh pool, FSB qbar=10 floor256, emp attacker: loss at q=1000 | 39.50 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar10_floor256_gt_loss_q1000` | M2x, fresh pool, FSB qbar=10 floor256, gt attacker: loss at q=1000 | 39.50 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor256_est_loss_q1000` | M2x, fresh pool, FSB qbar=10 floor256, est attacker: loss at q=1000 | 39.50 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor256_worst_q1000` | M2x, fresh pool, FSB qbar=10 floor256: largest loss over the emp, gt and est attackers at q=1000 | 39.50 | pp | `` |
+| `C6_M2x_qbar10_floor1024_emp_loss_q1` | M2x, fresh pool, FSB qbar=10 floor1024, emp attacker: loss at q=1 | -0.02 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar10_floor1024_gt_loss_q1` | M2x, fresh pool, FSB qbar=10 floor1024, gt attacker: loss at q=1 | 0.07 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor1024_est_loss_q1` | M2x, fresh pool, FSB qbar=10 floor1024, est attacker: loss at q=1 | 0.11 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor1024_worst_q1` | M2x, fresh pool, FSB qbar=10 floor1024: largest loss over the emp, gt and est attackers at q=1 | 0.11 | pp | `` |
+| `C6_M2x_qbar10_floor1024_emp_loss_qbar` | M2x, fresh pool, FSB qbar=10 floor1024, emp attacker: loss at q=10 | 0.26 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar10_floor1024_gt_loss_qbar` | M2x, fresh pool, FSB qbar=10 floor1024, gt attacker: loss at q=10 | 1.06 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor1024_est_loss_qbar` | M2x, fresh pool, FSB qbar=10 floor1024, est attacker: loss at q=10 | 1.09 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor1024_worst_qbar` | M2x, fresh pool, FSB qbar=10 floor1024: largest loss over the emp, gt and est attackers at q=10 | 1.09 | pp | `` |
+| `C6_M2x_qbar10_floor1024_emp_loss_q1000` | M2x, fresh pool, FSB qbar=10 floor1024, emp attacker: loss at q=1000 | 39.50 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar10_floor1024_gt_loss_q1000` | M2x, fresh pool, FSB qbar=10 floor1024, gt attacker: loss at q=1000 | 39.50 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor1024_est_loss_q1000` | M2x, fresh pool, FSB qbar=10 floor1024, est attacker: loss at q=1000 | 39.50 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor1024_worst_q1000` | M2x, fresh pool, FSB qbar=10 floor1024: largest loss over the emp, gt and est attackers at q=1000 | 39.50 | pp | `` |
+| `C6_M2x_qbar10_floor2048_emp_loss_q1` | M2x, fresh pool, FSB qbar=10 floor2048, emp attacker: loss at q=1 | -0.01 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar10_floor2048_gt_loss_q1` | M2x, fresh pool, FSB qbar=10 floor2048, gt attacker: loss at q=1 | 0.11 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor2048_est_loss_q1` | M2x, fresh pool, FSB qbar=10 floor2048, est attacker: loss at q=1 | 0.11 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor2048_worst_q1` | M2x, fresh pool, FSB qbar=10 floor2048: largest loss over the emp, gt and est attackers at q=1 | 0.11 | pp | `` |
+| `C6_M2x_qbar10_floor2048_emp_loss_qbar` | M2x, fresh pool, FSB qbar=10 floor2048, emp attacker: loss at q=10 | 1.00 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar10_floor2048_gt_loss_qbar` | M2x, fresh pool, FSB qbar=10 floor2048, gt attacker: loss at q=10 | 1.08 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor2048_est_loss_qbar` | M2x, fresh pool, FSB qbar=10 floor2048, est attacker: loss at q=10 | 1.09 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor2048_worst_qbar` | M2x, fresh pool, FSB qbar=10 floor2048: largest loss over the emp, gt and est attackers at q=10 | 1.09 | pp | `` |
+| `C6_M2x_qbar10_floor2048_emp_loss_q1000` | M2x, fresh pool, FSB qbar=10 floor2048, emp attacker: loss at q=1000 | 36.78 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar10_floor2048_gt_loss_q1000` | M2x, fresh pool, FSB qbar=10 floor2048, gt attacker: loss at q=1000 | 36.78 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor2048_est_loss_q1000` | M2x, fresh pool, FSB qbar=10 floor2048, est attacker: loss at q=1000 | 37.88 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor2048_worst_q1000` | M2x, fresh pool, FSB qbar=10 floor2048: largest loss over the emp, gt and est attackers at q=1000 | 37.88 | pp | `` |
+| `C6_M2x_qbar10_floor4096_emp_loss_q1` | M2x, fresh pool, FSB qbar=10 floor4096, emp attacker: loss at q=1 | 0.11 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar10_floor4096_gt_loss_q1` | M2x, fresh pool, FSB qbar=10 floor4096, gt attacker: loss at q=1 | 0.11 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor4096_est_loss_q1` | M2x, fresh pool, FSB qbar=10 floor4096, est attacker: loss at q=1 | 0.11 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor4096_worst_q1` | M2x, fresh pool, FSB qbar=10 floor4096: largest loss over the emp, gt and est attackers at q=1 | 0.11 | pp | `` |
+| `C6_M2x_qbar10_floor4096_emp_loss_qbar` | M2x, fresh pool, FSB qbar=10 floor4096, emp attacker: loss at q=10 | 1.08 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar10_floor4096_gt_loss_qbar` | M2x, fresh pool, FSB qbar=10 floor4096, gt attacker: loss at q=10 | 1.08 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor4096_est_loss_qbar` | M2x, fresh pool, FSB qbar=10 floor4096, est attacker: loss at q=10 | 1.09 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor4096_worst_qbar` | M2x, fresh pool, FSB qbar=10 floor4096: largest loss over the emp, gt and est attackers at q=10 | 1.09 | pp | `` |
+| `C6_M2x_qbar10_floor4096_emp_loss_q1000` | M2x, fresh pool, FSB qbar=10 floor4096, emp attacker: loss at q=1000 | 32.74 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar10_floor4096_gt_loss_q1000` | M2x, fresh pool, FSB qbar=10 floor4096, gt attacker: loss at q=1000 | 32.74 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor4096_est_loss_q1000` | M2x, fresh pool, FSB qbar=10 floor4096, est attacker: loss at q=1000 | 33.84 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar10_floor4096_worst_q1000` | M2x, fresh pool, FSB qbar=10 floor4096: largest loss over the emp, gt and est attackers at q=1000 | 33.84 | pp | `` |
+| `C6_M2x_qbar10_hpb_emp_loss_qbar` | M2x, fresh pool, matched HPB, emp: loss at q=qbar=10 | 27.93 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar100_plain_emp_loss_q1` | M2x, fresh pool, FSB qbar=100 plain, emp attacker: loss at q=1 | 9.50 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar100_plain_gt_loss_q1` | M2x, fresh pool, FSB qbar=100 plain, gt attacker: loss at q=1 | 9.52 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_plain_est_loss_q1` | M2x, fresh pool, FSB qbar=100 plain, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_plain_worst_q1` | M2x, fresh pool, FSB qbar=100 plain: largest loss over the emp, gt and est attackers at q=1 | 9.52 | pp | `` |
+| `C6_M2x_qbar100_plain_emp_loss_qbar` | M2x, fresh pool, FSB qbar=100 plain, emp attacker: loss at q=100 | 14.54 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar100_plain_gt_loss_qbar` | M2x, fresh pool, FSB qbar=100 plain, gt attacker: loss at q=100 | 14.50 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_plain_est_loss_qbar` | M2x, fresh pool, FSB qbar=100 plain, est attacker: loss at q=100 | 2.12 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_plain_worst_qbar` | M2x, fresh pool, FSB qbar=100 plain: largest loss over the emp, gt and est attackers at q=100 | 14.54 | pp | `` |
+| `C6_M2x_qbar100_plain_emp_loss_q1000` | M2x, fresh pool, FSB qbar=100 plain, emp attacker: loss at q=1000 | 39.50 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar100_plain_gt_loss_q1000` | M2x, fresh pool, FSB qbar=100 plain, gt attacker: loss at q=1000 | 39.50 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_plain_est_loss_q1000` | M2x, fresh pool, FSB qbar=100 plain, est attacker: loss at q=1000 | 39.50 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_plain_worst_q1000` | M2x, fresh pool, FSB qbar=100 plain: largest loss over the emp, gt and est attackers at q=1000 | 39.50 | pp | `` |
+| `C6_M2x_qbar100_floor256_emp_loss_q1` | M2x, fresh pool, FSB qbar=100 floor256, emp attacker: loss at q=1 | 0.20 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar100_floor256_gt_loss_q1` | M2x, fresh pool, FSB qbar=100 floor256, gt attacker: loss at q=1 | 0.19 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor256_est_loss_q1` | M2x, fresh pool, FSB qbar=100 floor256, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor256_worst_q1` | M2x, fresh pool, FSB qbar=100 floor256: largest loss over the emp, gt and est attackers at q=1 | 0.20 | pp | `` |
+| `C6_M2x_qbar100_floor256_emp_loss_qbar` | M2x, fresh pool, FSB qbar=100 floor256, emp attacker: loss at q=100 | 7.70 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar100_floor256_gt_loss_qbar` | M2x, fresh pool, FSB qbar=100 floor256, gt attacker: loss at q=100 | 7.71 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor256_est_loss_qbar` | M2x, fresh pool, FSB qbar=100 floor256, est attacker: loss at q=100 | 2.16 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor256_worst_qbar` | M2x, fresh pool, FSB qbar=100 floor256: largest loss over the emp, gt and est attackers at q=100 | 7.71 | pp | `` |
+| `C6_M2x_qbar100_floor256_emp_loss_q1000` | M2x, fresh pool, FSB qbar=100 floor256, emp attacker: loss at q=1000 | 39.50 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar100_floor256_gt_loss_q1000` | M2x, fresh pool, FSB qbar=100 floor256, gt attacker: loss at q=1000 | 39.50 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor256_est_loss_q1000` | M2x, fresh pool, FSB qbar=100 floor256, est attacker: loss at q=1000 | 39.48 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor256_worst_q1000` | M2x, fresh pool, FSB qbar=100 floor256: largest loss over the emp, gt and est attackers at q=1000 | 39.50 | pp | `` |
+| `C6_M2x_qbar100_floor1024_emp_loss_q1` | M2x, fresh pool, FSB qbar=100 floor1024, emp attacker: loss at q=1 | -0.02 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar100_floor1024_gt_loss_q1` | M2x, fresh pool, FSB qbar=100 floor1024, gt attacker: loss at q=1 | -0.02 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor1024_est_loss_q1` | M2x, fresh pool, FSB qbar=100 floor1024, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor1024_worst_q1` | M2x, fresh pool, FSB qbar=100 floor1024: largest loss over the emp, gt and est attackers at q=1 | 0.00 | pp | `` |
+| `C6_M2x_qbar100_floor1024_emp_loss_qbar` | M2x, fresh pool, FSB qbar=100 floor1024, emp attacker: loss at q=100 | 2.00 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar100_floor1024_gt_loss_qbar` | M2x, fresh pool, FSB qbar=100 floor1024, gt attacker: loss at q=100 | 4.02 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor1024_est_loss_qbar` | M2x, fresh pool, FSB qbar=100 floor1024, est attacker: loss at q=100 | 2.16 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor1024_worst_qbar` | M2x, fresh pool, FSB qbar=100 floor1024: largest loss over the emp, gt and est attackers at q=100 | 4.02 | pp | `` |
+| `C6_M2x_qbar100_floor1024_emp_loss_q1000` | M2x, fresh pool, FSB qbar=100 floor1024, emp attacker: loss at q=1000 | 27.51 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar100_floor1024_gt_loss_q1000` | M2x, fresh pool, FSB qbar=100 floor1024, gt attacker: loss at q=1000 | 32.72 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor1024_est_loss_q1000` | M2x, fresh pool, FSB qbar=100 floor1024, est attacker: loss at q=1000 | 33.86 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor1024_worst_q1000` | M2x, fresh pool, FSB qbar=100 floor1024: largest loss over the emp, gt and est attackers at q=1000 | 33.86 | pp | `` |
+| `C6_M2x_qbar100_floor2048_emp_loss_q1` | M2x, fresh pool, FSB qbar=100 floor2048, emp attacker: loss at q=1 | -0.06 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar100_floor2048_gt_loss_q1` | M2x, fresh pool, FSB qbar=100 floor2048, gt attacker: loss at q=1 | -0.03 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor2048_est_loss_q1` | M2x, fresh pool, FSB qbar=100 floor2048, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor2048_worst_q1` | M2x, fresh pool, FSB qbar=100 floor2048: largest loss over the emp, gt and est attackers at q=1 | 0.00 | pp | `` |
+| `C6_M2x_qbar100_floor2048_emp_loss_qbar` | M2x, fresh pool, FSB qbar=100 floor2048, emp attacker: loss at q=100 | 1.44 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar100_floor2048_gt_loss_qbar` | M2x, fresh pool, FSB qbar=100 floor2048, gt attacker: loss at q=100 | 2.12 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor2048_est_loss_qbar` | M2x, fresh pool, FSB qbar=100 floor2048, est attacker: loss at q=100 | 2.16 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor2048_worst_qbar` | M2x, fresh pool, FSB qbar=100 floor2048: largest loss over the emp, gt and est attackers at q=100 | 2.16 | pp | `` |
+| `C6_M2x_qbar100_floor2048_emp_loss_q1000` | M2x, fresh pool, FSB qbar=100 floor2048, emp attacker: loss at q=1000 | 6.03 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar100_floor2048_gt_loss_q1000` | M2x, fresh pool, FSB qbar=100 floor2048, gt attacker: loss at q=1000 | 31.34 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor2048_est_loss_q1000` | M2x, fresh pool, FSB qbar=100 floor2048, est attacker: loss at q=1000 | 31.18 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor2048_worst_q1000` | M2x, fresh pool, FSB qbar=100 floor2048: largest loss over the emp, gt and est attackers at q=1000 | 31.34 | pp | `` |
+| `C6_M2x_qbar100_floor4096_emp_loss_q1` | M2x, fresh pool, FSB qbar=100 floor4096, emp attacker: loss at q=1 | 0.00 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar100_floor4096_gt_loss_q1` | M2x, fresh pool, FSB qbar=100 floor4096, gt attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor4096_est_loss_q1` | M2x, fresh pool, FSB qbar=100 floor4096, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor4096_worst_q1` | M2x, fresh pool, FSB qbar=100 floor4096: largest loss over the emp, gt and est attackers at q=1 | 0.00 | pp | `` |
+| `C6_M2x_qbar100_floor4096_emp_loss_qbar` | M2x, fresh pool, FSB qbar=100 floor4096, emp attacker: loss at q=100 | -0.16 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar100_floor4096_gt_loss_qbar` | M2x, fresh pool, FSB qbar=100 floor4096, gt attacker: loss at q=100 | 2.12 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor4096_est_loss_qbar` | M2x, fresh pool, FSB qbar=100 floor4096, est attacker: loss at q=100 | 2.16 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor4096_worst_qbar` | M2x, fresh pool, FSB qbar=100 floor4096: largest loss over the emp, gt and est attackers at q=100 | 2.16 | pp | `` |
+| `C6_M2x_qbar100_floor4096_emp_loss_q1000` | M2x, fresh pool, FSB qbar=100 floor4096, emp attacker: loss at q=1000 | 30.53 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar100_floor4096_gt_loss_q1000` | M2x, fresh pool, FSB qbar=100 floor4096, gt attacker: loss at q=1000 | 30.56 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor4096_est_loss_q1000` | M2x, fresh pool, FSB qbar=100 floor4096, est attacker: loss at q=1000 | 29.47 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar100_floor4096_worst_q1000` | M2x, fresh pool, FSB qbar=100 floor4096: largest loss over the emp, gt and est attackers at q=1000 | 30.56 | pp | `` |
+| `C6_M2x_qbar100_hpb_emp_loss_qbar` | M2x, fresh pool, matched HPB, emp: loss at q=qbar=100 | 30.74 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar1000_plain_emp_loss_q1` | M2x, fresh pool, FSB qbar=1000 plain, emp attacker: loss at q=1 | 8.34 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar1000_plain_gt_loss_q1` | M2x, fresh pool, FSB qbar=1000 plain, gt attacker: loss at q=1 | 8.41 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_plain_est_loss_q1` | M2x, fresh pool, FSB qbar=1000 plain, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_plain_worst_q1` | M2x, fresh pool, FSB qbar=1000 plain: largest loss over the emp, gt and est attackers at q=1 | 8.41 | pp | `` |
+| `C6_M2x_qbar1000_plain_emp_loss_qbar` | M2x, fresh pool, FSB qbar=1000 plain, emp attacker: loss at q=1000 | 16.06 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar1000_plain_gt_loss_qbar` | M2x, fresh pool, FSB qbar=1000 plain, gt attacker: loss at q=1000 | 16.02 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_plain_est_loss_qbar` | M2x, fresh pool, FSB qbar=1000 plain, est attacker: loss at q=1000 | 3.63 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_plain_worst_qbar` | M2x, fresh pool, FSB qbar=1000 plain: largest loss over the emp, gt and est attackers at q=1000 | 16.06 | pp | `` |
+| `C6_M2x_qbar1000_plain_emp_loss_q1000` | M2x, fresh pool, FSB qbar=1000 plain, emp attacker: loss at q=1000 | 16.06 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar1000_plain_gt_loss_q1000` | M2x, fresh pool, FSB qbar=1000 plain, gt attacker: loss at q=1000 | 16.02 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_plain_est_loss_q1000` | M2x, fresh pool, FSB qbar=1000 plain, est attacker: loss at q=1000 | 3.63 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_plain_worst_q1000` | M2x, fresh pool, FSB qbar=1000 plain: largest loss over the emp, gt and est attackers at q=1000 | 16.06 | pp | `` |
+| `C6_M2x_qbar1000_floor256_emp_loss_q1` | M2x, fresh pool, FSB qbar=1000 floor256, emp attacker: loss at q=1 | 0.16 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar1000_floor256_gt_loss_q1` | M2x, fresh pool, FSB qbar=1000 floor256, gt attacker: loss at q=1 | 0.16 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor256_est_loss_q1` | M2x, fresh pool, FSB qbar=1000 floor256, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor256_worst_q1` | M2x, fresh pool, FSB qbar=1000 floor256: largest loss over the emp, gt and est attackers at q=1 | 0.16 | pp | `` |
+| `C6_M2x_qbar1000_floor256_emp_loss_qbar` | M2x, fresh pool, FSB qbar=1000 floor256, emp attacker: loss at q=1000 | 14.98 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar1000_floor256_gt_loss_qbar` | M2x, fresh pool, FSB qbar=1000 floor256, gt attacker: loss at q=1000 | 14.94 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor256_est_loss_qbar` | M2x, fresh pool, FSB qbar=1000 floor256, est attacker: loss at q=1000 | 3.61 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor256_worst_qbar` | M2x, fresh pool, FSB qbar=1000 floor256: largest loss over the emp, gt and est attackers at q=1000 | 14.98 | pp | `` |
+| `C6_M2x_qbar1000_floor256_emp_loss_q1000` | M2x, fresh pool, FSB qbar=1000 floor256, emp attacker: loss at q=1000 | 14.98 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar1000_floor256_gt_loss_q1000` | M2x, fresh pool, FSB qbar=1000 floor256, gt attacker: loss at q=1000 | 14.94 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor256_est_loss_q1000` | M2x, fresh pool, FSB qbar=1000 floor256, est attacker: loss at q=1000 | 3.61 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor256_worst_q1000` | M2x, fresh pool, FSB qbar=1000 floor256: largest loss over the emp, gt and est attackers at q=1000 | 14.98 | pp | `` |
+| `C6_M2x_qbar1000_floor1024_emp_loss_q1` | M2x, fresh pool, FSB qbar=1000 floor1024, emp attacker: loss at q=1 | -0.01 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar1000_floor1024_gt_loss_q1` | M2x, fresh pool, FSB qbar=1000 floor1024, gt attacker: loss at q=1 | -0.01 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor1024_est_loss_q1` | M2x, fresh pool, FSB qbar=1000 floor1024, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor1024_worst_q1` | M2x, fresh pool, FSB qbar=1000 floor1024: largest loss over the emp, gt and est attackers at q=1 | 0.00 | pp | `` |
+| `C6_M2x_qbar1000_floor1024_emp_loss_qbar` | M2x, fresh pool, FSB qbar=1000 floor1024, emp attacker: loss at q=1000 | 11.66 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar1000_floor1024_gt_loss_qbar` | M2x, fresh pool, FSB qbar=1000 floor1024, gt attacker: loss at q=1000 | 11.61 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor1024_est_loss_qbar` | M2x, fresh pool, FSB qbar=1000 floor1024, est attacker: loss at q=1000 | 3.61 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor1024_worst_qbar` | M2x, fresh pool, FSB qbar=1000 floor1024: largest loss over the emp, gt and est attackers at q=1000 | 11.66 | pp | `` |
+| `C6_M2x_qbar1000_floor1024_emp_loss_q1000` | M2x, fresh pool, FSB qbar=1000 floor1024, emp attacker: loss at q=1000 | 11.66 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar1000_floor1024_gt_loss_q1000` | M2x, fresh pool, FSB qbar=1000 floor1024, gt attacker: loss at q=1000 | 11.61 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor1024_est_loss_q1000` | M2x, fresh pool, FSB qbar=1000 floor1024, est attacker: loss at q=1000 | 3.61 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor1024_worst_q1000` | M2x, fresh pool, FSB qbar=1000 floor1024: largest loss over the emp, gt and est attackers at q=1000 | 11.66 | pp | `` |
+| `C6_M2x_qbar1000_floor2048_emp_loss_q1` | M2x, fresh pool, FSB qbar=1000 floor2048, emp attacker: loss at q=1 | -0.05 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar1000_floor2048_gt_loss_q1` | M2x, fresh pool, FSB qbar=1000 floor2048, gt attacker: loss at q=1 | -0.03 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor2048_est_loss_q1` | M2x, fresh pool, FSB qbar=1000 floor2048, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor2048_worst_q1` | M2x, fresh pool, FSB qbar=1000 floor2048: largest loss over the emp, gt and est attackers at q=1 | 0.00 | pp | `` |
+| `C6_M2x_qbar1000_floor2048_emp_loss_qbar` | M2x, fresh pool, FSB qbar=1000 floor2048, emp attacker: loss at q=1000 | 5.83 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar1000_floor2048_gt_loss_qbar` | M2x, fresh pool, FSB qbar=1000 floor2048, gt attacker: loss at q=1000 | 6.91 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor2048_est_loss_qbar` | M2x, fresh pool, FSB qbar=1000 floor2048, est attacker: loss at q=1000 | 3.61 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor2048_worst_qbar` | M2x, fresh pool, FSB qbar=1000 floor2048: largest loss over the emp, gt and est attackers at q=1000 | 6.91 | pp | `` |
+| `C6_M2x_qbar1000_floor2048_emp_loss_q1000` | M2x, fresh pool, FSB qbar=1000 floor2048, emp attacker: loss at q=1000 | 5.83 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar1000_floor2048_gt_loss_q1000` | M2x, fresh pool, FSB qbar=1000 floor2048, gt attacker: loss at q=1000 | 6.91 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor2048_est_loss_q1000` | M2x, fresh pool, FSB qbar=1000 floor2048, est attacker: loss at q=1000 | 3.61 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor2048_worst_q1000` | M2x, fresh pool, FSB qbar=1000 floor2048: largest loss over the emp, gt and est attackers at q=1000 | 6.91 | pp | `` |
+| `C6_M2x_qbar1000_floor4096_emp_loss_q1` | M2x, fresh pool, FSB qbar=1000 floor4096, emp attacker: loss at q=1 | 0.00 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar1000_floor4096_gt_loss_q1` | M2x, fresh pool, FSB qbar=1000 floor4096, gt attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor4096_est_loss_q1` | M2x, fresh pool, FSB qbar=1000 floor4096, est attacker: loss at q=1 | 0.00 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor4096_worst_q1` | M2x, fresh pool, FSB qbar=1000 floor4096: largest loss over the emp, gt and est attackers at q=1 | 0.00 | pp | `` |
+| `C6_M2x_qbar1000_floor4096_emp_loss_qbar` | M2x, fresh pool, FSB qbar=1000 floor4096, emp attacker: loss at q=1000 | 1.11 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar1000_floor4096_gt_loss_qbar` | M2x, fresh pool, FSB qbar=1000 floor4096, gt attacker: loss at q=1000 | 5.81 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor4096_est_loss_qbar` | M2x, fresh pool, FSB qbar=1000 floor4096, est attacker: loss at q=1000 | 3.61 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor4096_worst_qbar` | M2x, fresh pool, FSB qbar=1000 floor4096: largest loss over the emp, gt and est attackers at q=1000 | 5.81 | pp | `` |
+| `C6_M2x_qbar1000_floor4096_emp_loss_q1000` | M2x, fresh pool, FSB qbar=1000 floor4096, emp attacker: loss at q=1000 | 1.11 | pp | `e1g_floor_fresh.csv` |
+| `C6_M2x_qbar1000_floor4096_gt_loss_q1000` | M2x, fresh pool, FSB qbar=1000 floor4096, gt attacker: loss at q=1000 | 5.81 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor4096_est_loss_q1000` | M2x, fresh pool, FSB qbar=1000 floor4096, est attacker: loss at q=1000 | 3.61 | pp | `e1g_robust_fresh.csv` |
+| `C6_M2x_qbar1000_floor4096_worst_q1000` | M2x, fresh pool, FSB qbar=1000 floor4096: largest loss over the emp, gt and est attackers at q=1000 | 5.81 | pp | `` |
+| `C6_M2x_qbar1000_hpb_emp_loss_qbar` | M2x, fresh pool, matched HPB, emp: loss at q=qbar=1000 | 30.01 | pp | `e1g_floor_fresh.csv` |
+| `C6_qbar10_plain_avg` | FSB qbar=10 plain: average bucket size | 790.21 | entries | `e1g_floor_fresh.csv` |
+| `C6_qbar10_floor256_avg` | FSB qbar=10 floor256: average bucket size | 966.67 | entries | `e1g_floor_fresh.csv` |
+| `C6_qbar10_floor256_avg_ratio` | FSB qbar=10 floor256: average bucket size relative to plain FSB with the same qbar | 1.22 | ratio | `e1g_floor_fresh.csv` |
+| `C6_qbar10_floor1024_avg` | FSB qbar=10 floor1024: average bucket size | 1516.07 | entries | `e1g_floor_fresh.csv` |
+| `C6_qbar10_floor1024_avg_ratio` | FSB qbar=10 floor1024: average bucket size relative to plain FSB with the same qbar | 1.92 | ratio | `e1g_floor_fresh.csv` |
+| `C6_qbar10_floor2048_avg` | FSB qbar=10 floor2048: average bucket size | 2252.76 | entries | `e1g_floor_fresh.csv` |
+| `C6_qbar10_floor2048_avg_ratio` | FSB qbar=10 floor2048: average bucket size relative to plain FSB with the same qbar | 2.85 | ratio | `e1g_floor_fresh.csv` |
+| `C6_qbar10_floor4096_avg` | FSB qbar=10 floor4096: average bucket size | 3776.07 | entries | `e1g_floor_fresh.csv` |
+| `C6_qbar10_floor4096_avg_ratio` | FSB qbar=10 floor4096: average bucket size relative to plain FSB with the same qbar | 4.78 | ratio | `e1g_floor_fresh.csv` |
+| `C6_qbar100_plain_avg` | FSB qbar=100 plain: average bucket size | 2564.83 | entries | `e1g_floor_fresh.csv` |
+| `C6_qbar100_floor256_avg` | FSB qbar=100 floor256: average bucket size | 2734.44 | entries | `e1g_floor_fresh.csv` |
+| `C6_qbar100_floor256_avg_ratio` | FSB qbar=100 floor256: average bucket size relative to plain FSB with the same qbar | 1.07 | ratio | `e1g_floor_fresh.csv` |
+| `C6_qbar100_floor1024_avg` | FSB qbar=100 floor1024: average bucket size | 3275.60 | entries | `e1g_floor_fresh.csv` |
+| `C6_qbar100_floor1024_avg_ratio` | FSB qbar=100 floor1024: average bucket size relative to plain FSB with the same qbar | 1.28 | ratio | `e1g_floor_fresh.csv` |
+| `C6_qbar100_floor2048_avg` | FSB qbar=100 floor2048: average bucket size | 4006.55 | entries | `e1g_floor_fresh.csv` |
+| `C6_qbar100_floor2048_avg_ratio` | FSB qbar=100 floor2048: average bucket size relative to plain FSB with the same qbar | 1.56 | ratio | `e1g_floor_fresh.csv` |
+| `C6_qbar100_floor4096_avg` | FSB qbar=100 floor4096: average bucket size | 5476.27 | entries | `e1g_floor_fresh.csv` |
+| `C6_qbar100_floor4096_avg_ratio` | FSB qbar=100 floor4096: average bucket size relative to plain FSB with the same qbar | 2.14 | ratio | `e1g_floor_fresh.csv` |
+| `C6_qbar1000_plain_avg` | FSB qbar=1000 plain: average bucket size | 11,336 | entries | `e1g_floor_fresh.csv` |
+| `C6_qbar1000_floor256_avg` | FSB qbar=1000 floor256: average bucket size | 11,493 | entries | `e1g_floor_fresh.csv` |
+| `C6_qbar1000_floor256_avg_ratio` | FSB qbar=1000 floor256: average bucket size relative to plain FSB with the same qbar | 1.01 | ratio | `e1g_floor_fresh.csv` |
+| `C6_qbar1000_floor1024_avg` | FSB qbar=1000 floor1024: average bucket size | 12,010 | entries | `e1g_floor_fresh.csv` |
+| `C6_qbar1000_floor1024_avg_ratio` | FSB qbar=1000 floor1024: average bucket size relative to plain FSB with the same qbar | 1.06 | ratio | `e1g_floor_fresh.csv` |
+| `C6_qbar1000_floor2048_avg` | FSB qbar=1000 floor2048: average bucket size | 12,722 | entries | `e1g_floor_fresh.csv` |
+| `C6_qbar1000_floor2048_avg_ratio` | FSB qbar=1000 floor2048: average bucket size relative to plain FSB with the same qbar | 1.12 | ratio | `e1g_floor_fresh.csv` |
+| `C6_qbar1000_floor4096_avg` | FSB qbar=1000 floor4096: average bucket size | 14,167 | entries | `e1g_floor_fresh.csv` |
+| `C6_qbar1000_floor4096_avg_ratio` | FSB qbar=1000 floor4096: average bucket size relative to plain FSB with the same qbar | 1.25 | ratio | `e1g_floor_fresh.csv` |

@@ -29,6 +29,19 @@ class FSB:
         return float(cov.mean()), int(cov.max())
 
 
+class FSBFloor(FSB):
+    """Phase 1g: FSB with a lower bound on the number of copies, gamma(w) = min(|B|, max(gamma_FSB(w), floor)) for EVERY string.
+    The floor depends only on the string (not on whether it is stored), so the client can compute it. floor = 1 is plain FSB."""
+
+    def __init__(self, members, qbar, bits, floor):
+        super().__init__(members, qbar, bits)
+        self.floor = int(min(floor, self.B))
+        self.gamma_S = np.maximum(self.gamma_S, self.floor)
+
+    def gamma(self, strings):
+        return np.maximum(super().gamma(strings), self.floor)
+
+
 class HPB:
     kind = "hpb"
 

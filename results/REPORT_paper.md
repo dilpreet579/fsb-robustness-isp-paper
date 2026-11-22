@@ -64,5 +64,19 @@ Latest run (after item 13): 732 tokens, the same 4 unmatched (`436` twice, `1.5%
 ## Logs and tests
 D34 (DISCREPANCIES.md), Q37 (QUESTIONS.md) and the `paper/README.md` section "Paper PDF" were added. `make test`: 39 passed; its rewrite of `results/tests_all.txt` was reverted with `git checkout` to leave `results/` unchanged. Nothing from this task is committed.
 
+## Phase 1g update (gamma floor)
+Added after the floor experiments of `results/REPORT_1g.md`; each edit is non-mechanical text, listed here.
+1. **Abstract, Introduction**: one sentence in the abstract and a sixth contribution (C6); "five measurements" became "six".
+2. **Section 4.4**: one closing sentence pointing to Section 4.6 as an intervention test of the mechanism. The "three further measurements" list and its "none proves it" wording are unchanged.
+3. **New Section 4.6 (C6)**: the floor definition, protocol (dev pool, one fresh-pool run), the extra attackers gt and est, the q̄ = 100 / q̄ = 1000 results, the policy residual (2.16 pp, equal to plain FSB's est loss), and the q > q̄ artifact of the raw-count attacker (0.24 pp for emp against 13.94 pp for gt at q̄ = 100, q = 1000, floor 2,048).
+4. **Section 5**: "What the results say" and "Design implications" now report the floor instead of "an untested remedy ... we did not run it"; the limitation "we did not test an intervention such as a gamma floor" became "one intervention on one leak does not prove it"; new limitation "The floor evaluation is limited" (one fresh pool, three stored-password attackers, the flawed pre-registered selection rule, gt and est added after seeing the emp development run, no M1b / M3 / Li-et-al.-scale run, no storage or lookup cost).
+5. **Conclusion**: floor sentence added; future work no longer lists "test a floor"; now lists testing it at Li et al.'s scale and against stronger attackers.
+6. **Appendix D** (Table 4, `tables/T8_floor.tex` + `T8_note.tex`): worst-case loss over emp, gt, est for plain FSB, floors 256 to 4096 and matched HPB, q̄ in {10, 100, 1000}, M0 and M2x, fresh pool.
+- **Pipeline**: `paper_numlib.py` got the recipe `max_of`; `paper_numbers.py` got claim C6 (393 numbers; `numbers.csv` now has 757); `paper_tables.py` got `t8`; `check_text_numbers.py` got the floor grid values (256 to 16,384) as stated constants; `tests/test_paper_assets.py` expects C6, T8 and the two e1g fresh CSVs.
+- **Audit**: 916 tokens, the same 4 unmatched (`436` twice, `1.5%`, `16%`). `check_numbers.py`: all 757 numbers match. Full suite: 44 passed.
+- **Length**: text plus references now fill 8 pages (page 8 full), against the 7.5 to 7.75 target; Appendices A to C are on page 9 and Appendix D on page 10. No existing text was cut.
+- **Pool difference**: the floor numbers are on A_fresh; plain FSB on A_fresh loses 10.68 pp (M0, q̄ = 100, emp) against 10.92 on A_test. Section 4.6 and the Table 4 note say so.
+- `docs/paper.md` was not updated.
+
 ## Open items for the human
 Author block is filled (Dilpreet Singh, Ishita Gupta, Madhav Raj; institute under each name; no emails or departments). Gen-AI disclosure wording; undated Hunt reference; whether `paper/main.pdf` should be committed (build files are currently untracked and not ignored).

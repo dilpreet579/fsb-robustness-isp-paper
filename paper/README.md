@@ -57,13 +57,14 @@ files hold one-paragraph table notes. No LaTeX engine is installed in this repos
 | `T5_cost.tex`, `T5_note.tex` | attacker cost: candidates, time, peak memory | `e1e_cost.csv` |
 | `T6_estimator_error.tex`, `T6_note.tex` | head / tail sigma_hat, both methods, t = 1M | `e1d_esterror_summary.csv` |
 | `T7_m3_crossings.tex`, `T7_note.tex` | sigma at 5 points over 5 noise draws (est); emp crossing not defined | `e1d_noise.csv`, `e1c_e2.csv`, `e1e_headline.csv` |
+| `T8_floor.tex`, `T8_note.tex` | gamma floor (Phase 1g), fresh pool: worst-case loss over the emp, gt and est attackers at q=qbar and q=1000 for plain FSB, floors 256 / 1024 / 2048 / 4096 and size-matched HPB; M0 and M2x | `e1g_floor_fresh.csv`, `e1g_robust_fresh.csv` |
 
 ### Data and checks (`paper/`)
 
 | file | content |
 |---|---|
 | `head_cost.csv` | estimated size of the histogram head for t = 100k, 300k, 1M, 3M, 10M (plain text, gzip -9, float32 probabilities) and of the 3-gram table; an estimate of data size, not an implementation |
-| `numbers.csv` | every number the text may quote: id, claim (C1..C5), description, value, unit, source_csv, filter, plus the recipe columns op, column, source_csv2, filter2, extra |
+| `numbers.csv` | every number the text may quote: id, claim (C1..C6), description, value, unit, source_csv, filter, plus the recipe columns op, column, source_csv2, filter2, extra |
 | `numbers.md` | the same numbers as a readable table grouped by claim |
 | `captions.md` | factual caption drafts for Figures 1-5, with numbers computed from the CSVs (includes the note that tail-only noise leaves emp at the clean 10.92) |
 | `check_numbers.py` | recomputes every row of `numbers.csv` from its source CSV and exits 1 on any mismatch |
@@ -78,7 +79,8 @@ files hold one-paragraph table notes. No LaTeX engine is installed in this repos
 
 C1 reproduction (est: HPB loss at q=1 and q=qbar at matched sizes; FSB max |loss| for q <= qbar) | C2 noise tolerance (sigma crossings at 5 points, head and tail sigma_hat) |
 C3 count-aware attacker (emp loss at q=qbar, fraction of HPB loss removed at q=qbar and q=1, M2x success ratios) | C4 mechanism (loss contribution by group, tail guess rate, leak-count and gamma
-of newly gained targets, t sweep, fixes at equal size, tail-only vs full noise) | C5 attacker cost (time and memory).
+of newly gained targets, t sweep, fixes at equal size, tail-only vs full noise) | C5 attacker cost (time and memory) | C6 gamma floor (Phase 1g, fresh pool: loss of the emp, gt and est attackers and the
+largest of the three at q=1, q=qbar and q=1000 for plain FSB and floors 256 to 4096; average bucket size and its ratio to plain FSB; matched-HPB emp loss).
 
 ## Things to know before using these assets
 

@@ -170,9 +170,45 @@ def t7():
         "$\\sigma\\in\\{0,0.5,0.75,1.0,1.5\\}$; draws use salts d1--d5.\n")
 
 
+# ----------------------------------------------------------------------------------------------------------------- T8 gamma floor (Phase 1g)
+def _worst(cond, scheme, variant, qb, q, param=None):
+    """Largest loss over the emp (e1g_floor_fresh) and gt, est (e1g_robust_fresh) attackers on the fresh pool; also returns the average bucket size."""
+    vals = []
+    for src, atts in (("e1g_floor_fresh", ("emp",)), ("e1g_robust_fresh", ("gt", "est"))):
+        d = load(src)
+        for a in atts:
+            vals.append(float(one(sel(d, condition=cond, scheme=scheme, variant=variant, attacker=a), param=qb if param is None else param, q=q).loss))
+    return max(vals)
+
+
+def t8():
+    d = load("e1g_floor_fresh")
+    body = []
+    for qi, qb in enumerate(QBARS):
+        if qi:
+            body.append(None)
+        base = float(one(sel(d, condition="M0", scheme="fsb", variant="fsb_base", attacker="emp"), param=qb, q=1).avg_bucket)
+        rows = [("plain FSB", "fsb", "fsb_base", qb)] + [(f"floor {g:,}", "fsb", f"floor{g}", qb) for g in (256, 1024, 2048, 4096)]
+        l = int(one(sel(d, condition="M0", scheme="hpb", variant=f"match_qbar{qb}", attacker="emp"), q=1).param)
+        rows.append((f"matched HPB ($l={l}$)", "hpb", f"match_qbar{qb}", l))
+        for ri, (name, sch, v, par) in enumerate(rows):
+            avg = float(one(sel(d, condition="M0", scheme=sch, variant=v, attacker="emp"), param=par, q=1).avg_bucket)
+            ab = f"{avg:,.0f}" if v in ("fsb_base",) or sch == "hpb" else f"{avg:,.0f} (${avg / base:.2f}\\times$)"
+            cells = [f"${_worst(c, sch, v, qb, q, par):.2f}$" for c in ("M0", "M2x") for q in (qb, 1000)]
+            body.append(" & ".join([str(qb) if ri == 0 else "", name, ab, *cells]) + r" \\")
+    hdr = [r"$\bar q$ & Scheme & Avg.\ bucket & \multicolumn{2}{c}{M0 (pp)} & \multicolumn{2}{c}{M2x (pp)} \\",
+           r"\cmidrule(lr){4-5}\cmidrule(lr){6-7}",
+           r" & & (entries) & $q=\bar q$ & $q=1000$ & $q=\bar q$ & $q=1000$ \\"]
+    write("T8_floor.tex", "llrrrrr", hdr, body)
+    open(os.path.join(TABLES, "T8_note.tex"), "w").write(
+        "Fresh target pool (A\\_fresh), 5 repeats of 5,000 targets, FSB with $t=1$M; floor $g$: every string is stored in at least $g$ buckets. Each cell is the largest loss over three attackers "
+        "that hold all of $\\tilde S$: emp (raw counts), gt (Good--Turing adjusted counts) and est (the server's estimate $\\hat p$); sizes in parentheses are relative to plain FSB with the same "
+        "$\\bar q$. Plain FSB on this pool loses slightly less than on A\\_test (Table~\\ref{tab:headline}). The guarantee covers $q\\le\\bar q$; the $q=1000$ columns are outside it for $\\bar q<1000$.\n")
+
+
 def main():
     os.makedirs(TABLES, exist_ok=True)
-    for f in (t1, t2, t3, t4, t5, t6, t7):
+    for f in (t1, t2, t3, t4, t5, t6, t7, t8):
         f()
     print("tables written to", TABLES, sorted(os.listdir(TABLES)))
 
